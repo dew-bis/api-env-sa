@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.1
 info:
-  title: 'SA Geodata API '
+  title: SA Geodata API
   version: "0.1"
   description: SA Geodata - Webservice API specification
   contact:
@@ -644,6 +644,194 @@ paths:
       operationId: GetToken()
       summary: Generate bearer token
       description: Request to generate and return a bearer token.
+  /obw/v0.1b/obswells:
+    summary: Endpoint to interact with the list of obswells.
+    description: Obswells are a subset of waterwells - they are waterwells that are
+      monitored and have measurement data.
+    get:
+      tags: []
+      parameters:
+      - name: modifiedSince
+        description: If specified, only obswells that have been modified more recently
+          than the supplied value will be returned.
+        schema:
+          format: date-time
+          type: string
+        in: query
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/obswell-page'
+          description: Successful operation
+      operationId: GetObswells
+      summary: List all obwells
+      description: ""
+  /obw/v0.1b/obswells/{id}/elevationmeasurements/:
+    summary: Endpoint to interact with the list of elevation measurements for a single
+      obswell.
+    description: ""
+    get:
+      tags: []
+      parameters:
+      - name: modifiedSince
+        description: If specified, only elevation measurements that have been modified
+          more recently than the supplied value will be returned.
+        schema:
+          format: date-time
+          type: string
+        in: query
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/elevationmeasurement-page'
+          description: Successful operation
+      operationId: GetElevationMeasurements
+      summary: List all elevation measurements
+      description: ""
+    parameters:
+    - name: id
+      description: DrillholeId specifying which obswell to retrieve measurements for.
+      schema:
+        format: int64
+        type: integer
+      in: path
+      required: true
+  /obw/v0.1b/obswells/{id}/waterlevelmeasurements/:
+    summary: Endpoint to interact with the list of elevation measurements for a single
+      obswell.
+    description: ""
+    get:
+      tags: []
+      parameters:
+      - name: modifiedSince
+        description: If specified, only water level measurements that have been modified
+          more recently than the supplied value will be returned.
+        schema:
+          format: date-time
+          type: string
+        in: query
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/waterlevelmeasurement-page'
+          description: Successful operation
+      operationId: GetWaterLevelMeasurements
+      summary: List all water level measurements
+      description: ""
+    parameters:
+    - name: id
+      description: DrillholeId specifying which obswell to retrieve measurements for.
+      schema:
+        format: int64
+        type: integer
+      in: path
+      required: true
+  /obw/v0.1b/obswells/{id}:
+    summary: Endpoint to interact with a single obswell.
+    description: ""
+    get:
+      tags: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/obswell'
+          description: Successful operation
+      operationId: GetObswell
+      summary: Return a specific obswell
+      description: ""
+    parameters:
+    - name: id
+      description: DrillholeId for which details are requested
+      schema:
+        format: int64
+        type: integer
+      in: path
+      required: true
+  /obw/v0.1b/obswells/{id}/elevationmeasurements/{measurementId}:
+    summary: Endpoint to interact with a single elevation measurement.
+    description: ""
+    get:
+      tags: []
+      parameters:
+      - name: measurementId
+        description: MeasurementId specifying the measurement to retrieve.
+        schema:
+          format: int64
+          type: integer
+        in: path
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/elevationmeasurement'
+          description: Successful operation
+      operationId: GetElevationMeasurement
+      summary: Return a specific elevation measurement.
+      description: ""
+    parameters:
+    - name: id
+      description: DrillholeId specifying which obswell to retrieve measurements for.
+      schema:
+        format: int64
+        type: integer
+      in: path
+      required: true
+    - name: measurementId
+      description: MeasurementId specifying the measurement to retrieve.
+      schema:
+        format: int64
+        type: integer
+      in: path
+      required: true
+  /obw/v0.1b/obswells/{id}/waterlevelmeasurements/{measurementId}:
+    summary: Endpoint to interact with a single water level measurement.
+    description: ""
+    get:
+      tags: []
+      parameters:
+      - name: measurementId
+        description: MeasurementId specifying the measurement to retrieve.
+        schema:
+          format: int64
+          type: integer
+        in: path
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/waterlevelmeasurement'
+          description: Successful operation
+      operationId: GetWaterLevelMeasurement
+      summary: Return a specific water level measurement.
+      description: ""
+    parameters:
+    - name: id
+      description: DrillholeId specifying which obswell to retrieve measurements for.
+      schema:
+        format: int64
+        type: integer
+      in: path
+      required: true
+    - name: measurementId
+      description: MeasurementId specifying the measurement to retrieve.
+      schema:
+        format: int64
+        type: integer
+      in: path
+      required: true
 components:
   schemas:
     address:
@@ -2223,6 +2411,246 @@ components:
         longitude: ""
         mgaZone: "54"
         coordinateSystem: WGS84
+    obswell:
+      title: Root Type for obswell
+      description: A monitored waterwell.
+      type: object
+      properties:
+        unitNumber:
+          format: int32
+          type: integer
+        nrmRegionCode:
+          description: NRM region code
+          type: string
+        prescribedWellArea:
+          type: string
+        prescribedWaterResourceArea:
+          type: string
+        waterWellClass:
+          type: string
+        map100000Number:
+          format: int32
+          type: integer
+        sequenceNumber:
+          format: int32
+          type: integer
+        latitude:
+          format: double
+          description: Latitude of the obswell.
+          type: number
+        longitude:
+          format: double
+          description: Longitude of the obswell.
+          type: number
+        obsWellPlan:
+          type: string
+        obsWellSequenceNumber:
+          type: string
+        aquiferIntersected:
+          type: string
+        comments:
+          type: string
+        createdDate:
+          format: date-time
+          description: Date the obswell was added to SAGeoData.
+          type: string
+        modifiedDate:
+          format: date-time
+          description: Datetime of the most recent modification to the obswell in
+            SAGeoData.
+          type: string
+        drillholeId:
+          format: int32
+          description: Unique identifier specified by SAGeoData.
+          type: integer
+        name:
+          description: Name of the obswell.
+          type: string
+      example:
+        drillholeNumber: 230
+        drillholeName: A-29 (MT DAVIES)
+        unitNumber: 474500070
+        nrmRegionCode: Alinytjara Wilurara
+        waterWellClass: "N"
+        map100000Number: 4745
+        sequenceNumber: 70
+        latitude: -26.1130886
+        longitude: 129.02301
+        comments: South Western Mining Company
+        createdDate: 1992-12-10T18:04:24
+        modifiedDate: 2019-08-30T09:32:00
+    obswell-page:
+      description: Data type that represents a collection/page of water level measurements
+      required: []
+      type: object
+      properties:
+        nextPage:
+          description: URI to next page of the collection
+          type: string
+        prevPage:
+          description: URI to previous page of the collection
+          type: string
+        totalRecords:
+          description: Indicates the total number of records (including all pages)
+          type: integer
+        pageSize:
+          description: Number of records displayed per page
+          type: integer
+        pageNumber:
+          description: Index (1-based) respresenting current page number
+          type: integer
+        obswells:
+          description: Collection of obswells.
+          type: array
+          items:
+            $ref: '#/components/schemas/obswell'
+    waterlevelmeasurement:
+      title: Root Type for waterlevelmeasurement
+      description: Data type representing a water level measurement recorded during
+        a field visit to an obswell.
+      type: object
+      properties:
+        measurementDate:
+          format: date-time
+          description: Date the measurement was taken.
+          type: string
+        depthToWater:
+          format: double
+          description: The actual Depth to Water measurment value.
+          type: number
+        comments:
+          type: string
+        agencyResponsible:
+          type: string
+        conductedBy:
+          type: string
+        createdDate:
+          format: date-time
+          description: Date the measurement was added to SAGeoData.
+          type: string
+        modifiedDate:
+          format: date-time
+          description: Datetime of the most recent modification to the measurement
+            in SAGeoData.
+          type: string
+        drillholeId:
+          format: int32
+          description: Unique identifier of drillhole specified by SAGeoData.
+          type: integer
+        measurementId:
+          format: int32
+          description: Unique identifier of the measurement specified by SAGeoData.
+          type: integer
+      example:
+        drillholeNumber: 4
+        measurementNumber: 1
+        measurementDate: 1990-12-06T00:00:00
+        depthToWater: 71.6
+        agencyResponsible: DEWNR
+        conductedBy: DHDB
+        createdDate: 1997-07-02T18:23:52
+        modifiedDate: 2012-09-20T15:56:31
+    waterlevelmeasurement-page:
+      description: Data type that represents a collection/page of water level measurements.
+      required: []
+      type: object
+      properties:
+        nextPage:
+          description: URI to next page of the collection
+          type: string
+        prevPage:
+          description: URI to previous page of the collection
+          type: string
+        totalRecords:
+          description: Indicates the total number of records (including all pages)
+          type: integer
+        pageSize:
+          description: Number of records displayed per page
+          type: integer
+        pageNumber:
+          description: Index (1-based) respresenting current page number
+          type: integer
+        waterLevelMeasurements:
+          description: Collection of water level measurements.
+          type: array
+          items:
+            $ref: '#/components/schemas/waterlevelmeasurement'
+    elevationmeasurement:
+      title: Root Type for elevationmeasurement
+      description: Data type representing an elevation measurement recorded during
+        a field visit to an obswell.
+      type: object
+      properties:
+        measurementDate:
+          format: date-time
+          description: Date the measurement was taken.
+          type: string
+        groundElevation:
+          format: int32
+          type: integer
+        referenceElevation:
+          format: double
+          type: number
+        referencePointType:
+          type: string
+        surveyMethod:
+          type: string
+        comments:
+          type: string
+        conductedBy:
+          type: string
+        createdDate:
+          format: date-time
+          type: string
+        modifiedDate:
+          format: date-time
+          description: Datetime of the most recent modification to the obswell in
+            SAGeoData.
+          type: string
+        drillholeId:
+          format: int32
+          description: Unique identifier specified by SAGeoData.
+          type: integer
+        measurementId:
+          format: int32
+          description: Unique identifier of drillhole specified by SAGeoData.
+          type: integer
+      example:
+        drillholeNumber: 87308
+        measurementNumber: 422497
+        measurementDate: 2018-08-31T00:00:00
+        groundElevation: 226.818
+        surveyMethod: DEM
+        comments: Ground elevation has been interpolated from the GA 1 second SRTM
+          level 2 Digital DEM v1_0 (standard, smoothed and hydro corrected). Release
+          date of DEM 2010. Survey Date is date of load into database.
+        conductedBy: GALDS
+        createdDate: 2018-09-14T11:53:09
+    elevationmeasurement-page:
+      description: Data type that represents a collection/page of elevation measurements.
+      required: []
+      type: object
+      properties:
+        nextPage:
+          description: URI to next page of the collection
+          type: string
+        prevPage:
+          description: URI to previous page of the collection
+          type: string
+        totalRecords:
+          description: Indicates the total number of records (including all pages)
+          type: integer
+        pageSize:
+          description: Number of records displayed per page
+          type: integer
+        pageNumber:
+          description: Index (1-based) respresenting current page number
+          type: integer
+        elevationMeasurements:
+          description: Collection of water level measurements
+          type: array
+          items:
+            $ref: '#/components/schemas/elevationmeasurement'
   responses:
     UnauthorizedError:
       headers:

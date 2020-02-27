@@ -2701,6 +2701,11 @@ components:
           format: int32
           description: Unique identifier of drillhole specified by SAGeoData.
           type: integer
+        appliedDate:
+          format: date-time
+          description: Start date of period this elevation measurement should be used
+            for deriving level measurements.
+          type: string
       example:
         drillholeNumber: 87308
         measurementNumber: 422497

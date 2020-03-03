@@ -766,6 +766,46 @@ paths:
         type: integer
       in: path
       required: true
+  /api/v1.0/obswells/referencepointtypes:
+    summary: Endpoint to retrieve the list of possible reference point types and their
+      code values
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/codevaluepair'
+              examples:
+                Example:
+                  value:
+                  - Code: TOC
+                    Value: Casing (Top)
+                  - Code: REF
+                    Value: Reference
+          description: Successful operation
+      summary: List all reference point types
+  /api/v1.0/obswells/surveymethods/:
+    summary: Endpoint to retrieve the list of possible survey methods and their code
+      values
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/codevaluepair'
+              examples:
+                Example:
+                  value: "[\r\n  {\r\n    \"Code\": \"DEM\",\r\n    \"Value\": \"\
+                    Digital Elevation Model\t\"\r\n  },\r\n  {\r\n    \"Code\": \"\
+                    DIG\",\r\n    \"Value\": \"Digitised\"\r\n  }\r\n]"
+          description: Successful operation
+      summary: List all survey methods
 components:
   schemas:
     address:
@@ -2345,154 +2385,6 @@ components:
         longitude: ""
         mgaZone: "54"
         coordinateSystem: WGS84
-    obswell:
-      title: Root Type for obswell
-      description: A monitored waterwell.
-      type: object
-      properties:
-        unitNumber:
-          format: int32
-          description: A combination of the map100000Number and sequence number.
-          type: integer
-        nrmRegionCode:
-          description: NRM region code
-          enum:
-          - Eyre
-          - Peninsula
-          - South
-          - Australian
-          - Arid
-          - Lands
-          - East
-          - Northern
-          - '&'
-          - Yorke
-          - Alinytjara
-          - Wilurara
-          - Adelaide
-          - Mt
-          - Lofty
-          - Ranges
-          - Murray-Darling
-          - Basin
-          - Kangaroo
-          - Island
-          type: string
-        prescribedWellArea:
-          description: Prescribed well area code.
-          enum:
-          - Musgrave
-          - Southern
-          - Basins
-          - McLaren
-          - Vale
-          - Northern
-          - Adelaide
-          - Plains
-          - Noora
-          - Padthaway
-          - Central
-          - Far
-          - North
-          - Mallee
-          - Peake
-          - Roby
-          - and
-          - Sherlock
-          - Tintinara-Coonalpyn
-          - Lower
-          - Limestone
-          - Coast
-          - Angas-Bremer
-          - Tatiara
-          type: string
-        prescribedWaterResourceArea:
-          description: Prescribed water resource area code.
-          enum:
-          - Eastern
-          - Mount
-          - Lofty
-          - Ranges
-          - Baroota
-          - Marne
-          - River
-          - and
-          - Saunders
-          - Creek
-          - Barossa
-          - Valley
-          - Clare
-          - Western
-          type: string
-        sequenceNumber:
-          format: int32
-          description: A unique number identifying the obswell on the 1:100000 map
-            sheet for which the obswell is located.
-          type: integer
-        latitude:
-          format: double
-          description: Latitude of the obswell.
-          type: number
-        longitude:
-          format: double
-          description: Longitude of the obswell.
-          type: number
-        obsWellPlan:
-          description: A unique code for the plan (hundred) on which an obswell is
-            located.
-          type: string
-        obsWellSequenceNumber:
-          description: A unique number identifying the obswell on the obsWellPlan.
-          type: string
-        aquiferIntersected:
-          description: Code identifying the aquifer that the well intersects.
-          type: string
-        comments:
-          description: Comments
-          type: string
-        createdDate:
-          format: date-time
-          description: Date the obswell was added to SAGeoData.
-          type: string
-        modifiedDate:
-          format: date-time
-          description: Datetime of the most recent modification to the obswell in
-            SAGeoData.
-          type: string
-        name:
-          description: Name of the obswell.
-          type: string
-        elevationMeasurementsURL:
-          description: URL to API endpoint to retrieve elevation measurements for
-            the obswell.
-          type: string
-        waterLevelMeasurementsURL:
-          description: URL to API endpoint to retrieve water level measurements for
-            the obswell.
-          type: string
-        map100kNumber:
-          format: int32
-          description: The 1:100000 map sheet number on which an obswell is located.
-            Unique per 1:100000 map sheet. Generated by SAGeoData upon entry of coordinates
-            into SAGeoData.
-          type: integer
-        drillholeNumber:
-          format: int32
-          description: Unique identifier specified by SAGeoData.
-          type: integer
-      example:
-        drillholeNumber: 230
-        drillholeName: A-29 (MT DAVIES)
-        unitNumber: 474500070
-        nrmRegionCode: Alinytjara Wilurara
-        waterWellClass: "N"
-        map100000Number: 4745
-        sequenceNumber: 70
-        latitude: -26.1130886
-        longitude: 129.02301
-        comments: South Western Mining Company
-        createdDate: 1992-12-10T18:04:24
-        modifiedDate: 2019-08-30T09:32:00
     obswell-page:
       description: Data type that represents a collection/page of water level measurements
       required:
@@ -2613,70 +2505,6 @@ components:
           format: double
           description: The well's current elevation from the reference point in metres.
           type: number
-        referencePointType:
-          description: Name of the reference point, e.g. TOC (Top of Casing)
-          enum:
-          - GRD
-          - KB
-          - CAB
-          - TOC
-          - FLR
-          - PBP
-          - REF
-          - STP
-          - SCB
-          - WEL
-          - WLC
-          - WIN
-          - WDC
-          - COL
-          - FLN
-          type: string
-        surveyMethod:
-          description: The survey method used, e.g. GPSSN (GPS Standalone Navigational)
-          enum:
-          - MAP
-          - GPS
-          - SUR
-          - PRO
-          - UKN
-          - CAL
-          - DIG
-          - GCN
-          - SAN
-          - INFER
-          - AMGRD
-          - CLGRD
-          - UCMAP
-          - IMGD
-          - PHOTO
-          - VERBL
-          - GPSUN
-          - GPSSN
-          - GPSAP
-          - GPSRD
-          - GPSPD
-          - GPSSL
-          - DOCM
-          - TRX
-          - GPSDS
-          - GPSDM
-          - GPSDG
-          - COCH
-          - COOD
-          - EDM
-          - LOCAL
-          - ODOM
-          - GISP
-          - GISW
-          - GPSSK
-          - GPSSS
-          - GTRAV
-          - GOEAR
-          - GOMAP
-          - DEM
-          - GPSAU
-          type: string
         comments:
           description: Comments
           type: string
@@ -2705,6 +2533,99 @@ components:
           format: date-time
           description: Start date of period this elevation measurement should be used
             for deriving level measurements.
+          type: string
+        surveyMethodCode:
+          description: "Survey Method. Possible values: \n\n`AMGRD` - Controlled AMG/MGA\
+            \ map\t\n`CAL` - (DISUSED) Calculated\t\n`CLGRD` - Controlled CLARKE map\t\
+            \n`COCH` - (DISUSED) Compass and Chain\t\n`COOD` - (DISUSED) Compass and\
+            \ Odometer\t\n`DEM` - Digital Elevation Model\t\n`DIG` - Digitised\t\n\
+            `DOCM` - Sourced from documents (PLANS, ENV, RB,etc)\t\n`EDM` - (DISUSED)\
+            \ EDM\t\n`GCN` - (DISUSED) MESA Geog conversion from Clarke coords\t\n\
+            `GISP` - GIS software on PDA or similar mobile device\t\n`GISW` - GIS\
+            \ software on full Windows OS PC\t\n`GOEAR` - Google Earth image\t\n`GOMAP`\
+            \ - Google Maps image\t\n`GPS` - (DISUSED, use GPSUN) Global Positioning\
+            \ System\t\n`GPSAP` - GPS Averaged Position\t\n`GPSAU` - GPS Post Processed\
+            \ Using AUSPOS Service\t\n`GPSDG` - GPS Differential Generic\t\n`GPSDM`\
+            \ - GPS Multi Base Wide Area Differential (was GPSPD)\t\n`GPSDS` - GPS\
+            \ Single Base Wide Area Differential (was GPSRD)\t\n`GPSPD` - GPS Post\
+            \ Processed Differential (nav level)\t\n`GPSRD` - GPS Real-time Differential\
+            \ (nav level)\t\n`GPSSK` - GPS Svy Grade- Real Time Kinematic (RTK)/Kinematic\t\
+            \n`GPSSL` - GPS Survey Grade (kinematic/static)\t\n`GPSSN` - GPS Standalone\
+            \ Navigational\t\n`GPSSS` - GPS Survey Grade - Static\t\n`GPSUN` - GPS\
+            \ type unknown\t\n`GTRAV` - Interpolated traverse site between GPS endpoints\t\
+            \n`IMGD` - Digital Image\t\n`INFER` - (DISUSED) Inferred\t\n`LOCAL` -\
+            \ (DISUSED) Approximate local methods\t\n`MAP` - (DISUSED) Map Plot\t\n\
+            `ODOM` - (DISUSED) Odometer\t\n`PHOTO` - Air Photo\t\n`PRO` - (DISUSED)\
+            \ Provisional (Estimated)\t\n`SAN` - (DISUSED) Santos conversion from\
+            \ Clarke coords\t\n`SUR` - Surveying\t\n`TRX` - GDA94 Transformed\t\n\
+            `UCMAP` - Uncontrolled map\t\n`UKN` - (DISUSED) Unknown\t\n`VERBL` - (DISUSED)\
+            \ Verbal"
+          enum:
+          - AMGRD
+          - CAL
+          - CLGRD
+          - COCH
+          - COOD
+          - DEM
+          - DIG
+          - DOCM
+          - EDM
+          - GCN
+          - GISP
+          - GISW
+          - GOEAR
+          - GOMAP
+          - GPS
+          - GPSAP
+          - GPSAU
+          - GPSDG
+          - GPSDM
+          - GPSDS
+          - GPSPD
+          - GPSRD
+          - GPSSK
+          - GPSSL
+          - GPSSN
+          - GPSSS
+          - GPSUN
+          - GTRAV
+          - IMGD
+          - INFER
+          - LOCAL
+          - MAP
+          - ODOM
+          - PHOTO
+          - PRO
+          - SAN
+          - SUR
+          - TRX
+          - UCMAP
+          - UKN
+          - VERBL
+          type: string
+        referencePointTypeCode:
+          description: "Name of the reference point. Possible values:\n\n`GRD` Ground\n\
+            \n`KB\tKelly` Bushing\n\n`CAB` Cable Access (Top)\n\n`TOC` Casing (Top)\n\
+            \n`FLR` Floor (Top)\n\n`PBP` Pump Base Plate (Top)\n\n`REF` Reference\n\
+            \n`STP` Stand Pipe (Top)\n\n`SCB` Steel Cross Bar (Top)\n\n`WEL` Well\
+            \ (Top)\n\n`WLC` Well Cover (Top)\n\n`WIN` Windmill Clamp (Top)\n\n`WDC`\
+            \ Wooden Cover (Top)"
+          enum:
+          - GRD
+          - KB
+          - CAB
+          - TOC
+          - FLR
+          - PBP
+          - REF
+          - STP
+          - SCB
+          - WEL
+          - WLC
+          - WIN
+          - WDC
+          - COL
+          - FLN
           type: string
       example:
         drillholeNumber: 87308
@@ -2743,6 +2664,139 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/elevationmeasurement'
+    codevaluepair:
+      description: Key value pair used to display values from lookup tables.
+      type: object
+      properties:
+        Value:
+          description: The string value itself.
+          type: string
+        Code:
+          description: Code for the associated value.
+          type: string
+    obswell:
+      title: Root Type for obswell
+      description: A monitored waterwell.
+      type: object
+      properties:
+        unitNumber:
+          format: int32
+          description: A combination of the map100000Number and sequence number.
+          type: integer
+        nrmRegionCode:
+          description: "NRM region code. Possible values:\n\n`OUT` Out of NRM regions\n\
+            \n`AMLR`\tAdelaide & Mt Lofty Ranges\n\n`ATJWIL`Alinytjara Wilurara\n\n\
+            `EYRPEN`Eyre Peninsula\n\n`KI` Kangaroo Island\n\n`NTHYK`\tNorthern &\
+            \ Yorke\n\n`SAARDL` South Australian Arid Lands\n\n`STHEAST` South East\n\
+            \n`SAMDB`\tSouth Australian Murray-Darling Basin\n"
+          enum:
+          - ANGBRM
+          - CTRADL
+          - FRNTH
+          - LWRLC
+          - MAL
+          - MCLVAL
+          - MGRV
+          - NOO
+          - NTHADLPL
+          - PAD
+          - PKRBSHR
+          - STHBAS
+          - TAT
+          - TINCNP
+          - DRYCK
+          type: string
+        sequenceNumber:
+          format: int32
+          description: A unique number identifying the obswell on the 1:100000 map
+            sheet for which the obswell is located.
+          type: integer
+        latitude:
+          format: double
+          description: Latitude of the obswell.
+          type: number
+        longitude:
+          format: double
+          description: Longitude of the obswell.
+          type: number
+        obsWellPlan:
+          description: A unique code for the plan (hundred) on which an obswell is
+            located.
+          type: string
+        obsWellSequenceNumber:
+          description: A unique number identifying the obswell on the obsWellPlan.
+          type: string
+        aquiferIntersected:
+          description: Code identifying the aquifer that the well intersects.
+          type: string
+        comments:
+          description: Comments
+          type: string
+        createdDate:
+          format: date-time
+          description: Date the obswell was added to SAGeoData.
+          type: string
+        modifiedDate:
+          format: date-time
+          description: Datetime of the most recent modification to the obswell in
+            SAGeoData.
+          type: string
+        name:
+          description: Name of the obswell.
+          type: string
+        elevationMeasurementsURL:
+          description: URL to API endpoint to retrieve elevation measurements for
+            the obswell.
+          type: string
+        waterLevelMeasurementsURL:
+          description: URL to API endpoint to retrieve water level measurements for
+            the obswell.
+          type: string
+        map100kNumber:
+          format: int32
+          description: The 1:100000 map sheet number on which an obswell is located.
+            Unique per 1:100000 map sheet. Generated by SAGeoData upon entry of coordinates
+            into SAGeoData.
+          type: integer
+        drillholeNumber:
+          format: int32
+          description: Unique identifier specified by SAGeoData.
+          type: integer
+        nrmRegion:
+          description: NRM region
+          type: string
+        status:
+          description: "Status of the drillhole. Possible values are:\r\n\r\n\r\n\
+            Abandoned\t\r\nBackfilled\t\r\nBlocked\t\r\nCapped\t\r\nCare and Maintenance\t\
+            \r\nCased\t\r\nCollapsed\t\r\nCompleted\t\r\nControlled - shut in\t\r\n\
+            Controlled Flowing\t\r\nConverted to WW\t\r\nDamaged\t\r\nDamp\t\r\nDecommissioned\t\
+            \r\nDry\t\r\nDual Completion\t\r\nEquipped (pump, windmill, etc)\t\r\n\
+            Extinct Spring\t\r\nFlowing\t\r\nFree water and tail\t\r\nGeotechnically\
+            \ Equiped\t\r\nInjector\t\r\nMined (removed by mining)\t\r\nNot Equipped\t\
+            \r\nNot In Use\t\r\nNot Located\t\r\nNot Operational\t\r\nOperational\t\
+            \r\nOperational as required\t\r\nPlugged\t\r\nPond, free water\t\r\nRehabilitated\t\
+            \r\nSaturated\t\r\nShut In\t\r\nSingle Completion\t\r\nStorage\t\r\nSuspended\t\
+            \r\nUncontrolled Flowing\t\r\nUnequipped\t\r\nUnknown\t\r\nUnworked"
+          type: string
+        prescribedWellAreaName:
+          description: Prescribed well area
+          type: string
+        prescribedWaterResourceAreaName:
+          description: Prescribed water resource area
+          type: string
+      example:
+        drillholeNumber: 230
+        drillholeName: A-29 (MT DAVIES)
+        unitNumber: 474500070
+        nrmRegionCode: Alinytjara Wilurara
+        waterWellClass: "N"
+        map100000Number: 4745
+        sequenceNumber: 70
+        latitude: -26.1130886
+        longitude: 129.02301
+        comments: South Western Mining Company
+        createdDate: 1992-12-10T18:04:24
+        modifiedDate: 2019-08-30T09:32:00
   responses:
     UnauthorizedError:
       headers:

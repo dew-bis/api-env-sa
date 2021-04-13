@@ -1,1 +1,677 @@
- 
+---
+openapi: 3.0.2
+info:
+  title: Aramis Dashboard
+  version: 1.0.0
+  description: APIs for Aramis Dashboard design.
+paths:
+  /asset/compare:
+    summary: API to retrieve assets, finance and vistor data.
+    description: This api gives a full description of assets, finance and visitor
+      information for Comparison tab of Aramis Dashboard. It gives info about the
+      number of assets due and compare the assets based on the financial year.
+    get:
+      parameters:
+      - name: financialYear
+        description: Financial year
+        schema:
+          type: string
+        in: query
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/asset-compare-view-response'
+          description: Successful retrieval of assets, finance and visitor information.
+        "500":
+          description: Unexpected error occurred when processing the request
+      summary: Get asset, finance and vistor information for comparison.
+      description: Retrives information about the number of visitors and finance information
+        of aramis assets.
+    parameters:
+    - name: financialYear
+      description: Financial year
+      schema:
+        type: string
+      in: query
+  /asset/main:
+    summary: API to analyse the assets based on park and site. This populates asset
+      information for the main view of Aramis dashboard.
+    description: This API gives complete description of an asset to analyse based
+      on the park and site information. This also gives information about the overnight
+      visitors of a park and the traffic details of a park.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/asset-main-view-response'
+          description: Successful retrieval of complete asset analysis information.
+        "500":
+          description: Unexpected error occurred when processing the request
+      summary: Get asset information for analysis for the main view of the dashboard.
+      description: This API gives complete description of an asset to analyse based
+        on the park and site information. This also gives information about the overnight
+        visitors of a park and the traffic details of a park.
+  /asset/data/{offset}:
+    summary: API to retrieve asset related information for the Data View of Aramis
+      dashboard
+    description: This api gives all the asset related information including the calculated
+      replacement date and calculated replacement cost of an asset.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/asset-data-view-response'
+          description: Successful retrieval of asset related information for the data
+            tab of the dashboard.
+        "500":
+          description: Unexpected error occurred when processing the request
+      summary: Get  aramis asset information based on the request criteria.
+      description: Get all the asset related information for the data tab of the dashboard.
+    parameters:
+    - name: financialYear
+      description: Financial year
+      schema: {}
+      in: query
+      required: false
+    - name: quarter
+      description: Quarter of the financial year
+      schema: {}
+      in: query
+    - name: region
+      description: Name of the region
+      schema: {}
+      in: query
+    - name: park
+      description: Name of the park
+      schema: {}
+      in: query
+    - name: district
+      description: Name of the district
+      schema: {}
+      in: query
+    - name: group
+      description: Group to which the asset belong
+      schema: {}
+      in: query
+    - name: site
+      description: Name of the site
+      schema: {}
+      in: query
+    - name: condition
+      description: Condition of the asset
+      schema: {}
+      in: query
+    - examples:
+        offset:
+          value: http://envwebappsdev02:8280/asset/data/0
+      name: offset
+      description: |-
+        Offset to determine the start of the search.
+
+        Default value : 0.
+      schema:
+        type: integer
+      in: path
+      required: true
+components:
+  schemas:
+    asset-data-view-response:
+      title: Root Type for asset-data-view
+      description: This gives information for the data view of Aramis Dashboard.
+      type: array
+      items:
+        type: object
+        properties:
+          assetId:
+            format: int32
+            type: integer
+          park:
+            type: string
+          site:
+            type: string
+          subsite:
+            type: string
+          assetCondition:
+            type: string
+          assetTypeName:
+            type: string
+          assetTypeClass:
+            type: string
+          assetTypeDesc:
+            type: string
+          assetType:
+            type: string
+          quantity:
+            type: string
+          measure:
+            type: string
+          dimension:
+            type: string
+          inspectionDate:
+            type: string
+          calcReplacementCost:
+            type: string
+          calcReplacementDate:
+            format: date
+            type: string
+          assetTypeGroup:
+            type: string
+          cost:
+            format: int32
+            type: integer
+      properties:
+        assetDataView:
+          description: Details of assets for the data view.
+          type: array
+          items:
+            $ref: '#/components/schemas/asset-data-view'
+      example:
+      - assetId: 17513
+        park: Eurilla
+        site: No site
+        subsite: No subsite
+        assetCondition: Good
+        assetTypeName: Sign
+        assetTypeClass: Furniture & Fittings
+        assetTypeDesc: Plank
+        assetType: Timber
+        quantity: "1.00"
+        measure: No.
+        dimension: Unit
+        inspectionDate: 2021-04-03
+        calcReplacementCost: "510"
+        calcReplacementDate: 2025-10-26
+        assetTypeGroup: Infrastructure
+        cost: 58004
+      - assetId: 2755
+        park: Cobbler Creek
+        site: Cobbler Creek site
+        subsite: Para
+        assetCondition: Replace
+        assetTypeName: Sign
+        assetTypeClass: Furniture & Fittings
+        assetTypeDesc: Symbol Totem
+        assetType: Timber
+        quantity: "1.00"
+        measure: No.
+        dimension: Unit
+        inspectionDate: 1998-03-08
+        calcReplacementCost: "510"
+        calcReplacementDate: 1998-03-08
+        assetTypeGroup: Infrastructure
+        cost: 10056
+    asset-compare-view-response:
+      title: Root Type for asset-compare-response
+      description: Retrives lists of asset, finance and visitor data for Comparison
+        view of Aramis dashboard.
+      required:
+      - visitorCompareView
+      - financeCompareView
+      - assetCompareView
+      type: object
+      properties:
+        assetCompareView:
+          description: Information about the assets.
+          type: array
+          items:
+            $ref: '#/components/schemas/asset-compare-view'
+        financeCompareView:
+          description: Information about the finance information of assets(based on
+            financial year)
+          type: array
+          items:
+            $ref: '#/components/schemas/asset-compare-view-finance'
+        visitorCompareView:
+          description: Information about the number of visitors to a park in a financial
+            year for each month
+          type: array
+          items:
+            $ref: '#/components/schemas/asset-compare-view-visitor'
+      example:
+        assetCompareView:
+        - assetId: 62957
+          assetTypeGroup: Infrastructure
+          assetTypeName: Sign
+          assetCondition: Replace
+          replacementCost: 597
+          replacementDate: 2017-08-12
+          writtenDownValue: 0
+          financialYear: 2015-2020
+          month: Jul
+          region: Flinders and Outback
+          park: Outback
+          district: Malkumba-Coongie Lakes National Park
+        - assetId: 43102
+          assetTypeGroup: Plant and Equipment
+          assetTypeName: Solar panel
+          assetCondition: Replace
+          replacementCost: 2250
+          replacementDate: 2017-08-12
+          writtenDownValue: 0
+          financialYear: 2015-2020
+          month: Apr
+          region: Yorke and Mid North
+          park: Southern Flinders Mid North
+          district: Bimbowrie
+        financeCompareView:
+        - financialYear: 2020-2021
+          region: Adelaide and Mount Lofty Ranges
+          workType: BREAKDOWN MAINTENANCE
+          ytdActual: 28071
+          fyBudget: 62000
+        - financialYear: 2020-2021
+          region: Kangaroo Island
+          workType: BREAKDOWN MAINTENANCE
+          ytdActual: 10058
+          fyBudget: 27000
+        visitorCompareView:
+        - financialYear: 2020-2021
+          region: Riverland and Murray Lands
+          park: Loch Luna and Moorook Game Reserve
+          month: Jul
+          numVisitors: 226
+        - financialYear: 2020-2021
+          region: Eyre and Far West
+          park: Gawler Ranges National Park
+          month: Jul
+          numVisitors: 767
+    asset-main-view-response:
+      title: Root Type for asset-details
+      description: Gives analysis of assets by park and site information, analysis
+        of overnight visitors and total vistors of a park. This is used to populate
+        the  the main view of Aramis dashboard.
+      type: object
+      properties:
+        assetMainView:
+          description: Retrives the details of an asset
+          type: array
+          items:
+            $ref: '#/components/schemas/asset-main-view'
+        trafficMainView:
+          description: Retrives traffic inflow information of a park.
+          type: array
+          items:
+            $ref: '#/components/schemas/asset-main-view-traffic'
+        visitorMainView:
+          description: Retrieves total visitor information including the overnight
+            visitors of a park.
+          type: array
+          items:
+            $ref: '#/components/schemas/asset-main-view-visitor'
+      example:
+        assetMainView:
+        - financialYear: 2014-2015
+          quarter: 4
+          month: Jun
+          region: Flinders and Outback
+          district: Outback
+          park: Simpson Desert
+          park2: Simpson Desert
+          park3: Simpson Desert
+          site: Simpson Desert site
+          site2: Simpson Desert site
+          assetTypeName: Road-Public
+          assetCondition: Poor
+          calcReplacementCost: 428516.95
+          numAssets: 1
+          assetTypeGroup: Infrastructure
+        - financialYear: 2015-2016
+          quarter: 4
+          month: May
+          region: Limestone Coast
+          district: Lower Limestone Coast
+          park: Robe Workshop
+          park2: Robe Workshop
+          park3: Robe Workshop
+          site: Compound
+          site2: Compound
+          assetTypeName: Firearm
+          assetCondition: Good
+          calcReplacementCost: 1644.5
+          numAssets: 1
+          assetTypeGroup: Plant and Equipment
+        visitorMainView:
+        - region: Limestone Coast
+          park: Little Dip Conservation Park
+          park2: Little Dip Conservation Park
+          financialYear: 2015-2016
+          quarter: 3
+          month: Feb
+          numVisitors: 116
+          numNightsTotal: 177
+          numNights: 116
+        - region: Riverland and Murray Lands
+          park: Loch Luna and Moorook Game Reserve
+          park2: Loch Luna and Moorook Game Reserve
+          financialYear: 2016-2017
+          quarter: 4
+          month: Jun
+          numVisitors: 126
+          numNightsTotal: 257
+          numNights: 126
+        trafficMainView:
+        - financialYear: 2017-2018
+          quarter: 4
+          month: Jun
+          counter: 1619
+          region: Eyre and Far West
+          park: Coffin Bay National Park
+        - financialYear: 2017-2018
+          quarter: 4
+          month: Jun
+          counter: 1619
+          region: Eyre and Far West
+          park: Coffin Bay National Park
+    asset-data-view:
+      title: Root Type for asset-data-view-info
+      description: This gives asset information for the data view of Aramis dashboard.
+      type: object
+      properties:
+        assetId:
+          format: int32
+          type: integer
+        park:
+          type: string
+        site:
+          type: string
+        subsite:
+          type: string
+        assetCondition:
+          type: string
+        assetTypeName:
+          type: string
+        assetTypeClass:
+          type: string
+        assetTypeDesc:
+          type: string
+        assetType:
+          type: string
+        quantity:
+          type: string
+        measure:
+          type: string
+        dimension:
+          type: string
+        inspectionDate:
+          type: string
+        calcReplacementCost:
+          type: string
+        calcReplacementDate:
+          format: date
+          type: string
+        assetTypeGroup:
+          type: string
+        cost:
+          format: int32
+          type: integer
+      example:
+        assetId: 2755
+        park: Cobbler Creek
+        site: Cobbler Creek site
+        subsite: Para
+        assetCondition: Replace
+        assetTypeName: Sign
+        assetTypeClass: Furniture & Fittings
+        assetTypeDesc: Symbol Totem
+        assetType: Timber
+        quantity: "1.00"
+        measure: No.
+        dimension: Unit
+        inspectionDate: 08-03-98
+        calcReplacementCost: "510"
+        calcReplacementDate: 1998.03.08
+        assetTypeGroup: Infrastructure
+        cost: 58004
+    asset-main-view:
+      title: Root Type for asset-analysis
+      description: Gives a detailed analysis of asset information for the main view
+        of Aramis dashboard.
+      type: object
+      properties:
+        financialYear:
+          type: string
+        quarter:
+          format: int32
+          type: integer
+        month:
+          type: string
+        region:
+          type: string
+        district:
+          type: string
+        park:
+          type: string
+        park2:
+          type: string
+        park3:
+          type: string
+        site:
+          type: string
+        site2:
+          type: string
+        assetTypeName:
+          description: Name of the asset
+          type: string
+        assetCondition:
+          description: Condition of an asset
+          type: string
+        calcReplacementCost:
+          format: double
+          description: Calculated replacement cost of the asset
+          type: number
+        numAssets:
+          format: int32
+          type: integer
+        assetTypeGroup:
+          description: 'Group to which the asset belongs. Eg: Infrastructure, Plant
+            and Equipment.'
+          type: string
+      example:
+        financialYear: 2014-2015
+        quarter: 4
+        month: Jun
+        region: Flinders and Outback
+        district: Outback
+        park: Simpson Desert
+        park2: Simpson Desert
+        park3: Simpson Desert
+        site: Simpson Desert site
+        site2: Simpson Desert site
+        assetTypeName: Road-Public
+        assetCondition: Poor
+        calcReplacementCost: 428516.95
+        numAssets: 1
+        assetTypeGroup: Infrastructure
+    asset-main-view-traffic:
+      title: Root Type for asset-counter-details
+      description: Gives information about the traffic inflow of a park during a finacial
+        year for the main view of Aramis dashboard.
+      type: object
+      properties:
+        financialYear:
+          description: Financial year
+          type: string
+        quarter:
+          format: int32
+          type: integer
+        month:
+          type: string
+        counter:
+          format: int32
+          description: Traffic inflow of the park
+          type: integer
+        region:
+          type: string
+        park:
+          type: string
+      example:
+        financialYear: 2017-2018
+        quarter: 4
+        month: Jun
+        counter: 1619
+        region: Eyre and Far West
+        park: Coffin Bay National Park
+    asset-main-view-visitor:
+      title: Root Type for total-visitor-details
+      description: Gives information about total visitors, percentage of visitors
+        stayed overnight at parks and the avg no of nights stayed overnight. Used
+        to poulate the main view of Aramis dashboard.
+      type: object
+      properties:
+        region:
+          type: string
+        park:
+          type: string
+        park2:
+          type: string
+        financialYear:
+          type: string
+        quarter:
+          format: int32
+          type: integer
+        month:
+          type: string
+        numVisitors:
+          format: int32
+          description: Gives Total number of visitors stayed overnight
+          type: integer
+        numNightsTotal:
+          format: int32
+          description: Gives total number of nights stayed at a park
+          type: integer
+        numNights:
+          format: int32
+          description: Gives number of nights
+          type: integer
+      example:
+        region: Limestone Coast
+        park: Little Dip Conservation Park
+        park2: Little Dip Conservation Park
+        financialYear: 2015-2016
+        quarter: 3
+        month: Feb
+        numVisitors: 116
+        numNightsTotal: 177
+        numNights: 116
+    asset-compare-view:
+      title: Root Type for asset-data
+      description: Retrive a list of assets for Comparison view of Aramis dashboard.
+      type: object
+      properties:
+        assetId:
+          format: int32
+          description: Asset id of an asset
+          type: integer
+        assetTypeGroup:
+          description: |-
+            Denotes the group to which the asset belong
+            Examples: Infrastructure, Plant & Equipment
+          type: string
+        assetTypeName:
+          description: |-
+            Denotes the name of the asset type
+            Examples: Sand Collection Unit, Meteorological equipment, Ground Stabiliser etc
+          type: string
+        assetCondition:
+          description: "Condition of an asset. Values can be:\r\nNew,\r\nAverage,\r\
+            \nExcellent,\r\nGood,\r\nPoor,\r\nRemove,\r\nReplace"
+          type: string
+        replacementCost:
+          format: int32
+          description: Cost of replacement of an asset
+          type: integer
+        replacementDate:
+          format: date
+          description: Date of replacement of an asset
+          type: string
+        writtenDownValue:
+          format: int32
+          description: Written down value of an asset
+          type: integer
+        financialYear:
+          description: Financial year
+          type: string
+        month:
+          description: Month
+          type: string
+        region:
+          description: Region information of an asset.
+          type: string
+        park:
+          description: Park information of an asset.
+          type: string
+        district:
+          description: District information of an asset.
+          type: string
+      example:
+        assetId: 62957
+        assetTypeGroup: Infrastructure
+        assetTypeName: Sign
+        assetCondition: Replace
+        replacementCost: 597
+        replacementDate: 2017-08-12
+        writtenDownValue: 0
+        financialYear: 2015-2020
+        month: Jul
+        region: Flinders and Outback
+        park: Outback
+        district: Malkumba-Coongie Lakes National Park
+    asset-compare-view-finance:
+      title: Root Type for finance-data
+      description: Retrives a list of finance information for Comparison view of Aramis
+        dashboard.
+      type: object
+      properties:
+        financialYear:
+          description: Financial year
+          type: string
+        region:
+          description: Region information.
+          type: string
+        workType:
+          description: Work type information
+          type: string
+        ytdActual:
+          format: int32
+          type: integer
+        fyBudget:
+          format: int32
+          description: Financial year budget
+          type: integer
+      example:
+        financialYear: 2020-2021
+        region: Adelaide and Mount Lofty Ranges
+        workType: BREAKDOWN MAINTENANCE
+        ytdActual: 28071
+        fyBudget: 62000
+    asset-compare-view-visitor:
+      title: Root Type for visitor-data
+      description: Retrieves list of visitor information of a park for Comparison
+        view of Aramis dashboard.
+      type: object
+      properties:
+        financialYear:
+          description: Financial year
+          type: string
+        region:
+          type: string
+        park:
+          type: string
+        month:
+          type: string
+        numVisitors:
+          format: int32
+          description: Number of visitors
+          type: integer
+      example:
+        financialYear: 2020-2021
+        region: Riverland and Murray Lands
+        park: Loch Luna and Moorook Game Reserve
+        month: Jul
+        numVisitors: 226

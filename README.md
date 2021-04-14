@@ -3,18 +3,22 @@ API Specification Catalogue - BIS Systems - Environment &amp; Water Dept, SA Gov
 
 The API Catalogue (master) has the following definitions 
 
-1. [Aramis](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/n8-coder/api-env-sa/master/aramis-apispec.yml)
+1. [Aramis](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/aramis-apispec.yml)
 
-2. [Case Management and Intelligence System - CMIS](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/n8-coder/api-env-sa/master/cmis-apispec.yml)
+2. [Aramis Dashboard](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/aramisdashboard-apispec.yml)
 
-3. [SA Geodata](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/n8-coder/api-env-sa/master/sageodata-apispec.yml)
+3. [Case Management and Intelligence System - CMIS](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/cmis-apispec.yml)
 
-4. [Masterpiece AR](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/n8-coder/api-env-sa/master/masterpiece-ar-apispec.yml)
+4. [SA Geodata](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/sageodata-apispec.yml)
 
-5. [Wildlife Permit System](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/n8-coder/api-env-sa/master/wps-apispec.yml)
+5. [Masterpiece AR](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/masterpiece-ar-apispec.yml)
 
-6. [Enterprise CRM (eCRM) System](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/n8-coder/api-env-sa/master/ecrm-apispec.yml)
+6. [Wildlife Permit System](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/wps-apispec.yml)
 
-7. [TimeWise](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/n8-coder/api-env-sa/master/timewise-apispec.yml)
+7. [Enterprise CRM (eCRM) System](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/ecrm-apispec.yml)
 
-8. [Parks](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/n8-coder/api-env-sa/master/parks-apispec.yaml)
+8. [TimeWise](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/timewise-apispec.yml)
+
+9. [Parks](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/parks-apispec.yaml)
+
+

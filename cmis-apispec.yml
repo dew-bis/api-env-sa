@@ -724,6 +724,8 @@ paths:
     parameters:
     - name: id
       description: System generated ID of the client
+      schema:
+        type: string
       in: path
       required: true
   /whs-apis/v1/whsrisks/{id}:

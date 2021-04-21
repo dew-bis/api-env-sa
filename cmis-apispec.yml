@@ -388,6 +388,9 @@ paths:
           description: Unauthorized
         "403":
           description: Forbidden
+        "400":
+          description: 'Bad Request - Validation Failed: Either Residential or Postal
+            address must be suppied'
       operationId: CreateClient
       summary: Create a new `client`
       description: Create a new Client in the CMIS System
@@ -791,7 +794,6 @@ components:
       required:
       - firstname
       - lastname
-      - residentialAddress
       type: object
       properties:
         firstname:
@@ -1744,6 +1746,7 @@ components:
         The `nextPage` and `prevPage` urls are optional and will be present only when more matching results exists beyond this collection of data.
       required:
       - whsRisks
+      - whsRisk
       type: object
       properties:
         whsRisk:

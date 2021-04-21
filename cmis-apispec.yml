@@ -1287,7 +1287,6 @@ components:
       title: Nested Datatype - whsrisk
       description: Workplace Health and Safety risk details
       required:
-      - whsSafetyRiskCategory
       - riskId
       - status
       - whsSafetyRiskCategoryID

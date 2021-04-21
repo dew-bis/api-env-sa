@@ -995,62 +995,6 @@ components:
         notesText: Unable to contact client
         createdOn: 2012-01-05
         createdBy: Dick Tracy (DEW)
-    locationdetail:
-      title: Nested Datatype - locationdetail
-      description: Location details of a case
-      required:
-      - address
-      - locationType
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/address'
-          description: Address of the location
-        northing:
-          description: Northing (geographic cartesian coordinate).
-          type: string
-        easting:
-          description: Easting (geographic cartesian coordinate).
-          type: string
-        zone:
-          description: Coordinate system Zone
-          type: string
-        shortDescription:
-          description: Short description of the location
-          type: string
-        detailDescription:
-          description: Detailed description of the location
-          type: string
-        locationType:
-          description: |
-            Location type - address or boundary.
-            Possible values are `ADDR`, `BNDRY`
-          enum:
-          - ADDR
-          - BNDRY
-          type: string
-        polygonData:
-          description: |-
-            2D Polygon data representation in JSON format.
-
-            Syntax: `{
-              "hasZ" : true | false,
-              "hasM" : true | false,
-              "rings" : [[[<x11>, <y11>, <z11>, <m11>],...,[<x1N>, <y1N>, <z1N>, <m1N>]],
-                         ,...,[[<xk1>, <yk1>, <zk1>, <mk1>],...,[<xkM>, <ykM>, <zkM>, <mkM>]]],
-              "spatialReference" : {<spatialReference>}
-            }`
-          type: string
-      example:
-        address:
-          streetLine1: 81-95 Wamyouth Ave
-          suburb: ADELAIDE
-          postcode: 5000
-          state: SA
-          country: AU
-        northing: "6379468"
-        easting: "270398"
-        zone: "54"
     offencedetail:
       title: Nested Datatype - offenceDetails
       description: Details of the Act/Regulation and Offence that is convicted or
@@ -1779,6 +1723,68 @@ components:
         Code:
           description: ID (or Code) of the associated value
           type: string
+    locationdetail:
+      title: Nested Datatype - locationdetail
+      description: Location details of a case
+      required:
+      - address
+      - locationType
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/address'
+          description: Address of the location
+        northing:
+          description: Northing (geographic cartesian coordinate).
+          type: string
+        easting:
+          description: Easting (geographic cartesian coordinate).
+          type: string
+        zone:
+          description: Coordinate system Zone
+          type: string
+        shortDescription:
+          description: Short description of the location
+          type: string
+        detailDescription:
+          description: Detailed description of the location
+          type: string
+        lat:
+          description: Latitude - as retrieved from Location SA services
+          type: string
+        long:
+          description: Longitude - as retrieved from LocationSA services
+          type: string
+        locationType:
+          description: |
+            Location type - address or boundary.
+            Possible values are `ADDR`, `BNDRY`
+          enum:
+          - ADDR
+          - BNDRY
+          type: string
+        polygonData:
+          description: |-
+            2D Polygon data representation in JSON format.
+
+            Syntax: `{
+              "hasZ" : true | false,
+              "hasM" : true | false,
+              "rings" : [[[<x11>, <y11>, <z11>, <m11>],...,[<x1N>, <y1N>, <z1N>, <m1N>]],
+                         ,...,[[<xk1>, <yk1>, <zk1>, <mk1>],...,[<xkM>, <ykM>, <zkM>, <mkM>]]],
+              "spatialReference" : {<spatialReference>}
+            }`
+          type: string
+      example:
+        address:
+          streetLine1: 81-95 Wamyouth Ave
+          suburb: ADELAIDE
+          postcode: 5000
+          state: SA
+          country: AU
+        northing: "6379468"
+        easting: "270398"
+        zone: "54"
   securitySchemes:
     Bearer:
       scheme: bearer

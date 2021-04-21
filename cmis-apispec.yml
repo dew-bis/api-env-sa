@@ -1561,57 +1561,6 @@ components:
           occupation: Serial Glogger
           clientId: da801abe-91a7-e911-a2cc-005056a719a3
           allegedCasesCount: 0
-    address:
-      title: Nested Datatype - address
-      description: Represents an address data
-      required:
-      - country
-      - postcode
-      - streetLine1
-      - suburb
-      type: object
-      properties:
-        streetLine1:
-          description: Street address - line one
-          type: string
-        streetLine2:
-          description: Street address - cont.
-          type: string
-        suburb:
-          description: Suburb or town of the address
-          type: string
-        postcode:
-          description: Postcode of the address
-          type: string
-        state:
-          description: State / District of the address
-          enum:
-          - NSW
-          - QLD
-          - VIC
-          - SA
-          - WA
-          - NT
-          - TAS
-          - ACT
-          - Other
-          type: string
-        country:
-          description: ISO 3166-1 alpha-2 country code of the address
-          pattern: ^[A-Z]{2}$
-          type: string
-        lat:
-          description: Latitude - as retrieved from Location SA services
-          type: string
-        long:
-          description: Longitude - as retrieved from LocationSA services
-          type: string
-      example:
-        streetLine1: 81-95 Wamyouth Ave
-        suburb: ADELAIDE
-        postcode: 5000
-        state: SA
-        country: AU
     document-metadata:
       description: Metadata of documents attached to a case
       required:
@@ -1785,6 +1734,51 @@ components:
         northing: "6379468"
         easting: "270398"
         zone: "54"
+    address:
+      title: Nested Datatype - address
+      description: Represents an address data
+      required:
+      - country
+      - postcode
+      - streetLine1
+      - suburb
+      type: object
+      properties:
+        streetLine1:
+          description: Street address - line one
+          type: string
+        streetLine2:
+          description: Street address - cont.
+          type: string
+        suburb:
+          description: Suburb or town of the address
+          type: string
+        postcode:
+          description: Postcode of the address
+          type: string
+        state:
+          description: State / District of the address
+          enum:
+          - NSW
+          - QLD
+          - VIC
+          - SA
+          - WA
+          - NT
+          - TAS
+          - ACT
+          - Other
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code of the address
+          pattern: ^[A-Z]{2}$
+          type: string
+      example:
+        streetLine1: 81-95 Wamyouth Ave
+        suburb: ADELAIDE
+        postcode: 5000
+        state: SA
+        country: AU
   securitySchemes:
     Bearer:
       scheme: bearer

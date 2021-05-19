@@ -785,6 +785,49 @@ paths:
         type: string
       in: path
       required: true
+  /case-apis/v1/regions:
+    summary: Endpoint for querying Regions
+    description: "The REST endpoint/path used to list zero or more `region` entities.\
+      \  \n\nThis path contains a `GET` operation to query the regions configured\
+      \ in the system."
+    get:
+      tags:
+      - case-apis
+      parameters:
+      - name: regionType
+        description: |-
+          Should be one of the following values
+          `LND` - Landscape Regions
+          `NPW` - National Parks & Wildlife SA
+        schema:
+          enum:
+          - LND
+          - NPW
+          type: string
+        in: query
+        required: true
+      - name: limit
+        description: Maximum number of results in the response
+        schema:
+          type: integer
+        in: query
+        required: false
+      - name: page
+        description: 1-based Page index
+        schema:
+          type: integer
+        in: query
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/region-page'
+          description: Success
+      operationId: GetRegions
+      summary: Get a list of regions configured in CMIS for a specific regionType
+      description: Get a list of regions configured in CMIS for a specific regionType
 components:
   schemas:
     client:
@@ -1779,6 +1822,56 @@ components:
         postcode: 5000
         state: SA
         country: AU
+    region:
+      description: Region definition
+      required:
+      - regionName
+      - districts
+      type: object
+      properties:
+        regionName:
+          description: Name of the region
+          type: string
+        regionType:
+          description: "Region Type. Possible Values are: \n`LND` - Landscape Board\
+            \ SA\n`NPW` - National Parks and Wildlife SA"
+          enum:
+          - LND
+          - NPW
+          type: string
+        districts:
+          description: List of districts in the region
+          type: array
+          items:
+            type: string
+    region-page:
+      description: "Page of `region` entities. \n\nThe `nextPage` and `prevPage` urls\
+        \ are optional and will be present only when more matching results exists\
+        \ beyond this collection of data."
+      required:
+      - regions
+      type: object
+      properties:
+        regions:
+          description: Array of `region` entities
+          type: array
+          items:
+            $ref: '#/components/schemas/region'
+        nextPage:
+          description: URI to next page of the collection
+          type: string
+        prevPage:
+          description: URI to previous page of the collection
+          type: string
+        totalRecords:
+          description: Indicates the total number of records (including all pages)
+          type: integer
+        pageSize:
+          description: Number of records displayed per page
+          type: integer
+        pageNumber:
+          description: Index (1-based) respresenting current page number
+          type: integer
   securitySchemes:
     Bearer:
       scheme: bearer

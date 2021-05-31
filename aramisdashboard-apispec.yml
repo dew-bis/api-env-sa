@@ -312,10 +312,7 @@ components:
           region: Flinders and Outback
           district: Outback
           park: Simpson Desert
-          park2: Simpson Desert
-          park3: Simpson Desert
           site: Simpson Desert site
-          site2: Simpson Desert site
           assetTypeName: Road-Public
           assetCondition: Poor
           calcReplacementCost: 428516.95
@@ -327,10 +324,7 @@ components:
           region: Limestone Coast
           district: Lower Limestone Coast
           park: Robe Workshop
-          park2: Robe Workshop
-          park3: Robe Workshop
           site: Compound
-          site2: Compound
           assetTypeName: Firearm
           assetCondition: Good
           calcReplacementCost: 1644.5

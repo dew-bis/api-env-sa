@@ -15,8 +15,9 @@ paths:
       - name: financialYear
         description: Financial year
         schema:
-          type: string
+          type: integer
         in: query
+        required: true
       responses:
         "200":
           content:
@@ -26,15 +27,23 @@ paths:
           description: Successful retrieval of assets, finance and visitor information.
         "500":
           description: Unexpected error occurred when processing the request
+        "400":
+          description: The request sent by the client was syntactically incorrect.
+        "401":
+          description: This request requires HTTP authentication.
       summary: Get asset, finance and vistor information for comparison.
       description: Retrives information about the number of visitors and finance information
         of aramis assets.
     parameters:
-    - name: financialYear
+    - examples:
+        finYearEg:
+          value: https://aramisdashboardws.qa.env.sa.gov.au/AramisDashboardWS/v1/asset/compare?financialYear=2020-2021
+      name: financialYear
       description: Financial year
       schema:
-        type: string
+        type: integer
       in: query
+      required: true
   /asset/main:
     summary: API to analyse the assets based on park and site. This populates asset
       information for the main view of Aramis dashboard.
@@ -51,6 +60,8 @@ paths:
           description: Successful retrieval of complete asset analysis information.
         "500":
           description: Unexpected error occurred when processing the request
+        "401":
+          description: This request requires HTTP authentication.
       summary: Get asset information for analysis for the main view of the dashboard.
       description: This API gives complete description of an asset to analyse based
         on the park and site information. This also gives information about the overnight
@@ -71,6 +82,8 @@ paths:
             tab of the dashboard.
         "500":
           description: Unexpected error occurred when processing the request
+        "401":
+          description: This request requires HTTP authentication.
       summary: Get  aramis asset information based on the request criteria.
       description: Get all the asset related information for the data tab of the dashboard.
     parameters:

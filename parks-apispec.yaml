@@ -61,7 +61,7 @@ paths:
       - examples:
           financialYear:
             value: 2013-2014
-        name: financialYear
+        name: financialyear
         description: Financial Year
         schema:
           type: string
@@ -160,7 +160,7 @@ paths:
       - examples:
           financialYear:
             value: 2013-2014
-        name: financialYear
+        name: financialyear
         description: Financial Year
         schema:
           type: string
@@ -355,7 +355,7 @@ paths:
       - examples:
           financialYear:
             value: '"2013-2014"'
-        name: financialYear
+        name: financialyear
         description: Financial Year
         schema:
           type: string
@@ -441,7 +441,7 @@ paths:
       parameters:
       - examples:
           park:
-            value: '"Belair National Park"'
+            value: '"Coffin Bay National Park"'
         name: park
         description: Park name
         schema:
@@ -487,6 +487,48 @@ paths:
       security:
       - HTTP-Basic: []
       summary: Get park occupancy info
+  /parks/visitororigin:
+    summary: Get Visitiors origin information
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/parks-visitors-origin'
+              examples:
+                Success:
+                  value:
+                  - year: 2015
+                    region: Adelaide and Mount Lofty Ranges
+                    park: Belair National Park
+                    lga: Mitcham (C)
+                    fromLat: -35.004201909
+                    fromLng: 138.614714818
+                    toLat: -35.0110307
+                    toLng: 138.6525054
+                    visitors: 15
+                    repeatVisitors: 0
+                  - year: 2015
+                    region: Adelaide and Mount Lofty Ranges
+                    park: Belair National Park
+                    lga: Unley (C)
+                    fromLat: -34.952075
+                    fromLng: 138.575187
+                    toLat: -35.0110307
+                    toLng: 138.6525054
+                    visitors: 24
+                    repeatVisitors: 24
+          description: Success response - returns an array of `parks-visitors-origin`
+        "400":
+          description: Unable to process the request successfully
+        "500":
+          description: Unexpected error occurred when processing the request
+      security:
+      - HTTP-Basic: []
+      summary: Get visitors origin information
 components:
   schemas:
     generic-key-value-info:
@@ -520,14 +562,14 @@ components:
       description: Number of nights by month
       type: object
       properties:
-        month:
-          description: ""
-          type: string
         nights:
           description: ""
           type: integer
+        monthName:
+          description: ""
+          type: string
       example:
-        month: Apr
+        monthName: Apr
         nights: 37178
     parks-info:
       description: ""
@@ -590,9 +632,9 @@ components:
         - campGround: Northern Flinders Staff Accomm
           visitors: 2471
         nightsByMonth:
-        - month: Apr
+        - monthName: Apr
           nights: 37178
-        - month: Aug
+        - monthName: Aug
           nights: 21090
     parks-data:
       description: Parks data
@@ -966,7 +1008,11 @@ components:
           description: Maximum number of bookings
           type: integer
         occupancyRate:
-          description: Occupancy rate
+          description: Occupancy rate (fixed length, rounded to two decimal places)
+          type: number
+        occupancyRateFloat:
+          format: float
+          description: Occupancy rate as float
           type: number
       example:
         region: Kangaroo Island
@@ -1099,6 +1145,55 @@ components:
         navigation:
           previous: /parks/visitoruse?financialYear=2014-2015&offset=0
           next: /parks/visitoruse?financialYear=2014-2015&offset=20000
+    parks-visitors-origin:
+      description: ""
+      type: object
+      properties:
+        year:
+          description: Calendar year
+          type: integer
+        region:
+          description: Region name
+          type: string
+        park:
+          description: Park name
+          type: string
+        lga:
+          description: Local Government Area
+          type: string
+        fromLat:
+          format: float
+          description: From Latitude
+          type: number
+        fromLng:
+          format: float
+          description: From Longitude
+          type: number
+        toLat:
+          format: float
+          description: To Latitude
+          type: number
+        toLng:
+          format: float
+          description: To Longitude
+          type: number
+        visitors:
+          description: No. of visitors
+          type: integer
+        repeatVisitors:
+          description: No. of repeat visitors
+          type: integer
+      example:
+        year: 2015
+        region: Adelaide and Mount Lofty Ranges
+        park: Belair National Park
+        lga: Mitcham (C)
+        fromLat: -35.004201909
+        fromLng: 138.614714818
+        toLat: -35.0110307
+        toLng: 138.6525054
+        visitors: 15
+        repeatVisitors: 0
   securitySchemes:
     HTTP-Basic:
       scheme: basic

@@ -1,0 +1,120 @@
+---
+openapi: 3.0.2
+info:
+  title: PosWS
+  version: 1.0.0
+  description: API to receive transaction data from H&L POS
+paths:
+  /transactions:
+    summary: Path used to receive transaction data
+    description: The REST endpoint/path used to create transaction. This path contains
+      a `POST` operation
+    post:
+      requestBody:
+        description: Transaction data from H&LPOS must be a valid JSON
+        content:
+          application/json:
+            examples:
+              sample-transaction:
+                value:
+                  total_results: 58
+                  results:
+                  - id: i-1578-1390756-1
+                    transaction_id: 1578-1390756
+                    site_id: 1
+                    site_name: The Burger Bar
+                    venue_id: "1578"
+                    docket_number: "60729046"
+                    transaction_type: sale
+                    transaction_time: 2021-05-27T00:01:39
+                    utc: 2021-05-27T10:01:39
+                    number_items: 4
+                    account_id: 157
+                    account_name: Tom Smith
+                    account_type_id: I
+                    account_type_name: internal
+                    account_category_id: ""
+                    account_category_name: ""
+                    account_club_id: ""
+                    account_club_name: ""
+                    member_id: 857954
+                    member_card_number: "768215498"
+                    member_name: Dwight Schrute
+                    cash_change: 1.45
+                    rounding: 0.02
+                    tips: 5
+                    guest_id: 478
+                    sale_total: 120.9
+                    station_id: 12
+                    station_name: Bottle Shop 1
+                    user_id: 802
+                    user_name: Sally
+                    table_id: 56898
+                    table_number: 15
+                    table_total: 174.6
+                    table_booking_id: 58795324
+                    table_bookbook_id: 60729046fcf1360b0a876a16
+                    plu: 540
+                    plu_long_name: Coopers Dry Stubbie
+                    plu_modifier: "Y"
+                    plu_quantity: 1
+                    plu_price: 11.5
+                    plu_cost: 4.4
+                    tax_gst: 1.5
+                    tax_1: 0
+                    tax_2: 0
+                    tax_3: 0
+                    tax_code: OUTPUT
+                    location_id: 10
+                    location_name: Sports Bar
+                    points: 11.5
+                    price_level: 1
+                    discount: 1.5
+                    barcode: "9387458742"
+                    surcharge: 0.2
+                    revenue_group_id: 240
+                    revenue_group_name: Take away liquor
+                    offer_id: 524875
+                    offer_name: Members discount offer
+                    offer_members_only: false
+                    tender_type_id: 8
+                    tender_type_name: EFTpos
+                    tender_amount: 11.5
+                    tender_surcharges: 0
+                    tender_tip: 0
+                    tender_customer_data: ""
+                    tender_card_number: ""
+                    tender_room_number: "16"
+                    tender_room_index: 2
+                    tender_points_redeemed: 1150
+                    sale_items_count: 5
+                    course_id: 3
+                    course_name: Mains
+                    ticket_number: "60587985642589541"
+                    ticket_description: Live Band Show
+                    ticket_quantity: 2
+                    ticket_expiry_date: 2022-05-28T23:59:59
+                    ticket_valid_date: 2021-05-28T23:59:59
+                    event_id: 50
+                    event_description: ABC company function
+                    event_group: ABC company
+                    event_type: Trade Shows
+        required: true
+      responses:
+        "201":
+          description: Successful response. When transaction data is successfully
+            stored using `POST` request.
+        "400":
+          description: Response when data can't be stored successfully
+        "500":
+          description: When unexpected error occurs processing the request
+      security:
+      - HTTP-Basic: []
+      summary: Receive transaction data from H&LPOS and persist it in DB
+components:
+  securitySchemes:
+    HTTP-Basic:
+      scheme: basic
+      type: http
+security:
+- HTTP-Basic: []

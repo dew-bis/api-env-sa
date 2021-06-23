@@ -21,4 +21,6 @@ The API Catalogue (master) has the following definitions
 
 9. [Parks](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/parks-apispec.yaml)
 
+10.[POS](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/posws-apispec.yaml)
+
 

@@ -115,15 +115,107 @@ paths:
     get:
       tags:
       - asset-apis
+      parameters:
+      - name: action
+        description: Parameter to indicate whether an asset needs to be checked out.  When
+          used this parameter value must be set to "checkout"
+        schema:
+          type: string
+        in: query
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/asset'
-          description: Successful response - returns a single `asset`.
-        "501":
-          description: This operation is not currently implemented
+                $ref: '#/components/schemas/assets-page'
+              examples:
+                View only (no checkout):
+                  value:
+                    assets:
+                    - asset:
+                        assetId: 25084
+                        readonly: false
+                        actionStatusId: 8
+                        actionDate: 2017-07-28T17:00:13+09:30
+                        assetDescription: "Fencing altered from 11km to 25km and the\
+                          \ condition to average as per Tom Gerschwitz.\r\nPart of\
+                          \ the 2006 over $100,000 stocktake - Last inspection mid\
+                          \ 2005. only eastern boundary checked."
+                        ownerId: 13
+                        maintainerId: 8
+                        assetConditionId: 2
+                        assessmentMethodId: 7
+                        assetTypeGradeTypeDescId: 13195
+                        assetTypeGradeTypeId: 225
+                        assetTypeDescriptionId: 73
+                        assetTypeNameId: 32
+                        assetTypeClassId: 21
+                        assetTypeGroupId: 1
+                        locationType: 1
+                        directorateId: 21
+                        parkId: 2283
+                        siteId: 6655
+                        subsiteId: 24931
+                        dimensionId: 3
+                        measureId: 3
+                        primaryQuantity: 25000
+                        inspectorId: 241
+                        inspectionDate: 2015-06-03T00:00:00+09:30
+                        agencyCompanyId: 1
+                      action: {}
+                    navigation: {}
+                Asset checkout:
+                  value:
+                    assets:
+                    - assetLock:
+                        assetId: 25084
+                        assetLockId: 10170497
+                        username: fims_user
+                        lockDate: 2021-06-25T00:00:00+09:30
+                        lockMessage: Asset 25084 Checked Out by fims_user on 25/06/2021
+                      asset:
+                        assetId: 25084
+                        readonly: true
+                        actionStatusId: 8
+                        actionDate: 2017-07-28T17:00:13+09:30
+                        assetDescription: "Fencing altered from 11km to 25km and the\
+                          \ condition to average as per Tom Gerschwitz.\r\nPart of\
+                          \ the 2006 over $100,000 stocktake - Last inspection mid\
+                          \ 2005. only eastern boundary checked."
+                        ownerId: 13
+                        maintainerId: 8
+                        assetConditionId: 2
+                        assessmentMethodId: 7
+                        assetTypeGradeTypeDescId: 13195
+                        assetTypeGradeTypeId: 225
+                        assetTypeDescriptionId: 73
+                        assetTypeNameId: 32
+                        assetTypeClassId: 21
+                        assetTypeGroupId: 1
+                        locationType: 1
+                        directorateId: 21
+                        parkId: 2283
+                        siteId: 6655
+                        subsiteId: 24931
+                        dimensionId: 3
+                        measureId: 3
+                        primaryQuantity: 25000
+                        inspectorId: 241
+                        inspectionDate: 2015-06-03T00:00:00+09:30
+                        agencyCompanyId: 1
+                      action:
+                        checkin-url: /aramissvc/v1/assets/asset/25084
+                      checkoutId: 10170497
+                    navigation: {}
+          description: Successful response - returns an array of `asset` entity.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response-message'
+          description: Unable to process the request successfully
+        "500":
+          description: Unexpected error occurred when processing the request
       security:
       - HTTP-Basic: []
       operationId: getresource-asset
@@ -908,4 +1000,3 @@ tags:
   description: APIs for interacting with parks
 - name: lookup-apis
   description: APIs for look-up data
-

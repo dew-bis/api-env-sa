@@ -72,6 +72,12 @@ paths:
     description: This api gives all the asset related information including the calculated
       replacement date and calculated replacement cost of an asset.
     get:
+      parameters:
+      - name: type
+        description: Asset type name
+        schema:
+          type: string
+        in: query
       responses:
         "200":
           content:
@@ -344,24 +350,30 @@ components:
           numAssets: 1
           assetTypeGroup: Plant and Equipment
         visitorMainView:
-        - region: Limestone Coast
-          park: Little Dip Conservation Park
-          park2: Little Dip Conservation Park
-          financialYear: 2015-2016
-          quarter: 3
-          month: Feb
-          numVisitors: 116
-          numNightsTotal: 177
-          numNights: 116
-        - region: Riverland and Murray Lands
-          park: Loch Luna and Moorook Game Reserve
-          park2: Loch Luna and Moorook Game Reserve
-          financialYear: 2016-2017
+        - region: Yorke and Mid North
+          park: Mount Remarkable National Park
+          financialYear: 2018-2019
           quarter: 4
-          month: Jun
-          numVisitors: 126
-          numNightsTotal: 257
-          numNights: 126
+          month: Apr
+          facility: Entry
+          numBooking: 616
+          numVisitors: 1792
+          numNightsTotal: 0
+          numNights: 0
+          numRepeatVisitors: 368
+          revenue: 5804
+        - region: Yorke and Mid North
+          park: Mount Remarkable National Park
+          financialYear: 2020-2021
+          quarter: 1
+          month: Aug
+          facility: Entry
+          numBooking: 959
+          numVisitors: 2510
+          numNightsTotal: 0
+          numNights: 0
+          numRepeatVisitors: 750
+          revenue: 9667
         trafficMainView:
         - financialYear: 2017-2018
           quarter: 4
@@ -535,8 +547,6 @@ components:
           type: string
         park:
           type: string
-        park2:
-          type: string
         financialYear:
           type: string
         quarter:
@@ -556,16 +566,31 @@ components:
           format: int32
           description: Gives number of nights
           type: integer
+        facility:
+          description: ""
+          type: string
+        revenue:
+          description: ""
+          type: integer
+        numRepeatVisitors:
+          description: ""
+          type: integer
+        numBooking:
+          description: ""
+          type: integer
       example:
-        region: Limestone Coast
-        park: Little Dip Conservation Park
-        park2: Little Dip Conservation Park
-        financialYear: 2015-2016
-        quarter: 3
-        month: Feb
-        numVisitors: 116
-        numNightsTotal: 177
-        numNights: 116
+        region: Yorke and Mid North
+        park: Mount Remarkable National Park
+        financialYear: 2018-2019
+        quarter: 4
+        month: Apr
+        facility: Entry
+        numBooking: 616
+        numVisitors: 1792
+        numNightsTotal: 0
+        numNights: 0
+        numRepeatVisitors: 368
+        revenue: 5804
     asset-compare-view:
       title: Root Type for asset-data
       description: Retrive a list of assets for Comparison view of Aramis dashboard.

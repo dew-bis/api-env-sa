@@ -23,4 +23,6 @@ The API Catalogue (master) has the following definitions
 
 10. [POS](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/posws-apispec.yaml)
 
+11. [FIMS](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/fims-apispec.yml)
+
 

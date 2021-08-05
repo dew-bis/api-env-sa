@@ -1,2 +1,70 @@
-
-
+---
+openapi: 3.0.2
+info:
+  title: FIMS Webservice
+  version: 1.0.0
+  description: 'APIs written for FIMS Public website page - https://www.environment.sa.gov.au/topics/fire-management/stay-informed '
+paths:
+  /fimsws/v1/regions:
+    summary: Gives information about the various regions with upcoming prescribed
+      burns.
+    description: The 'Stay Informed' public website page displays regions to which
+      people can subscribe for burn notifications. This api gives information about
+      the different regions and their id's.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Region Info:
+                  value:
+                  - id: 1
+                    name: AMLR
+                  - id: 2
+                    name: Eyre &  Far West
+                  - id: 3
+                    name: Flinders & Outback
+                  - id: 4
+                    name: Kangaroo Island
+                  - id: 5
+                    name: Limestone Coast
+                  - id: 6
+                    name: Riverland & Murraylands
+                  - id: 7
+                    name: Yorke & Mid North
+          description: Successful retrieval of region information.
+        "500":
+          description: Unexpected error happened at the server side.
+      summary: Get information about the burn regions and their ids.
+      description: This api retrives the name and id of the regions with upcoming
+        prescribed burns.
+  /fimsws/v1/subscriber:
+    summary: This api inserts the subscriber information from the public website to
+      the FIMS application.
+    post:
+      requestBody:
+        description: Please refer to the example which shows how the subscriber data
+          is passed in the format of 'text/plain'
+        content:
+          text/plain:
+            examples:
+              Subscribe input data:
+                value:
+                  name: John
+                  email: john@test-site.com
+                  regions:
+                  - 1
+                  - 2
+        required: true
+      responses:
+        "201":
+          description: Successfully inserted the details into FIMS database.
+        "400":
+          description: Indicates that the email is null or the regions are null.
+        "500":
+          description: Unexpected error in the server side.
+      summary: Posts subscriber data to FIMS database.
+      description: This api will insert the details of the users who have subscribed
+        for the burn notifications through the 'Stay informed' public website page
+        into the FIMS database.

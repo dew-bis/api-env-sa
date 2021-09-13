@@ -5,7 +5,7 @@ info:
   version: 1.0.0
   description: 'APIs written for FIMS Public website page - https://www.environment.sa.gov.au/topics/fire-management/stay-informed '
 paths:
-  /fimsws/v1/regions:
+  /fimsws/webresources/regions:
     summary: Gives information about the various regions with upcoming prescribed
       burns.
     description: The 'Stay Informed' public website page displays regions to which
@@ -39,7 +39,7 @@ paths:
       summary: Get information about the burn regions and their ids.
       description: This api retrives the name and id of the regions with upcoming
         prescribed burns.
-  /fimsws/v1/subscriber:
+  /fimsws/webresources/subscriber:
     summary: This api inserts the subscriber information from the public website to
       the FIMS application.
     post:

@@ -25,6 +25,6 @@ The API Catalogue (master) has the following definitions
 
 11. [FIMS](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/fims-apispec.yml)
 
-12. [Rezdy](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/rezdyws-apispec.yml)
+12. [Rezdy](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/rezdyws-apispec.yaml)
 
 

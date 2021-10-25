@@ -1,1 +1,157 @@
 ---
+openapi: 3.0.2
+info:
+  title: Rezdy
+  version: 1.0.0
+  description: APIs for the BI Team
+paths:
+  /RezdyWS/v1/rezdy/data:
+    summary: API to retrieve rezdy booking data
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                rezdyDataResponse:
+                  value:
+                  - idNum: 1590200
+                    itineraryNumber: 141183
+                    numBooking: 1
+                    bookingDate: 2020-10-11T00:00:00
+                    arrivalDate: 2020-10-11T00:00:00
+                    month: 10
+                    monthStr: Oct
+                    monthStrArrival: Oct
+                    numNights: 0
+                    paxTotals: 2
+                    cost: 22.39
+                    product: Flinders Chase
+                    package: Flinders Chase National Park Entry Park Fee
+                    facility: Entry
+                    gender: Unknown
+                    about: Unknown
+                    state: NSW
+                    payment: CREDITCARD
+                    sourceDesc: ONLINE
+                    dayDiff: 0
+                    finYear: 2020-2021
+                  - idNum: 1590200
+                    itineraryNumber: 141183
+                    numBooking: 1
+                    bookingDate: 2020-10-11T00:00:00
+                    arrivalDate: 2020-10-11T00:00:00
+                    month: 10
+                    monthStr: Oct
+                    monthStrArrival: Oct
+                    numNights: 0
+                    paxTotals: 2
+                    cost: 22.39
+                    product: Flinders Chase
+                    package: Flinders Chase National Park Entry Park Fee
+                    facility: Entry
+                    gender: Unknown
+                    about: Unknown
+                    state: NSW
+                    payment: CREDITCARD
+                    sourceDesc: ONLINE
+                    dayDiff: 0
+                    finYear: 2020-2021
+          description: Successfully retrived the response.
+        "401":
+          description: Unauthorized access to the API.
+        "500":
+          description: Unexpected error in the server.
+      summary: Get booking information of different products
+  /RezdyWS/v1/rezdy/quantity:
+    summary: Get the quantity and value of the rezdy Items.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                rezdyQtyResponse:
+                  value:
+                  - quantityId: 831424
+                    itemId: 114081
+                    optionLabel: Concession
+                    optionPrice: 12
+                    value: 0
+                  - quantityId: 831434
+                    itemId: 114082
+                    optionLabel: Adult
+                    optionPrice: 12
+                    value: 2
+          description: Successfully retrieved the response.
+        "401":
+          description: Unauthorized API access.
+        "500":
+          content:
+            application/json: {}
+          description: Unexpected error in the server.
+      summary: Get the quantity and value of the rezdy Items.
+  /RezdyWS/v1/rezdy/number:
+    summary: API to retrive the number of items.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                rezdyQtyResponse:
+                  value:
+                  - itemId: 119121
+                    number: 1
+                  - itemId: 122038
+                    number: 2
+                  - itemId: 127611
+                    number: 1
+                  - itemId: 133445
+                    number: 2
+          description: Successfully retrieved the item quantity.
+        "401":
+          description: Unauthorized API access.
+        "500":
+          description: Unexpected error in the server.
+      summary: Get the number of items.
+  /RezdyWS/v1/rezdy/item:
+    summary: API to retrieve the item information.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                rezdyItemResponse:
+                  value:
+                  - itemId: 114126
+                    bookingId: 104556
+                    productName: Stick-Tomato & Wonambi Fossil Centre
+                    productCode: PZZ02L
+                    startTime: 2021-09-06T00:00:00
+                    endTime: 2021-09-07T00:00:00
+                    startTimeLocal: 2021-09-07T00:00:00
+                    endTimeLocal: 2021-09-08T00:00:00
+                    totalQty: 13
+                    amount: 195
+                    subtotal: 198.41
+                    totalItemTax: 21.14
+                  - itemId: 114135
+                    bookingId: 104561
+                    productName: 'Naracoorte Caves Souvenirs '
+                    productCode: P8UM2P
+                    startTime: 2021-09-03T00:00:00
+                    endTime: 2021-09-03T00:00:00
+                    startTimeLocal: 2021-09-03T00:00:00
+                    endTimeLocal: 2021-09-03T00:00:00
+                    totalQty: 4
+                    amount: 8
+                    subtotal: 8
+                    totalItemTax: 0
+          description: Successfully retreived the item information.
+        "401":
+          description: Unauthorized API access.
+        "500":
+          description: Unexpected error in the server side.
+      summary: Get item information.

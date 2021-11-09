@@ -27,7 +27,7 @@ paths:
                     paxTotals: 2
                     cost: 22.39
                     product: Flinders Chase
-                    package: Flinders Chase National Park Entry Park Fee
+                    packageName: Flinders Chase National Park Entry Park Fee
                     facility: Entry
                     gender: Unknown
                     about: Unknown
@@ -48,7 +48,7 @@ paths:
                     paxTotals: 2
                     cost: 22.39
                     product: Flinders Chase
-                    package: Flinders Chase National Park Entry Park Fee
+                    packageName: Flinders Chase National Park Entry Park Fee
                     facility: Entry
                     gender: Unknown
                     about: Unknown

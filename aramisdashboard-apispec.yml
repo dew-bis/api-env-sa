@@ -266,6 +266,8 @@ components:
           region: Flinders and Outback
           park: Outback
           district: Malkumba-Coongie Lakes National Park
+          lat: -36.01720632
+          lng: 136.8528769
         - assetId: 43102
           assetTypeGroup: Plant and Equipment
           assetTypeName: Solar panel
@@ -278,6 +280,8 @@ components:
           region: Yorke and Mid North
           park: Southern Flinders Mid North
           district: Bimbowrie
+          lat: -34.01560634
+          lng: 128.7508769
         financeCompareView:
         - financialYear: 2020-2021
           region: Adelaide and Mount Lofty Ranges

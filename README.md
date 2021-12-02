@@ -27,6 +27,6 @@ The API Catalogue (master) has the following definitions
 
 12. [Rezdy](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/rezdyws-apispec.yaml)
 
-13. [Cepas](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/cepasws-apispec.yaml)
+13. [Cepas](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/cepas-apispec.yaml)
 
 

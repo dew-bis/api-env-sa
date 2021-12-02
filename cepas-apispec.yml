@@ -1,0 +1,151 @@
+---
+openapi: 3.0.2
+info:
+  title: Cepas
+  version: 1.0.0
+  description: API for Cepas webservices. This is developed for BI dashboards.
+paths:
+  /CepasWS/v1/get:
+    summary: Get summaries of tables
+    description: This gives a descriptive information of various table summaries for
+      Cepas.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+              examples:
+                summaryResponse:
+                  value: "\"tableSummary1\":[\r\n   {\r\n      \"order\":1,\r\n  \
+                    \    \"priorityName\":\"<img src=traffic_light/details_open.png\
+                    \ style=height:20px; width:20px class=\\\"tooltiptext\\\" alt=\\\
+                    \"alternative text\\\" title=\\\"Show Details\\\">Contribute to\
+                    \ Northern Water Supply Project\",\r\n      \"tier\":\"Tier 1\
+                    \ - Cross sector / strategic priorities\",\r\n      \"score\"\
+                    :\"6.00\",\r\n      \"previousScore\":\"Previous Score: 6.00\"\
+                    ,\r\n      \"status\":\"<b> October Indicator:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img\
+                    \ src=traffic_light/green.png style=height:20px; width:20px><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>\
+                    \ September Indicator:</b>&nbsp;<img src=traffic_light/green.png\
+                    \ style=height:20px; width:20px>\",\r\n      \"director\":\"Ben\
+                    \ Bruce\",\r\n      \"directorAD\":\"Director Approved: 18/11/2021\"\
+                    ,\r\n      \"edDirector\":\"Ben Bruce\",\r\n      \"edAuthorised\"\
+                    :\"ED Approved: 18/11/2021&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<b\
+                    \ style=\\\"color:dark green\\\" > Updated - Complete </b>\",\r\
+                    \n      \"cepalCommentary\":\"No Data\",\r\n      \"internalCommentary\"\
+                    :\"No Data\"\r\n   }\r\n],\r\n\"tableSummary2\":[\r\n   {\r\n\
+                    \      \"order\":2,\r\n      \"priorityName\":\"<img src=traffic_light/details_open.png\
+                    \ style=height:20px; width:20px class=\\\"tooltiptext\\\" alt=\\\
+                    \"alternative text\\\" title=\\\"Show Details\\\">Digitise Permits\"\
+                    ,\r\n      \"tier\":\"Tier 1 - Cross sector / strategic priorities\"\
+                    ,\r\n      \"score\":\"7.00\",\r\n      \"previousScore\":\"Previous\
+                    \ Score: 7.00\",\r\n      \"status\":\"<b> October Indicator:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img\
+                    \ src=traffic_light/green.png style=height:20px; width:20px><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>\
+                    \ September Indicator:</b>&nbsp;<img src=traffic_light/green.png\
+                    \ style=height:20px; width:20px>\",\r\n      \"director\":\"Lisien\
+                    \ Loan\",\r\n      \"directorAD\":\"Director Approved: No Data\"\
+                    ,\r\n      \"edDirector\":\"Mike Williams\",\r\n      \"edAuthorised\"\
+                    :\"ED Approved: No Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<b\
+                    \ style=\\\"color:orange\\\" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updated\
+                    \ - Partial </b> \",\r\n      \"cepalCommentary\":\"No Data\"\
+                    ,\r\n      \"internalCommentary\":\"No Data\"\r\n   }\r\n],\r\n\
+                    \"tableSummary3\":[\r\n   {\r\n      \"order\":3,\r\n      \"\
+                    priorityName\":\"<img src=traffic_light/details_open.png style=height:20px;\
+                    \ width:20px class=\\\"tooltiptext\\\" alt=\\\"alternative text\\\
+                    \" title=\\\"Show Details\\\">Digitise water licensing system\
+                    \ / process\",\r\n      \"tier\":\"Tier 1 - Cross sector / strategic\
+                    \ priorities\",\r\n      \"score\":\"11.00\",\r\n      \"previousScore\"\
+                    :\"Previous Score: 11.00\",\r\n      \"status\":\"<b> October\
+                    \ Indicator:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img\
+                    \ src=traffic_light/green.png style=height:20px; width:20px><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>\
+                    \ September Indicator:</b>&nbsp;<img src=traffic_light/green.png\
+                    \ style=height:20px; width:20px>\",\r\n      \"director\":\"Mike\
+                    \ Fuller\",\r\n      \"directorAD\":\"Director Approved: No Data\"\
+                    ,\r\n      \"edDirector\":\"Ben Bruce\",\r\n      \"edAuthorised\"\
+                    :\"ED Approved: No Data&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<b\
+                    \ style=\\\"color:orange\\\" > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updated\
+                    \ - Partial </b> \",\r\n      \"cepalCommentary\":\"No Data\"\
+                    ,\r\n      \"internalCommentary\":\"No Data\"\r\n   }\r\n],\r\n\
+                    \"tableStatus\":[\r\n   {\r\n      \"r1A\":0.0,\r\n      \"r2A\"\
+                    :0.0,\r\n      \"r3A\":0.0,\r\n      \"r4A\":0.0,\r\n      \"\
+                    r5A\":0.0,\r\n      \"r6A\":0.0,\r\n      \"r7A\":0.0,\r\n   \
+                    \   \"r1B\":0.0,\r\n      \"r2B\":0.0,\r\n      \"r3B\":0.0,\r\
+                    \n      \"r4B\":0.0,\r\n      \"r5B\":0.0,\r\n      \"r6B\":0.0,\r\
+                    \n      \"r7B\":0.0,\r\n      \"r1C\":0.0,\r\n      \"r2C\":0.0,\r\
+                    \n      \"r3C\":0.0,\r\n      \"r4C\":0.0,\r\n      \"r5C\":0.0,\r\
+                    \n      \"r6C\":0.0,\r\n      \"r7C\":0.0,\r\n      \"r1D\":0.0,\r\
+                    \n      \"r2D\":0.0,\r\n      \"r3D\":0.0,\r\n      \"r4D\":0.0,\r\
+                    \n      \"r5D\":0.0,\r\n      \"r6D\":0.0,\r\n      \"r7D\":0.0,\r\
+                    \n      \"r1E\":0.0,\r\n      \"r2E\":0.0,\r\n      \"r3E\":0.0,\r\
+                    \n      \"r4E\":0.0,\r\n      \"r5E\":0.0,\r\n      \"r6E\":0.0,\r\
+                    \n      \"r7E\":0.0,\r\n      \"criteria1\":\"Project management\
+                    \ (Weighting x 1.5) <td style=\\\"font-size:11px;\\\"> <b>Status:</b>\
+                    \ </td><td style=\\\"font-size:11px;\\\">No Data</td> <td style=\\\
+                    \"font-size:11px;\\\"> <b>Previous Status:</b> </td><td style=\\\
+                    \"font-size:11px;\\\">Being managed</td><td style=\\\"font-size:11px;\\\
+                    \"> <b>Score:</b> </td><td style=\\\"font-size:11px;\\\">0</td>\"\
+                    ,\r\n      \"criteria2\":\"Financial management  (Weighting x\
+                    \ 1.5) <td style=\\\"font-size:11px;\\\"> <b>Status:</b> </td><td\
+                    \ style=\\\"font-size:11px;\\\">No Data</td> <td style=\\\"font-size:11px;\\\
+                    \"> <b>Previous Status:</b> </td><td style=\\\"font-size:11px;\\\
+                    \">Being managed</td><td style=\\\"font-size:11px;\\\"> <b>Score:</b>\
+                    \ </td><td style=\\\"font-size:11px;\\\">0</td>\",\r\n      \"\
+                    criteria3\":\"Partnerships <td style=\\\"font-size:11px;\\\">\
+                    \ <b>Status:</b> </td><td style=\\\"font-size:11px;\\\">No Data</td>\
+                    \ <td style=\\\"font-size:11px;\\\"> <b>Previous Status:</b> </td><td\
+                    \ style=\\\"font-size:11px;\\\">On track</td><td style=\\\"font-size:11px;\\\
+                    \"> <b>Score:</b> </td><td style=\\\"font-size:11px;\\\">0</td>\"\
+                    ,\r\n      \"criteria4\":\"Stakeholder engagement & public relations\
+                    \ <td style=\\\"font-size:11px;\\\"> <b>Status:</b> </td><td style=\\\
+                    \"font-size:11px;\\\">No Data</td> <td style=\\\"font-size:11px;\\\
+                    \"> <b>Previous Status:</b> </td><td style=\\\"font-size:11px;\\\
+                    \">On track</td><td style=\\\"font-size:11px;\\\"> <b>Score:</b>\
+                    \ </td><td style=\\\"font-size:11px;\\\">0</td>\",\r\n      \"\
+                    criteria5\":\"Project risks <td style=\\\"font-size:11px;\\\"\
+                    > <b>Status:</b> </td><td style=\\\"font-size:11px;\\\">No Data</td>\
+                    \ <td style=\\\"font-size:11px;\\\"> <b>Previous Status:</b> </td><td\
+                    \ style=\\\"font-size:11px;\\\">On track</td><td style=\\\"font-size:11px;\\\
+                    \"> <b>Score:</b> </td><td style=\\\"font-size:11px;\\\">0</td>\"\
+                    ,\r\n      \"criteria6\":\"Progress towards outcomes <td style=\\\
+                    \"font-size:11px;\\\"> <b>Status:</b> </td><td style=\\\"font-size:11px;\\\
+                    \">No Data</td> <td style=\\\"font-size:11px;\\\"> <b>Previous\
+                    \ Status:</b> </td><td style=\\\"font-size:11px;\\\">Being managed</td><td\
+                    \ style=\\\"font-size:11px;\\\"> <b>Score:</b> </td><td style=\\\
+                    \"font-size:11px;\\\">0</td>\",\r\n      \"criteria7\":\"Capability\
+                    \ and capacity <td style=\\\"font-size:11px;\\\"> <b>Status:</b>\
+                    \ </td><td style=\\\"font-size:11px;\\\">No Data</td> <td style=\\\
+                    \"font-size:11px;\\\"> <b>Previous Status:</b> </td><td style=\\\
+                    \"font-size:11px;\\\">Being managed</td><td style=\\\"font-size:11px;\\\
+                    \"> <b>Score:</b> </td><td style=\\\"font-size:11px;\\\">0</td>\"\
+                    ,\r\n      \"month\":\"October\",\r\n      \"tier\":\"Tier 2 -\
+                    \ DEW specific priorities\",\r\n      \"director\":\"Grant Pelton\"\
+                    ,\r\n      \"score2\":0.0,\r\n      \"year\":\"2021\",\r\n   \
+                    \   \"score3\":0.0,\r\n      \"score4\":0.0,\r\n      \"score5\"\
+                    :0.0,\r\n      \"score1\":0.0,\r\n      \"status6\":7,\r\n   \
+                    \   \"status3\":0,\r\n      \"score7\":0.0,\r\n      \"score6\"\
+                    :0.0,\r\n      \"status4\":0,\r\n      \"status5\":0,\r\n    \
+                    \  \"status1\":0,\r\n      \"status2\":0,\r\n      \"scoreFeb\"\
+                    :0.0,\r\n      \"scoreMay\":0.0,\r\n      \"scoreAug\":0.0,\r\n\
+                    \      \"scoreJan\":0.0,\r\n      \"scoreMar\":0.0,\r\n      \"\
+                    scoreSep\":0.0,\r\n      \"scoreApr\":0.0,\r\n      \"scoreJun\"\
+                    :0.0,\r\n      \"scoreJul\":0.0,\r\n      \"scoreOct\":0.0,\r\n\
+                    \      \"scoreNov\":0.0,\r\n      \"scoreDec\":0.0,\r\n      \"\
+                    priorityName\":\"Bushfire Recovery / Kangaroo Island Rebuild\"\
+                    ,\r\n      \"internalCommentary\":\"\",\r\n      \"edAuthorised\"\
+                    :\"No Data\",\r\n      \"scoreDesc3\":\"Partnerships\",\r\n  \
+                    \    \"scoreDesc5\":\"Project risks\",\r\n      \"scoreDesc1\"\
+                    :\"Project management (Weighting x 1.5)\",\r\n      \"scoreDesc6\"\
+                    :\"Progress towards outcomes\",\r\n      \"scoreDesc7\":\"Capability\
+                    \ and capacity\",\r\n      \"scoreDesc4\":\"Stakeholder engagement\
+                    \ & public relations\",\r\n      \"scoreDesc2\":\"Financial management\
+                    \  (Weighting x 1.5)\",\r\n      \"cepasCommentary\":\"\",\r\n\
+                    \      \"dateDirectorAuth\":\"No Data\",\r\n      \"authorisedBy\"\
+                    :\"No Data\",\r\n      \"dateEDAuthorised\":\"No Data\"\r\n  \
+                    \ }\r\n]"
+          description: Successfully retrieved the response.
+        "500":
+          description: Unexpected error in the server.
+      summary: Get table summary information
+components: {}

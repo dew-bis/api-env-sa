@@ -353,6 +353,20 @@ paths:
         schema:
           type: string
         in: query
+      - name: changesSince
+        description: Client records changed since date and time (inclusive) in ISO-8601
+          format `yyyy-MM-ddTHH:mm:ssZ`
+        schema:
+          format: date
+          type: string
+        in: query
+      - name: changesTillDate
+        description: Client records changed till date and time (inclusive) in ISO-8601
+          format `yyyy-MM-ddTHH:mm:ssZ`
+        schema:
+          format: date
+          type: string
+        in: query
       responses:
         "200":
           content:
@@ -362,9 +376,13 @@ paths:
           description: Single page of `client` records
         "400":
           description: "Bad request - Atleast one of the following query parameters\
-            \ required : \n\n`firstNameContains`, \n`lastNameContains`, or\n`postCode`"
+            \ required : \n\n`firstNameContains`, \n`lastNameContains`,\n`postCode`,\
+            \ or\n`changesSince`"
         "401":
           description: Unauthorized
+        "403":
+          description: 'Cannot process: either `changesSince` to `changesTillDate`
+            window larger than 14 days or number of changed records exceed 1000'
       operationId: GetClients
       summary: List all Clients registered in the system
       description: Get `client` records that match the requested filters

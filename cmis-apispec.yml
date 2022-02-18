@@ -18,80 +18,6 @@ servers:
       default: qa-api
       description: QA domain
 paths:
-  /crm-apis/v1/businesses:
-    summary: Business establishment details end-point
-    description: Resource URI for interacting with registered Business establishments
-      in CMIS
-    get:
-      tags:
-      - crm-apis
-      parameters:
-      - name: businessNameContains
-        description: Filter reprsenting a value to string match with `businessName`
-        schema:
-          type: string
-        in: query
-        required: false
-      - name: limit
-        description: Maximum number of results in the response
-        schema:
-          type: integer
-        in: query
-        required: false
-      - name: page
-        description: 1-based Page index
-        schema:
-          type: integer
-        in: query
-        required: false
-      - name: abnNumber
-        description: |-
-          ABN Number of the Business establishment.
-
-          The ABN Number should be of the format `nnnnnnnnnnn`. For eg: '36702093234'
-        schema:
-          type: string
-        in: query
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/business-page'
-          description: Successful operation
-        "400":
-          description: "Bad request - Atleast one of the following query parameters\
-            \ required : \n\n`businessNameContains`, or `abnNumber`"
-        "401":
-          description: Unauthorized
-      operationId: GetBusinesses
-      summary: List all  Businesses registered in the system
-      description: "Paginated list of all Businesses registered in the CMIS system.\n\
-        \nNote: Atleast one of the following query parameters required for this end-point\
-        \ : \n\n`businessNameContains`, or `abnNumber`"
-    post:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/business'
-        required: true
-      tags:
-      - crm-apis
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/business'
-          description: Successful operation
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-      operationId: CreateBusiness
-      summary: Create a new `business` establishment
-      description: Create a new `business` entity in the CMIS System
   /auth/v1/token:
     summary: Authentication and Authorization
     description: Authentication and authorization end points
@@ -846,6 +772,97 @@ paths:
       operationId: GetRegions
       summary: Get a list of regions configured in CMIS for a specific regionType
       description: Get a list of regions configured in CMIS for a specific regionType
+  /crm-apis/v1/businesses:
+    summary: Business establishment details end-point
+    description: Resource URI for interacting with registered Business establishments
+      in CMIS
+    get:
+      tags:
+      - crm-apis
+      parameters:
+      - name: businessNameContains
+        description: Filter reprsenting a value to string match with `businessName`
+        schema:
+          type: string
+        in: query
+        required: false
+      - name: limit
+        description: Maximum number of results in the response
+        schema:
+          type: integer
+        in: query
+        required: false
+      - name: page
+        description: 1-based Page index
+        schema:
+          type: integer
+        in: query
+        required: false
+      - name: abnNumber
+        description: |-
+          ABN Number of the Business establishment.
+
+          The ABN Number should be of the format `nnnnnnnnnnn`. For eg: '36702093234'
+        schema:
+          type: string
+        in: query
+      - name: changesSince
+        description: Client records changed since date and time (inclusive) in ISO-8601
+          format `yyyy-MM-ddTHH:mm:ssZ`
+        schema:
+          format: date
+          type: string
+        in: query
+      - name: changesTillDate
+        description: Client records changed till date and time (inclusive) in ISO-8601
+          format `yyyy-MM-ddTHH:mm:ssZ`
+        schema:
+          format: date
+          type: string
+        in: query
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business-page'
+          description: Successful operation
+        "400":
+          description: "Bad request - Atleast one of the following query parameters\
+            \ required : \n\n`businessNameContains`, `abnNumber`, or `changesSince`"
+        "401":
+          description: Unauthorized
+        "403":
+          description: 'Cannot process: either `changesSince` to `changesTillDate`
+            window larger than 14 days or number of changed records exceed 1000'
+      operationId: GetBusinesses
+      summary: List all  Businesses registered in the system
+      description: "Paginated list of all Businesses registered in the CMIS system.\n\
+        \nNote: Atleast one of the following query parameters required for this end-point\
+        \ : \n\n`businessNameContains`, or `abnNumber`"
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/business'
+        required: true
+      tags:
+      - crm-apis
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business'
+          description: Successful operation
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+      operationId: CreateBusiness
+      summary: Create a new `business` establishment
+      description: Create a new `business` entity in the CMIS System
 components:
   schemas:
     client:

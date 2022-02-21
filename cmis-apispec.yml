@@ -308,7 +308,8 @@ paths:
           description: Unauthorized
         "403":
           description: 'Cannot process: either `changesSince` to `changesTillDate`
-            window larger than 14 days or number of changed records exceed 1000'
+            window larger than 14 days or, number of results exceed 1000 records please
+            refine query further.'
       operationId: GetClients
       summary: List all Clients registered in the system
       description: Get `client` records that match the requested filters
@@ -834,7 +835,8 @@ paths:
           description: Unauthorized
         "403":
           description: 'Cannot process: either `changesSince` to `changesTillDate`
-            window larger than 14 days or number of changed records exceed 1000'
+            window larger than 14 days or, number of results exceed 1000 records please
+            refine query further.'
       operationId: GetBusinesses
       summary: List all  Businesses registered in the system
       description: "Paginated list of all Businesses registered in the CMIS system.\n\

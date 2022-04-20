@@ -1,1 +1,717 @@
 ---
+openapi: 3.0.2
+info:
+  title: HeritageWS
+  version: 1.0.0
+  description: APIs for Heritage used by  BI dashboards
+paths:
+  /HeritageWS/v1/heritage/reports/lga/{table}/{start}/{typeOfData}:
+    summary: API for Heritage Reports LGA
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                lga:
+                  value:
+                  - countOfDocCode: 5
+                    lgaDescription: Campbelltown
+                    totalCost: 20
+                  - countOfDocCode: 6
+                    lgaDescription: Walkerville
+                    totalCost: 20
+                  - countOfDocCode: 8
+                    lgaDescription: Playford
+                    totalCost: 20
+                  - countOfDocCode: 8
+                    lgaDescription: Prospect
+                    totalCost: 20
+                  - countOfDocCode: 11
+                    lgaDescription: Tea Tree Gully
+                    totalCost: 20
+                  - countOfDocCode: 14
+                    lgaDescription: Marion
+                    totalCost: 20
+                  - countOfDocCode: 25
+                    lgaDescription: Salisbury
+                    totalCost: 20
+                  - countOfDocCode: 109
+                    lgaDescription: Adelaide Hills
+                    totalCost: 20
+                  - countOfDocCode: 464
+                    lgaDescription: Adelaide
+                    totalCost: 20
+          description: Successfully retrived the response.
+        "401":
+          description: Not authorized to perform this operation.
+        "500":
+          description: Unexpected error in the server.
+      summary: Get Heritage Reports Lga  information
+    parameters:
+    - examples:
+        start:
+          value: "0"
+      name: start
+      in: path
+      required: true
+    - examples:
+        typeOfData:
+          value: "1"
+      name: typeOfData
+      in: path
+      required: true
+    - examples:
+        table:
+          value: Vw_bi_heritage_qryL_LGA_Count
+      name: table
+      in: path
+      required: true
+  /HeritageWS/v1/heritage/reports/owner/{table}/{start}/{typeOfData}:
+    summary: Get Heritage Reports Owner.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                  - lgaDescription: Adelaide
+                    bodyName: Botanic Gardens of South Australia
+                    docCode: "10642"
+                    itemName: Museum of Economic Botany, Adelaide Botanic Garden
+                    street: Park Lands
+                    suburb: ADELAIDE
+                    bodyTypeCode: GS
+                    statusCode: REG
+                    totalCost: 1026
+                  - lgaDescription: Adelaide
+                    bodyName: GOVERNORS OF THE BOTANIC GARDEN
+                    docCode: "10642"
+                    itemName: Museum of Economic Botany, Adelaide Botanic Garden
+                    street: Park Lands
+                    suburb: ADELAIDE
+                    bodyTypeCode: GS
+                    statusCode: REG
+                    totalCost: 1026
+          description: Successfully retrieved the response.
+        "401":
+          description: Not authorized to perform this operation.
+        "500":
+          content:
+            application/json: {}
+          description: Unexpected error in the server side.
+      summary: Get Heritage Reports Owner
+    parameters:
+    - examples:
+        table:
+          value: Vw_bi_heritage_qryO_Govt_owner_info
+      name: table
+      in: path
+      required: true
+    - examples:
+        start:
+          value: "0"
+      name: start
+      in: path
+      required: true
+    - examples:
+        typeOfData:
+          value: "1"
+      name: typeOfData
+      in: path
+      required: true
+  /HeritageWS/v1/heritage/reports/significance/{table}/{start}/{typeOfData}:
+    summary: Get Heritage Reports Significance.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                  - criteriaCode: C
+                    docCode: "14620"
+                    itemName: Function Centre (Former Upper Skilly Bible Christian
+                      Chapel)
+                    suburb: AUBURN
+                    statusDate: 1994-02-15T00:00:00
+                    totalCost: 75
+                  - criteriaCode: C
+                    docCode: "14314"
+                    itemName: Granite Outcrop (Swanport Whaleback) Geological Site
+                    suburb: SWANPORT
+                    statusDate: 1994-06-23T00:00:00
+                    totalCost: 75
+                  - criteriaCode: C
+                    docCode: "14423"
+                    itemName: Flinders Island Whaling & Sealing Site
+                    suburb: FLINDERS ISLAND
+                    statusDate: 1994-06-23T00:00:00
+                    totalCost: 75
+                  - criteriaCode: C
+                    docCode: "14425"
+                    itemName: Point Collinson Whaling Station Site
+                    suburb: SMOKY BAY
+                    statusDate: 1994-06-23T00:00:00
+                    totalCost: 75
+                  - criteriaCode: C
+                    docCode: "14548"
+                    itemName: Cape d'Estaing to Emu Bay (west) and Emu Bay (east)
+                      to Boxing Bay Coastline (designated place of palaeontological
+                      significance)
+                    suburb: EMU BAY
+                    statusDate: 1994-09-22T00:00:00
+                    totalCost: 75
+                  - criteriaCode: C
+                    docCode: "13039"
+                    itemName: Huppatz Cemetery
+                    suburb: RIVERTON
+                    statusDate: 1994-09-22T00:00:00
+                    totalCost: 75
+                  - criteriaCode: C
+                    docCode: "14679"
+                    itemName: St Vigeans Estate Garden
+                    suburb: STIRLING
+                    statusDate: 1994-12-15T00:00:00
+                    totalCost: 75
+                  - criteriaCode: C
+                    docCode: "14675"
+                    itemName: Four Down-draught Brick Kilns and Four Chimneys, former
+                      James' Brickyard
+                    suburb: BEVERLEY
+                    statusDate: 1995-02-09T00:00:00
+                    totalCost: 75
+                  - criteriaCode: C
+                    docCode: "14655"
+                    itemName: Deep Creek Bridge [Stone Arch]
+                    suburb: BASKET RANGE
+                    statusDate: 1995-02-09T00:00:00
+                    totalCost: 75
+                  - criteriaCode: C
+                    docCode: "14693"
+                    itemName: Former Victoria Gold Mine
+                    suburb: CASTAMBUL
+                    statusDate: 1995-02-09T00:00:00
+                    totalCost: 75
+          description: Successfully retrieved the response.
+        "500":
+          description: Unexpected error in the server.
+        "401":
+          description: Not authorized to perform this operation.
+      summary: Get Heritage Reports Significance.
+    parameters:
+    - examples:
+        table:
+          value: Vw_bi_heritage_qryS_Assessment_Criteria
+      name: table
+      in: path
+      required: true
+    - examples:
+        start:
+          value: "0"
+      name: start
+      in: path
+      required: true
+    - examples:
+        typeOfData:
+          value: "1"
+      name: typeOfData
+      in: path
+      required: true
+  /HeritageWS/v1/heritage/reports/status/{table}/{start}/{typeOfData}:
+    summary: Get Heritage Reports Status.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                  - itemName: '"Martindale Hall", Martindale Hall Conservation Park
+                      [includes Mortlock Weapons Collection, Billiards & Sporting,
+                      Pictorial & Heraldic Collections - Objects of heritage significance]'
+                    isOpenToPublic: "Y"
+                    statusCode: REG
+                    totalCost: 2365
+                  - itemName: '"Thornber House" and Cottage'
+                    isOpenToPublic: "N"
+                    statusCode: REG
+                    totalCost: 2365
+                  - itemName: '`A'' Division Cell Block - DEMOLISHED (Archived - Destroyed
+                      by fire)'
+                    isOpenToPublic: "N"
+                    statusCode: REG
+                    totalCost: 2365
+                  - itemName: 1854 Flour Mill and 1942 extension (Laucke's Flour Mill)
+                    isOpenToPublic: "N"
+                    statusCode: REG
+                    totalCost: 2365
+          description: Successfully retrived the response.
+      summary: Get Heritage Reports Status.
+    parameters:
+    - examples:
+        tbl:
+          value: Vw_bi_heritage_qryR_OPEN_TO_PUBLIC_2
+      name: table
+      in: path
+      required: true
+    - examples:
+        start:
+          value: "0"
+      name: start
+      in: path
+      required: true
+    - examples:
+        typeOfData:
+          value: "1"
+      name: typeOfData
+      in: path
+      required: true
+  /HeritageWS/v1/heritage/reports/subject/{table}/{start}/{typeOfData}:
+    summary: Get Heritage Reports subject.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                  - grpDescription: Aboriginal site
+                    catDescription: Historic/Contact site
+                    suburb: OOLDEA
+                    docCode: "14265"
+                    itemName: Daisy Bates' Campsite
+                    yearOfBuild: "1919"
+                    street: ""
+                    totalCost: 441
+                  - grpDescription: Cemeteries and burial sites
+                    catDescription: Isolated Grave
+                    suburb: PORT LINCOLN
+                    docCode: "14220"
+                    itemName: Hawson's Grave, Hawson Square
+                    yearOfBuild: "1911"
+                    street: Hawson Place
+                    totalCost: 441
+          description: Successfully retrieved the response.
+        "401":
+          description: Not authorized to perform this operation.
+        "500":
+          description: Unexpected error in the server side.
+      summary: Get Heritage Reports subject.
+    parameters:
+    - examples:
+        tbl:
+          value: Vw_bi_heritage_qryN_20thC_by_subject
+      name: table
+      in: path
+      required: true
+    - examples:
+        st:
+          value: "0"
+      name: start
+      in: path
+      required: true
+    - examples:
+        typ:
+          value: "1"
+      name: typeOfData
+      in: path
+      required: true
+  /HeritageWS/v1/heritage/reports/{idType}:
+    summary: Get BI Heritage Reports with idType.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                  - subject: ' Select Subject'
+                    report: ' Select a Report'
+                    idReport: 1
+                  - subject: Owner Queries
+                    report: qryO_Govt_owner_info
+                    idReport: 2
+                  - subject: Owner Queries
+                    report: qryO_LAND_DESC
+                    idReport: 3
+                  - subject: Owner Queries
+                    report: qryO_Land_Description
+                    idReport: 4
+                  - subject: Owner Queries
+                    report: qryO_Land_Description_Owner
+                    idReport: 5
+                  - subject: Owner Queries
+                    report: qryO_Owner_info
+                    idReport: 6
+                  - subject: Owner Queries
+                    report: qryO_Owner_Mail_List
+                    idReport: 7
+                  - subject: Owner Queries
+                    report: qryO_Title_info
+                    idReport: 8
+                  - subject: Owner Queries
+                    report: qryO_Title_info_for_data_matching
+                    idReport: 9
+                  - subject: Owner Queries
+                    report: qryO_Owner_Code_Land_Description
+                    idReport: 43
+                  - subject: Architect/Builder queries
+                    report: qryA_Architect
+                    idReport: 10
+                  - subject: Architect/Builder queries
+                    report: qryA_Architect_Subject
+                    idReport: 11
+                  - subject: Architect/Builder queries
+                    report: qryA_Builder
+                    idReport: 12
+                  - subject: Architect/Builder queries
+                    report: qryA_Date
+                    idReport: 13
+                  - subject: Subject
+                    report: qryN_20thC_by_subject
+                    idReport: 14
+                  - subject: Subject
+                    report: qryN_Denomination
+                    idReport: 15
+                  - subject: Subject
+                    report: qryN_DESIGNATIONS
+                    idReport: 16
+          description: Successfully retrieved the response.
+        "401":
+          description: Not authorized to perform this operation.
+        "500":
+          description: Unexpected error in the server side.
+      summary: Get BI Heritage Reports with idType.
+    parameters:
+    - examples:
+        idType:
+          value: "1"
+      name: idType
+      in: path
+      required: true
+  /HeritageWS/v1/heritage/reports/significance/validated:
+    summary: Get Heritage Reports significance validated info.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                validated:
+                  value:
+                  - docCode: "14315"
+                    validatedDate: "2000"
+                    validate: Validated
+                    lgaDescription: Murray Bridge
+                    suburb: WELLINGTON
+                    herSignIfClob: Wellington was the site of the earliest and, until
+                      the late 1870s, the most important crossing of the River Murray.
+                      This former ferry road and stone wall indicate the original
+                      route to the old ferry.  They are of significance because they
+                      also demonstrate the effects of the immense shifting sandhills
+                      which were as much a threat to Wellington's existence as the
+                      diversion of traffic to Murray Bridge.  From the early 1850s
+                      visitors and residents were troubled by encroaching sand which
+                      by the 1880s had almost buried West Wellington.  The line of
+                      stones embedded in the roadside is the last vestige of the six
+                      feet high walls which were built to withstand the drift.
+                    itemName: Former Wellington Ferry Road & Stone Wall
+                    street: ""
+                    streetNumber: ""
+                    statusCode: REG
+                    totalRs: 1
+          description: |
+            Successfully retrieved the response.
+      summary: Get Heritage Reports significance validated info.
+    parameters:
+    - examples:
+        example:
+          value: "2000"
+      name: dbYear
+      description: financial year
+      schema:
+        type: integer
+      in: query
+      required: true
+    - examples:
+        lga:
+          value: Murray%20Bridge
+      name: lga
+      description: ""
+      schema: {}
+      in: query
+      required: true
+    - examples:
+        suburb:
+          value: WELLINGTON
+      name: suburb
+      description: ""
+      schema: {}
+      in: query
+      required: true
+    - examples:
+        validate:
+          value: Validated
+      name: validate
+      description: ""
+      schema: {}
+      in: query
+      required: true
+  /HeritageWS/v1/heritage/reports/ownership:
+    summary: Get Heritage Reports ownership
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                json:
+                  value:
+                  - codeDescription: Business
+                    countBodyTypeCode: 1346
+                    totalCost: 8
+                    bodyTypecode: BU
+                  - codeDescription: Church
+                    countBodyTypeCode: 224
+                    totalCost: 8
+                    bodyTypecode: CH
+                  - codeDescription: Government (Commonwealth)
+                    countBodyTypeCode: 9
+                    totalCost: 8
+                    bodyTypecode: GC
+                  - codeDescription: Government (Local)
+                    countBodyTypeCode: 592
+                    totalCost: 8
+                    bodyTypecode: GL
+                  - codeDescription: Government (State)
+                    countBodyTypeCode: 1087
+                    totalCost: 8
+                    bodyTypecode: GS
+                  - codeDescription: Individuals
+                    countBodyTypeCode: 4447
+                    totalCost: 8
+                    bodyTypecode: OT
+                  - codeDescription: Organisation
+                    countBodyTypeCode: 293
+                    totalCost: 8
+                    bodyTypecode: OR
+                  - codeDescription: Private School
+                    countBodyTypeCode: 19
+                    totalCost: 8
+                    bodyTypecode: SC
+          description: "Successfully retrieved the response.\r\n\r\n"
+        "401":
+          description: Not authorized to perform this operation.
+        "500":
+          description: Unexpected error in the server side.
+      summary: Get Heritage Reports ownership
+  /HeritageWS/v1/heritage/reports/lga/count:
+    summary: Get BI Heritage LGA Count.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                json:
+                  value:
+                  - docCodeCount: 5
+                    lgaDescription: Campbelltown
+                  - docCodeCount: 6
+                    lgaDescription: Walkerville
+          description: "Successfully retrieved the response.\r\n"
+        "401":
+          description: "\r\nNot authorized to perform this operation."
+        "500":
+          description: "\r\nUnexpected error in the server side."
+      summary: Get BI Heritage LGA Count.
+  /HeritageWS/v1/heritage/reports/lga/count/reg:
+    summary: Get BI Heritage LGA Count reg.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                jjson:
+                  value:
+                  - docCodeCount: 1
+                    lgaDescription: Barunga West
+                  - docCodeCount: 1
+                    lgaDescription: Franklin Harbour
+                  - docCodeCount: 2
+                    lgaDescription: Karoonda/East Murray
+                  - docCodeCount: 2
+                    lgaDescription: Coober Pedy
+                  - docCodeCount: 2
+                    lgaDescription: Orroroo/Carrieton
+                  - docCodeCount: 2
+                    lgaDescription: Tumby Bay
+                  - docCodeCount: 3
+                    lgaDescription: Southern Mallee
+                  - docCodeCount: 3
+                    lgaDescription: Ceduna
+                  - docCodeCount: 3
+                    lgaDescription: Kimba
+                  - docCodeCount: 4
+                    lgaDescription: Cleve
+                  - docCodeCount: 5
+                    lgaDescription: Streaky Bay
+          description: Successfully retrieved the response.
+        "401":
+          description: "\r\nNot authorized to perform this operation."
+        "500":
+          description: "\r\nUnexpected error in the server side."
+      summary: Get BI Heritage LGA Count reg.
+  /HeritageWS/v1/heritage/reports/builder/{start}:
+    summary: Get heritage reports builder information.
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                  - builderDesc: Anangu People
+                    suburb: ERNABELLA
+                    docCode: "18723"
+                    itemName: Former Hospital, Church and Manse of former Ernabella
+                      Mission
+                    street: ""
+                    streetNumber: ""
+                    builderType: O
+                    builderPeriod: 1940s
+                    yearOfBuild: 1930s
+                    totalCostOfConstruction: 2
+          description: Successfully retrieved the response.
+        "401":
+          description: "\r\nNot authorized to perform this operation."
+        "500":
+          description: Unexpected error in the server side.
+      summary: Get heritage reports builder information.
+    parameters:
+    - examples:
+        start:
+          value: "1"
+      name: start
+      in: path
+      required: true
+    - examples:
+        name:
+          value: Anangu%20People
+      name: builder
+      description: ""
+      schema: {}
+      in: query
+      required: true
+    - examples:
+        item:
+          value: Former%20Hospital%2C%20Church%20and%20Manse%20of%20former%20Ernabella%20Mission
+      name: item
+      description: ""
+      schema: {}
+      in: query
+      required: true
+  /HeritageWS/v1/heritage/reports/register/status:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                resp:
+                  value:
+                  - itemName: NOM
+                    statusCode: NOM
+                    statusDate: "1975"
+                  - itemName: NOM
+                    statusCode: NOM
+                    statusDate: "1978"
+                  - itemName: NOM
+                    statusCode: NOM
+                    statusDate: "1978"
+                  - itemName: NOM
+                    statusCode: NOM
+                    statusDate: "1978"
+                  - itemName: NOM
+                    statusCode: NOM
+                    statusDate: "1978"
+          description: Successfully retrieved the response.
+        "401":
+          description: Not authorized to perform this operation.
+        "500":
+          description: Unexpected error in the server side.
+      summary: Get heritage reports register status
+  /HeritageWS/v1/heritage/reports/architect/{table}/{start}/{typeOfData}:
+    summary: Get heritage reports architect info.
+    get:
+      parameters:
+      - examples:
+          tbl:
+            value: Vw_bi_heritage_qryA_Architect
+        name: table
+        in: path
+        required: true
+      - examples:
+          start:
+            value: "0"
+        name: start
+        in: path
+        required: true
+      - examples:
+          type:
+            value: "1"
+        name: typeOfData
+        in: path
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                  - architectDesc: Abbott, George
+                    suburb: BEULAH PARK
+                    docCode: "13171"
+                    itemName: Clayton Wesley Uniting (former Congregational) Church
+                      Complex (including 1882 Church, 1856 Chapel, 1875 Hope Hall
+                      and 1910 Clayton Institute)
+                    street: Portrush Road
+                    streetNumber: "278"
+                    statusCode: REG
+                    yearOfBuild: "1856"
+                    totalCostOfConstruction: 2516
+                  - architectDesc: Abbott, William H
+                    suburb: CLARENDON
+                    docCode: "10451"
+                    itemName: Former Clarendon Police Station & Courthouse
+                    street: Grants Gully Road
+                    streetNumber: "59"
+                    statusCode: REG
+                    yearOfBuild: "1869"
+                    totalCostOfConstruction: 2516
+          description: Successfully retrieved the response.
+        "401":
+          description: "\r\nNot authorized to perform this operation."
+        "500":
+          description: Unexpected error in the server side.
+      summary: Get heritage reports architect info.
+    parameters:
+    - name: table
+      in: path
+      required: true
+    - name: start
+      in: path
+      required: true
+    - name: typeOfData
+      in: path
+      required: true

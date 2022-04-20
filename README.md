@@ -29,4 +29,5 @@ The API Catalogue (master) has the following definitions
 
 13. [Cepas](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/cepas-apispec.yml)
 
+14. [Heritage](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/heritagews-apispec.yaml)
 

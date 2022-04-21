@@ -715,3 +715,54 @@ paths:
     - name: typeOfData
       in: path
       required: true
+  /HeritageWS/v1/heritage/reports/architect/{start}:
+    summary: Get  Architect information by name
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                  - architect: Abbott, George
+                    suburb: BEULAH PARK
+                    docCode: "13171"
+                    itemName: Clayton Wesley Uniting (former Congregational) Church
+                      Complex (including 1882 Church, 1856 Chapel, 1875 Hope Hall
+                      and 1910 Clayton Institute)
+                    street: Portrush Road
+                    streetnr: "278"
+                    statusCode: REG
+                    yearBuilt: "1856"
+                    totalCost: 1
+          description: Successfully retrieved the response.
+        "401":
+          description: Not authorized to perform this operation.
+        "500":
+          description: Unexpected error in the server side.
+      summary: Get  Architect information by name
+    parameters:
+    - examples:
+        start:
+          value: "1"
+      name: start
+      in: path
+      required: true
+    - examples:
+        name:
+          value: Abbott%2C%20George
+      name: architect
+      description: ""
+      schema: {}
+      in: query
+      required: true
+    - examples:
+        item:
+          value: |
+            ALL
+      name: item
+      description: ""
+      schema: {}
+      in: query
+      required: true

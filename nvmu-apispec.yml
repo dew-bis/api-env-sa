@@ -1,0 +1,435 @@
+---
+openapi: 3.0.2
+info:
+  title: SOILS
+  version: 1.0.0
+  description: SOILS
+paths:
+  /soils/sites/152576:
+    get:
+      servers:
+      - url: https://apps.dev.env.sa.gov.au/SoilsCSLWS2
+        description: ""
+      parameters:
+      - name: siteID
+        description: siteID
+        schema: {}
+        in: query
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: "{\r\n    \"id\": \"RSCU075_0000\",\r\n    \"privacy\": {\r\
+            \n        \"description\": \"Non-public: Government assisted on private\
+            \ land\",\r\n        \"value\": \"NPG\"\r\n    },\r\n    \"project\":\
+            \ {\r\n        \"code\": \"00001\",\r\n        \"name\": \"SA State Land\
+            \ and Soil Mapping Program\",\r\n        \"projectId\": 185\r\n    },\r\
+            \n    \"siteId\": 152576,\r\n    \"siteType\": {\r\n        \"description\"\
+            : \"Free survey\",\r\n        \"value\": \"F\"\r\n    },\r\n    \"dataConfidence\"\
+            : {\r\n        \"description\": \"Best available. Data has been derived\
+            \ using recognised techniques by a qualified soil science or land resource\
+            \ assessment professional.\",\r\n        \"value\": \"1\"\r\n    },\r\n\
+            \    \"dateDescribed\": \"2013-02-12T13:30:00Z[UTC]\",\r\n    \"describedByLegacy\"\
+            : {\r\n        \"name\": \"Andrew Harding\",\r\n        \"userCode\":\
+            \ \"HARA\"\r\n    },\r\n    \"documents\": [],\r\n    \"landscape\": {\r\
+            \n        \"landForm\": {\r\n            \"elementType\": {\r\n      \
+            \          \"description\": \"Terrace flat\",\r\n                \"value\"\
+            : \"TEF\"\r\n            },\r\n            \"patternType\": {\r\n    \
+            \            \"description\": \"Alluvial plain\",\r\n                \"\
+            value\": \"ALP\"\r\n            }\r\n        },\r\n        \"landUseHistory\"\
+            : [],\r\n        \"morphType\": {\r\n            \"description\": \"Flat\"\
+            ,\r\n            \"value\": \"F\"\r\n        },\r\n        \"slopePercent\"\
+            : 1.0\r\n    },\r\n    \"mapSheetNo\": \"6532-2\",\r\n    \"observations\"\
+            : [\r\n        {\r\n            \"dataConfidence\": {\r\n            \
+            \    \"description\": \"Best available. Data has been derived using recognised\
+            \ techniques by a qualified soil science or land resource assessment professional.\"\
+            ,\r\n                \"value\": \"1\"\r\n            },\r\n          \
+            \  \"dateDescribed\": \"2013-02-12T13:30:00Z[UTC]\",\r\n            \"\
+            describedByLegacy\": {\r\n                \"name\": \"Andrew Harding\"\
+            ,\r\n                \"userCode\": \"HARA\"\r\n            },\r\n    \
+            \        \"id\": \"1\",\r\n            \"landscape\": {\r\n          \
+            \      \"asc\": {\r\n                    \"confidence\": {\r\n       \
+            \                 \"description\": \"Analytical data are incomplete but\
+            \ reasonable confidence.\",\r\n                        \"value\": \"2\"\
+            \r\n                    },\r\n                    \"gravelContent\": {\r\
+            \n                        \"description\": \"Non-gravelly\",\r\n     \
+            \                   \"value\": \"E\"\r\n                    },\r\n   \
+            \                 \"greatSoilGroup\": {\r\n                        \"\
+            description\": \"Calcic\",\r\n                        \"value\": \"BD\"\
+            \r\n                    },\r\n                    \"horizonThickness\"\
+            : {\r\n                        \"description\": \"Medium\",\r\n      \
+            \                  \"value\": \"B\"\r\n                    },\r\n    \
+            \                \"order\": {\r\n                        \"description\"\
+            : \"Chromosol\",\r\n                        \"value\": \"CH\"\r\n    \
+            \                },\r\n                    \"soilDepth\": {\r\n      \
+            \                  \"description\": \"Deep\",\r\n                    \
+            \    \"value\": \"W\"\r\n                    },\r\n                  \
+            \  \"subGroup\": {\r\n                        \"description\": \"Haplic\"\
+            ,\r\n                        \"value\": \"CD\"\r\n                   \
+            \ },\r\n                    \"subOrder\": {\r\n                      \
+            \  \"description\": \"Red\",\r\n                        \"value\": \"\
+            AA\"\r\n                    },\r\n                    \"textureA1\": {\r\
+            \n                        \"description\": \"Loamy\",\r\n            \
+            \            \"value\": \"L\"\r\n                    },\r\n          \
+            \          \"textureB\": {\r\n                        \"description\"\
+            : \"Clayey\",\r\n                        \"value\": \"O\"\r\n        \
+            \            }\r\n                },\r\n                \"classSA\": {\r\
+            \n                    \"description\": \"Loam over red clay\",\r\n   \
+            \                 \"value\": \"D2\"\r\n                },\r\n        \
+            \        \"disturbances\": [\r\n                    {\r\n            \
+            \            \"number\": 1,\r\n                        \"type\": {\r\n\
+            \                            \"description\": \"Cultivation. Rainfed\"\
+            ,\r\n                            \"value\": \"6\"\r\n                \
+            \        }\r\n                    }\r\n                ],\r\n        \
+            \        \"rockOutcrops\": [\r\n                    {\r\n            \
+            \            \"abundance\": {\r\n                            \"description\"\
+            : \"No bedrock exposed\",\r\n                            \"value\": \"\
+            0\"\r\n                        }\r\n                    }\r\n        \
+            \        ],\r\n                \"substrate\": {\r\n                  \
+            \  \"geneticType\": {\r\n                        \"description\": \"Alluvium\"\
+            ,\r\n                        \"value\": \"AL\"\r\n                   \
+            \ },\r\n                    \"massAlteration\": {\r\n                \
+            \        \"description\": \"Calcified\",\r\n                        \"\
+            value\": \"K\"\r\n                    },\r\n                    \"massStrength\"\
+            : {\r\n                        \"description\": \"Earth or soil\",\r\n\
+            \                        \"value\": \"E\"\r\n                    }\r\n\
+            \                },\r\n                \"surface\": {\r\n            \
+            \        \"aspect\": 315,\r\n                    \"conditions\": [\r\n\
+            \                        {\r\n                            \"description\"\
+            : \"Hard setting\",\r\n                            \"value\": \"H\"\r\n\
+            \                        }\r\n                    ],\r\n             \
+            \       \"elevation\": 320\r\n                },\r\n                \"\
+            surfaceCoarseFragments\": [\r\n                    {\r\n             \
+            \           \"abundance\": {\r\n                            \"description\"\
+            : \"No coarse fragments\",\r\n                            \"value\": \"\
+            0\"\r\n                        },\r\n                        \"no\": 1\r\
+            \n                    }\r\n                ],\r\n                \"water\"\
+            : {\r\n                    \"drainage\": {},\r\n                    \"\
+            inundation\": {\r\n                        \"description\": \"No inundation\"\
+            ,\r\n                        \"value\": \"0\"\r\n                    }\r\
+            \n                }\r\n            },\r\n            \"latitude\": -32.7753523563592,\r\
+            \n            \"locationMethod\": {\r\n                \"description\"\
+            : \"GPS: Handheld\",\r\n                \"value\": \"2\"\r\n         \
+            \   },\r\n            \"longitude\": 138.303831901457,\r\n           \
+            \ \"observationId\": 88684,\r\n            \"observationType\": {\r\n\
+            \                \"description\": \"Auger boring\",\r\n              \
+            \  \"value\": \"A\"\r\n            }\r\n        }\r\n    ],\r\n    \"\
+            reason\": {\r\n        \"description\": \"Land assessment and mapping\
+            \ (general)\",\r\n        \"value\": \"Lm\"\r\n    }\r\n}"
+      summary: SOILS Site Details
+      description: SOILS Site Details
+  /soils/observations/98071/horizons:
+    get:
+      servers:
+      - url: https://apps.dev.env.sa.gov.au/SoilsCSLWS2
+        description: ""
+      parameters:
+      - name: observationID
+        description: observationID
+        schema: {}
+        in: query
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                SampleResponse:
+                  value:
+                  - horizonID: 323592
+                    horizonNo: 1
+                    lowerDepth: 25
+                    materialNo: 1
+                    texture:
+                      description: Fine sandy loam
+                      value: FSL
+                    upperDepth: 0
+                    boundaryDistinctiveness:
+                      description: Gradual
+                      value: G
+                    carbonate:
+                      effervescence:
+                        description: Moderately calcareous
+                        value: M
+                    coarseFragments:
+                    - abundance:
+                        description: common, 10-20%
+                        value: "3"
+                      lithology:
+                        description: Shale
+                        value: SH
+                      fragmentSize:
+                        description: Medium gravelly, 6-20mm
+                        value: "2"
+                      "no": 1
+                    colours:
+                    - munsell:
+                        description: Brown
+                        value: 7.5YR43
+                        value2: "4"
+                        value3: "3"
+                      "no": 1
+                    consistence:
+                      strength:
+                      - description: Weak
+                        value: "2"
+                    fieldPh:
+                    - 8.5
+                    label:
+                      description: Surface mineral horizon; 1st layer
+                      value: A1
+                    mottles:
+                    - "no": 1
+                    pans: []
+                    roots: []
+                    segregations:
+                    - abundance:
+                        description: Few, 2-10%
+                        value: "2"
+                      form:
+                        description: Fragments
+                        value: F
+                      nature:
+                        description: Calcareous
+                        value: K
+                      "no": 1
+                    structures:
+                    - "no": 1
+                      peds:
+                        grade:
+                          description: Massive
+                          value: V
+                    - "no": 2
+                  - horizonID: 323593
+                    horizonNo: 2
+                    lowerDepth: 50
+                    materialNo: 1
+                    texture:
+                      description: Clay loam
+                      value: CL
+                    upperDepth: 25
+                    boundaryDistinctiveness:
+                      description: Clear
+                      value: C
+                    carbonate:
+                      effervescence:
+                        description: Moderately calcareous
+                        value: M
+                    coarseFragments:
+                    - abundance:
+                        description: common, 10-20%
+                        value: "3"
+                      lithology:
+                        description: Shale
+                        value: SH
+                      fragmentSize:
+                        description: Medium gravelly, 6-20mm
+                        value: "2"
+                      "no": 1
+                    colours:
+                    - munsell:
+                        description: Brown
+                        value: 7.5YR43
+                        value2: "4"
+                        value3: "3"
+                      "no": 1
+                    consistence:
+                      strength:
+                      - description: Weak
+                        value: "2"
+                    fieldPh: []
+                    label:
+                      description: Subsoil; 1st layer
+                      value: B1
+                    mottles:
+                    - "no": 1
+                    pans: []
+                    roots: []
+                    segregations:
+                    - abundance:
+                        description: Few, 2-10%
+                        value: "2"
+                      form:
+                        description: Fragments
+                        value: F
+                      nature:
+                        description: Calcareous
+                        value: K
+                      "no": 1
+                    structures:
+                    - "no": 1
+                      peds:
+                        grade:
+                          description: Massive
+                          value: V
+                    - "no": 2
+                  - horizonID: 323594
+                    horizonNo: 3
+                    lowerDepth: 65
+                    materialNo: 1
+                    texture:
+                      description: Light clay
+                      value: LC
+                    upperDepth: 50
+                    boundaryDistinctiveness:
+                      description: Abrupt
+                      value: A
+                    carbonate:
+                      effervescence:
+                        description: Highly calcareous
+                        value: H
+                    coarseFragments:
+                    - abundance:
+                        description: few, 2-10%
+                        value: "2"
+                      lithology:
+                        description: Shale
+                        value: SH
+                      fragmentSize:
+                        description: Medium gravelly, 6-20mm
+                        value: "2"
+                      "no": 1
+                    colours:
+                    - munsell:
+                        description: Dark brown
+                        value: 7.5YR34
+                        value2: "3"
+                        value3: "4"
+                      "no": 1
+                    consistence:
+                      strength:
+                      - description: Very firm
+                        value: "4"
+                    fieldPh:
+                    - 8.5
+                    label:
+                      description: Subsoil; 2nd layer
+                      value: B2
+                    mottles:
+                    - "no": 1
+                    pans: []
+                    roots: []
+                    segregations:
+                    - abundance:
+                        description: Few, 2-10%
+                        value: "2"
+                      form:
+                        description: Fragments
+                        value: F
+                      nature:
+                        description: Calcareous
+                        value: K
+                      "no": 1
+                    structures:
+                    - "no": 1
+                      peds:
+                        grade:
+                          description: Massive
+                          value: V
+                    - "no": 2
+                    suffix:
+                      description: Accumulations of carbonates commonly calcium carbonate
+                        (e.g. B2k)
+                      value: k
+                  - horizonID: 323595
+                    horizonNo: 4
+                    lowerDepth: 70
+                    materialNo: 1
+                    upperDepth: 65
+                    carbonate:
+                      effervescence:
+                        description: Highly calcareous
+                        value: H
+                    coarseFragments:
+                    - abundance:
+                        description: abundant, 50-90%
+                        value: "5"
+                      lithology:
+                        description: Shale
+                        value: SH
+                      fragmentSize:
+                        description: Stony, 200-600mm
+                        value: "5"
+                      "no": 1
+                    colours: []
+                    consistence:
+                      strength:
+                      - description: Very firm
+                        value: "4"
+                    fieldPh:
+                    - 9
+                    label:
+                      description: C Horizons are consolidated or unconsolidated materials
+                        below the solum (Ab profile) which are little affected by
+                        soil forming processes. These may contain sedimentary laminae
+                        or ghost rock structure in the case of saprolite or partially
+                        weathered rock. Alternatively C horizons can be described
+                        as Substrate.
+                      value: C
+                    mottles:
+                    - "no": 1
+                    pans:
+                    - cementation:
+                        description: Weakly cemented
+                        value: "1"
+                      "no": 1
+                      panType:
+                        description: Calcrete
+                        value: K
+                      structure:
+                        description: Massive
+                        value: V
+                    roots: []
+                    segregations: []
+                    structures:
+                    - "no": 1
+                    - "no": 2
+      summary: SOILS Observations Horizons
+      description: SOILS Observations Horizons
+  /soils/observations/98071/labresults:
+    get:
+      servers:
+      - url: https://apps.dev.env.sa.gov.au/SoilsCSLWS2
+        description: ""
+      parameters:
+      - name: observationID
+        description: observationID
+        schema: {}
+        in: query
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: "[\r\n    {\r\n        \"horizonID\": 323592,\r\n        \"\
+            horizonNo\": 1,\r\n        \"lowerDepth\": 25.0,\r\n        \"materialNo\"\
+            : 1,\r\n        \"texture\": {\r\n            \"description\": \"Fine\
+            \ sandy loam\",\r\n            \"value\": \"FSL\"\r\n        },\r\n  \
+            \      \"upperDepth\": 0.0,\r\n        \"samples\": [\r\n            {\r\
+            \n                \"labResults\": [],\r\n                \"lowerDepth\"\
+            : 25.0,\r\n                \"sampleId\": 249783,\r\n                \"\
+            sampleNo\": 1,\r\n                \"upperDepth\": 0.0\r\n            }\r\
+            \n        ]\r\n    },\r\n    {\r\n        \"horizonID\": 323593,\r\n \
+            \       \"horizonNo\": 2,\r\n        \"lowerDepth\": 50.0,\r\n       \
+            \ \"materialNo\": 1,\r\n        \"texture\": {\r\n            \"description\"\
+            : \"Clay loam\",\r\n            \"value\": \"CL\"\r\n        },\r\n  \
+            \      \"upperDepth\": 25.0,\r\n        \"samples\": [\r\n           \
+            \ {\r\n                \"labResults\": [],\r\n                \"lowerDepth\"\
+            : 50.0,\r\n                \"sampleId\": 249784,\r\n                \"\
+            sampleNo\": 1,\r\n                \"upperDepth\": 25.0\r\n           \
+            \ }\r\n        ]\r\n    },\r\n    {\r\n        \"horizonID\": 323594,\r\
+            \n        \"horizonNo\": 3,\r\n        \"lowerDepth\": 65.0,\r\n     \
+            \   \"materialNo\": 1,\r\n        \"texture\": {\r\n            \"description\"\
+            : \"Light clay\",\r\n            \"value\": \"LC\"\r\n        },\r\n \
+            \       \"upperDepth\": 50.0,\r\n        \"samples\": [\r\n          \
+            \  {\r\n                \"labResults\": [],\r\n                \"lowerDepth\"\
+            : 65.0,\r\n                \"sampleId\": 249785,\r\n                \"\
+            sampleNo\": 1,\r\n                \"upperDepth\": 50.0\r\n           \
+            \ }\r\n        ]\r\n    },\r\n    {\r\n        \"horizonID\": 323595,\r\
+            \n        \"horizonNo\": 4,\r\n        \"lowerDepth\": 70.0,\r\n     \
+            \   \"materialNo\": 1,\r\n        \"upperDepth\": 65.0,\r\n        \"\
+            samples\": [\r\n            {\r\n                \"labResults\": [],\r\
+            \n                \"lowerDepth\": 70.0,\r\n                \"sampleId\"\
+            : 249786,\r\n                \"sampleNo\": 1,\r\n                \"upperDepth\"\
+            : 65.0\r\n            }\r\n        ]\r\n    }\r\n]"
+      summary: Soils Observations Lab Results
+      description: Soils Observations Lab Results
+components: {}

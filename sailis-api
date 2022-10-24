@@ -1,0 +1,573 @@
+---
+openapi: 3.0.0
+info:
+  title: SAILIS-API
+  version: 1.0.0
+  description: SAILIS API
+servers:
+- url: http://localhost:8080
+paths:
+  /sailisapi-0.1.0/api/titles/{reference}:
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/title'
+              titleDTO:
+                area: 0
+                edition: 1
+                editionCreateDateTime: 0001-01-01T00:00:00
+                editionSystemNumber: 111705418
+                estateType: P
+                folio: 151
+                landDescription: ALLOTMENT (ROAD) ROAD DEPOSITED PLAN 1452, HUNDRED
+                  OF YATALA
+                prefix: CT
+                status: A
+                systemNumber: 32232
+                titleCreateDateTime: 0001-01-01T00:00:00
+                volume: 1003
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/titles/32232
+  /sailisapi-0.1.0/api/titles/{prefix}/{folio}/{volume}:
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/title'
+              titleDTO:
+                area: 969000000
+                areaType: A
+                edition: 1
+                editionCreateDateTime: 0001-01-01T00:00:00
+                editionSystemNumber: 111703134
+                estateType: C
+                folio: 7
+                landDescription: BLOCK 956, OUT OF HUNDREDS (BARTON), BLOCK 956, OUT
+                  OF HUNDREDS (TARCOOLA), IN THE AREA NAMED MULGATHING
+                leaseExpiryDate: 2041-05-31
+                leaseNumber: "002158"
+                leaseStartDate: 1990-03-07
+                leaseType: PE
+                prefix: CL
+                status: A
+                systemNumber: 4127
+                titleCreateDateTime: 0001-01-01T00:00:00
+                volume: 1170
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/titles/CL/7/1170
+  /sailisapi-0.1.0/api/parcels/{id}:
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/parcel'
+              titleDTO:
+                area: 969000000
+                areaType: A
+                edition: 1
+                editionCreateDateTime: 0001-01-01T00:00:00
+                editionSystemNumber: 111703134
+                estateType: C
+                folio: 7
+                landDescription: BLOCK 956, OUT OF HUNDREDS (BARTON), BLOCK 956, OUT
+                  OF HUNDREDS (TARCOOLA), IN THE AREA NAMED MULGATHING
+                leaseExpiryDate: 2041-05-31
+                leaseNumber: "002158"
+                leaseStartDate: 1990-03-07
+                leaseType: PE
+                prefix: CL
+                status: A
+                systemNumber: 4127
+                titleCreateDateTime: 0001-01-01T00:00:00
+                volume: 1170
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+        "404":
+          description: Parcel ID not found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/parcels/506856575
+  /sailisapi-0.1.0/api/parcels/{prefix}/{folio}/{volume}:
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/parceltitle'
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/parcels/CL/7/1170
+  /sailisapi-0.1.0/api/valuation/{parcelId}:
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/valuation'
+              valuationDTO:
+                parcelId: 1018012
+                parcelNumber: 9
+                valuationSummary:
+                  capitalValue: 100
+                  effectiveFromDate: 1978-07-01
+                  ownershipGroup: "90000812"
+                  siteValue: 100
+                  systemNumber: 36494
+                  valuationNumber: "6819619001"
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/valuation/1018012
+  /sailisapi-0.1.0/api/names/{ownership}:
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ownershipName'
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/names/00001492
+    parameters:
+    - name: ownership
+      description: ownership group id
+      schema:
+        type: string
+      in: path
+      required: true
+  /sailisapi-0.1.0/api/names/search/{partialNameString}:
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ownershipName'
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/names/search/damien gerard
+    parameters:
+    - name: partialNameString
+      description: Ownership group name
+      schema:
+        type: string
+      in: path
+      required: true
+  /sailisapi-0.1.0/api/ownership/{id}:
+    get:
+      tags:
+      - default
+      parameters:
+      - name: ownershipId
+        description: ownershipId
+        schema:
+          type: integer
+        in: query
+        required: false
+      - name: groupId
+        description: groupId
+        schema:
+          type: integer
+        in: query
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ownershipGroup'
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/ownership/90013963
+    parameters:
+    - name: id
+      schema:
+        type: integer
+      in: path
+      required: true
+  /sailisapi-0.1.0/api/ownershipgroup:
+    get:
+      tags:
+      - default
+      parameters:
+      - name: id
+        description: ""
+        schema:
+          type: integer
+        in: query
+        required: false
+      - name: groupid
+        description: ""
+        schema:
+          type: integer
+        in: query
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ownershipGroup'
+          description: Successful response
+        "400":
+          description: Bad Request - atleast one query parameter required
+        "404":
+          description: No results
+      summary: http://localhost:8080/sailisapi-0.1.0/api/ownership/ownershipGroupId/90013963
+components:
+  schemas:
+    parceltitle:
+      title: Root Type for parceltitle
+      description: ""
+      type: object
+      properties:
+        areaTotal:
+          format: int32
+          type: integer
+        areaType:
+          type: string
+        hundredName:
+          type: string
+        hundredSystemKey:
+          format: int32
+          type: integer
+        hundredType:
+          type: string
+        isPartialParcel:
+          type: boolean
+        order:
+          format: int32
+          type: integer
+        parcelNumber:
+          type: string
+        parcelSystemKey:
+          format: int32
+          type: integer
+        parcelType:
+          type: string
+        planNumber:
+          type: string
+        planSystemKey:
+          format: int32
+          type: integer
+        planType:
+          type: string
+        titleSystemKey:
+          format: int32
+          type: integer
+      example:
+        areaTotal: 969000000
+        areaType: A
+        hundredName: OH(BARTON)
+        hundredSystemKey: 452
+        hundredType: H
+        isPartialParcel: false
+        order: 1
+        parcelNumber: "956"
+        parcelSystemKey: 1018011
+        parcelType: BL
+        planNumber: "833500"
+        planSystemKey: 79956
+        planType: H
+        titleSystemKey: 4127
+    parcel:
+      title: Root Type for parcel
+      description: ""
+      type: object
+      properties:
+        areaID:
+          format: int32
+          type: integer
+        parcelNumber:
+          type: string
+        parcelType:
+          type: string
+        plan:
+          $ref: '#/components/schemas/plan'
+          properties:
+            certified:
+              type: string
+            crossPlan:
+              type: string
+            planNumber:
+              type: string
+            planType:
+              type: string
+            systemNumber:
+              format: int32
+              type: integer
+        planNumber:
+          type: string
+        planType:
+          type: string
+        systemNumber:
+          format: int32
+          type: integer
+        toDate:
+          format: date
+          type: string
+      example:
+        areaID: 0
+        parcelNumber: "956"
+        parcelType: BL
+        plan:
+          certified: "N"
+          crossPlan: "N"
+          planNumber: "833600"
+          planType: H
+          systemNumber: 79957
+        planNumber: "833600"
+        planType: H
+        systemNumber: 1018012
+        toDate: 9999-12-31
+    plan:
+      title: Root Type for plan
+      description: ""
+      type: object
+      properties:
+        certified:
+          type: string
+        crossPlan:
+          type: string
+        planNumber:
+          type: string
+        planType:
+          type: string
+        systemNumber:
+          format: int32
+          type: integer
+      example:
+        certified: "N"
+        crossPlan: "N"
+        planNumber: "833600"
+        planType: H
+        systemNumber: 79957
+    valuation:
+      title: Root Type for valuation
+      description: ""
+      required: []
+      type: object
+      properties:
+        parcelId:
+          format: int32
+          type: integer
+        parcelNumber:
+          format: int32
+          type: integer
+        valuationSummary:
+          $ref: '#/components/schemas/valuationSummary'
+          properties:
+            capitalValue:
+              format: int32
+              type: integer
+            effectiveFromDate:
+              format: date
+              type: string
+            ownershipGroup:
+              format: date
+              type: string
+            siteValue:
+              format: int32
+              type: integer
+            systemNumber:
+              format: int32
+              type: integer
+            valuationNumber:
+              type: string
+      example:
+        parcelId: 1018012
+        parcelNumber: 9
+        valuationSummary:
+          capitalValue: 100
+          effectiveFromDate: 1978-07-01
+          ownershipGroup: "90000812"
+          siteValue: 100
+          systemNumber: 36494
+          valuationNumber: "6819619001"
+    valuationSummary:
+      title: Root Type for valuationSummary
+      description: ""
+      type: object
+      properties:
+        capitalValue:
+          format: int32
+          type: integer
+        effectiveFromDate:
+          format: date
+          type: string
+        ownershipGroup:
+          format: date
+          type: string
+        siteValue:
+          format: int32
+          type: integer
+        systemNumber:
+          format: int32
+          type: integer
+        valuationNumber:
+          type: string
+      example:
+        capitalValue: 100
+        effectiveFromDate: 1978-07-01
+        ownershipGroup: "90000812"
+        siteValue: 100
+        systemNumber: 36494
+        valuationNumber: "6819619001"
+    title:
+      title: Root Type for title
+      description: ""
+      type: object
+      properties:
+        area:
+          format: int32
+          type: integer
+        edition:
+          format: int32
+          type: integer
+        editionCreateDateTime:
+          format: date-time
+          type: string
+        editionSystemNumber:
+          format: int32
+          type: integer
+        estateType:
+          type: string
+        folio:
+          format: int32
+          type: integer
+        landDescription:
+          type: string
+        prefix:
+          type: string
+        status:
+          type: string
+        systemNumber:
+          format: int32
+          type: integer
+        titleCreateDateTime:
+          format: date-time
+          type: string
+        volume:
+          format: int32
+          type: integer
+      example:
+        area: 0
+        edition: 1
+        editionCreateDateTime: 0001-01-01T00:00:00
+        editionSystemNumber: 111705418
+        estateType: P
+        folio: 151
+        landDescription: ALLOTMENT (ROAD) ROAD DEPOSITED PLAN 1452, HUNDRED OF YATALA
+        prefix: CT
+        status: A
+        systemNumber: 32232
+        titleCreateDateTime: 0001-01-01T00:00:00
+        volume: 1003
+    ownershipName:
+      title: Root Type for ownershipName
+      description: ""
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        ownershipGroupId:
+          type: string
+        sequence:
+          format: int32
+          type: integer
+        systemNumber:
+          format: int32
+          type: integer
+      example:
+        firstname: ERIC JOHN
+        lastname: ABBOTT
+        ownershipGroupId: "00001492"
+        sequence: 1
+        systemNumber: 170597153
+    ownershipGroup:
+      title: Root Type for ownershipGroup
+      description: ""
+      type: object
+      properties:
+        abbreviatedName:
+          type: string
+        addressLineFive:
+          type: string
+        addressLineFour:
+          type: string
+        addressLineOne:
+          type: string
+        addressLineThree:
+          type: string
+        addressLineTwo:
+          type: string
+        ownershipGroupId:
+          type: string
+        systemNumber:
+          format: int32
+          type: integer
+        type:
+          type: string
+      example:
+        abbreviatedName: MINISTER FOR INDUSTRY, INNOVATION
+        addressLineFive: N/A
+        addressLineFour: N/A
+        addressLineOne: GPO BOX 320
+        addressLineThree: N/A
+        addressLineTwo: ADELAIDE SA 5001
+        ownershipGroupId: "90013963"
+        systemNumber: 9001396
+        type: G

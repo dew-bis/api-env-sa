@@ -7,108 +7,6 @@ info:
 servers:
 - url: http://localhost:8080
 paths:
-  /sailisapi-0.1.0/api/titles/{reference}:
-    get:
-      tags:
-      - default
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/title'
-              titleDTO:
-                area: 0
-                edition: 1
-                editionCreateDateTime: 0001-01-01T00:00:00
-                editionSystemNumber: 111705418
-                estateType: P
-                folio: 151
-                landDescription: ALLOTMENT (ROAD) ROAD DEPOSITED PLAN 1452, HUNDRED
-                  OF YATALA
-                prefix: CT
-                status: A
-                systemNumber: 32232
-                titleCreateDateTime: 0001-01-01T00:00:00
-                volume: 1003
-          description: Successful response
-        "400":
-          description: Bad Request
-        "402":
-          description: no records found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/titles/32232
-  /sailisapi-0.1.0/api/titles/{prefix}/{folio}/{volume}:
-    get:
-      tags:
-      - default
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/title'
-              titleDTO:
-                area: 969000000
-                areaType: A
-                edition: 1
-                editionCreateDateTime: 0001-01-01T00:00:00
-                editionSystemNumber: 111703134
-                estateType: C
-                folio: 7
-                landDescription: BLOCK 956, OUT OF HUNDREDS (BARTON), BLOCK 956, OUT
-                  OF HUNDREDS (TARCOOLA), IN THE AREA NAMED MULGATHING
-                leaseExpiryDate: 2041-05-31
-                leaseNumber: "002158"
-                leaseStartDate: 1990-03-07
-                leaseType: PE
-                prefix: CL
-                status: A
-                systemNumber: 4127
-                titleCreateDateTime: 0001-01-01T00:00:00
-                volume: 1170
-          description: Successful response
-        "400":
-          description: Bad Request
-        "402":
-          description: no records found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/titles/CL/7/1170
-  /sailisapi-0.1.0/api/parcels/{id}:
-    get:
-      tags:
-      - default
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/parcel'
-              titleDTO:
-                area: 969000000
-                areaType: A
-                edition: 1
-                editionCreateDateTime: 0001-01-01T00:00:00
-                editionSystemNumber: 111703134
-                estateType: C
-                folio: 7
-                landDescription: BLOCK 956, OUT OF HUNDREDS (BARTON), BLOCK 956, OUT
-                  OF HUNDREDS (TARCOOLA), IN THE AREA NAMED MULGATHING
-                leaseExpiryDate: 2041-05-31
-                leaseNumber: "002158"
-                leaseStartDate: 1990-03-07
-                leaseType: PE
-                prefix: CL
-                status: A
-                systemNumber: 4127
-                titleCreateDateTime: 0001-01-01T00:00:00
-                volume: 1170
-          description: Successful response
-        "400":
-          description: Bad Request
-        "402":
-          description: no records found
-        "404":
-          description: Parcel ID not found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/parcels/506856575
   /sailisapi-0.1.0/api/parcels/{prefix}/{folio}/{volume}:
     get:
       tags:
@@ -127,32 +25,22 @@ paths:
         "402":
           description: no records found
       summary: http://localhost:8080/sailisapi-0.1.0/api/parcels/CL/7/1170
-  /sailisapi-0.1.0/api/valuation/{parcelId}:
-    get:
-      tags:
-      - default
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/valuation'
-              valuationDTO:
-                parcelId: 1018012
-                parcelNumber: 9
-                valuationSummary:
-                  capitalValue: 100
-                  effectiveFromDate: 1978-07-01
-                  ownershipGroup: "90000812"
-                  siteValue: 100
-                  systemNumber: 36494
-                  valuationNumber: "6819619001"
-          description: Successful response
-        "400":
-          description: Bad Request
-        "402":
-          description: no records found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/valuation/1018012
+    parameters:
+    - name: prefix
+      schema:
+        type: string
+      in: path
+      required: true
+    - name: folio
+      schema:
+        type: integer
+      in: path
+      required: true
+    - name: volume
+      schema:
+        type: integer
+      in: path
+      required: true
   /sailisapi-0.1.0/api/names/{ownership}:
     get:
       tags:
@@ -203,40 +91,6 @@ paths:
         type: string
       in: path
       required: true
-  /sailisapi-0.1.0/api/ownership/{id}:
-    get:
-      tags:
-      - default
-      parameters:
-      - name: ownershipId
-        description: ownershipId
-        schema:
-          type: integer
-        in: query
-        required: false
-      - name: groupId
-        description: groupId
-        schema:
-          type: integer
-        in: query
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ownershipGroup'
-          description: Successful response
-        "400":
-          description: Bad Request
-        "402":
-          description: no records found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/ownership/90013963
-    parameters:
-    - name: id
-      schema:
-        type: integer
-      in: path
-      required: true
   /sailisapi-0.1.0/api/ownershipgroup:
     get:
       tags:
@@ -265,6 +119,106 @@ paths:
         "404":
           description: No results
       summary: http://localhost:8080/sailisapi-0.1.0/api/ownership/ownershipGroupId/90013963
+  /sailisapi-0.1.0/api/parcels/{id}:
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/parcel'
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+        "404":
+          description: Parcel ID not found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/parcels/506856575
+    parameters:
+    - name: id
+      schema:
+        type: integer
+      in: path
+      required: true
+  /sailisapi-0.1.0/api/titles/{prefix}/{folio}/{volume}:
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/title'
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/titles/CL/7/1170
+    parameters:
+    - name: prefix
+      schema:
+        type: string
+      in: path
+      required: true
+    - name: folio
+      schema:
+        type: integer
+      in: path
+      required: true
+    - name: volume
+      schema:
+        type: integer
+      in: path
+      required: true
+  /sailisapi-0.1.0/api/titles/{reference}:
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/title'
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/titles/32232
+    parameters:
+    - name: reference
+      schema:
+        type: integer
+      in: path
+      required: true
+  /sailisapi-0.1.0/api/valuation/{parcelId}:
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/valuation'
+          description: Successful response
+        "400":
+          description: Bad Request
+        "402":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/valuation/1018012
+    parameters:
+    - name: parcelId
+      schema:
+        type: integer
+      in: path
+      required: true
 components:
   schemas:
     parceltitle:

@@ -3,11 +3,60 @@ openapi: 3.0.0
 info:
   title: SAILIS-API
   version: 1.0.0
-  description: SAILIS API
+  description: API to retrieve SAILIS data
 servers:
 - url: http://localhost:8080
 paths:
-  /sailisapi-0.1.0/api/parcels/{prefix}/{folio}/{volume}:
+  /sailisapi-0.1.0/api/valuation/{parcelId}:
+    summary: Retrieve valuation data associated with a parcel
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/valuation'
+          description: Successful response
+        "400":
+          description: Bad Request - please provide a valid parcel Id
+        "404":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/valuation/1018012
+    parameters:
+    - name: parcelId
+      schema:
+        format: int64
+        type: integer
+      in: path
+      required: true
+  /sailisapi-0.1.0/api/parcels/{id}:
+    summary: Retrieve parcel details associated with system number (id)
+    get:
+      tags:
+      - default
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/parcel'
+          description: Successful response
+        "400":
+          description: Bad Request - please provide a valid id (system number)
+        "404":
+          description: no records found
+      summary: http://localhost:8080/sailisapi-0.1.0/api/parcels/id/506856575
+    parameters:
+    - name: id
+      description: id (system number)
+      schema:
+        type: integer
+      in: path
+      required: true
+  /sailisapi-0.1.0/api/parcel-titles/{prefix}/{folio}/{volume}:
+    summary: Retrieve parcel title details by title Prefix, Folio and Volume
     get:
       tags:
       - default
@@ -21,10 +70,11 @@ paths:
                   $ref: '#/components/schemas/parceltitle'
           description: Successful response
         "400":
-          description: Bad Request
-        "402":
+          description: Bad Request - please provide a valid combination of prefix,
+            polio and volume
+        "404":
           description: no records found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/parcels/CL/7/1170
+      summary: http://localhost:8080/sailisapi-0.1.0/api/parcel-titles/CL/7/1170
     parameters:
     - name: prefix
       schema:
@@ -41,7 +91,9 @@ paths:
         type: integer
       in: path
       required: true
-  /sailisapi-0.1.0/api/names/{ownership}:
+  /sailisapi-0.1.0/api/titles:
+    summary: Retrieve title details by title id (system number) or combination of  title
+      Prefix, Folio and Volume
     get:
       tags:
       - default
@@ -50,23 +102,41 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ownershipName'
+                $ref: '#/components/schemas/title'
           description: Successful response
         "400":
-          description: Bad Request
-        "402":
+          description: Bad Request - please provide a valid Id (system number) or
+            combination of prefix, folio and volume
+        "404":
           description: no records found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/names/00001492
+      summary: http://localhost:8080/sailisapi-0.1.0/api/titles
     parameters:
-    - name: ownership
-      description: ownership group id
+    - name: id
+      description: Unique system number
+      schema:
+        format: int64
+        type: integer
+      in: query
+    - name: prefix
+      description: ""
       schema:
         type: string
-      in: path
-      required: true
-  /sailisapi-0.1.0/api/names/search/{partialNameString}:
+      in: query
+    - name: volume
+      description: ""
+      schema:
+        format: int64
+        type: integer
+      in: query
+    - name: folio
+      description: ""
+      schema:
+        format: int64
+        type: integer
+      in: query
+  /sailisapi-0.1.0/api/ownership/names:
+    summary: Retrieve full names for all owners participating in an ownership based
+      on ownership group Id or name
     get:
       tags:
       - default
@@ -80,33 +150,35 @@ paths:
                   $ref: '#/components/schemas/ownershipName'
           description: Successful response
         "400":
-          description: Bad Request
-        "402":
+          description: Bad Request - please provide a ownershipGrouId or name
+        "404":
           description: no records found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/names/search/damien gerard
+      summary: http://localhost:8080//sailisapi-0.1.0/api/ownership/names
     parameters:
+    - name: ownershipGroupId
+      description: ownershipGroupId
+      schema:
+        type: string
+      in: query
     - name: partialNameString
-      description: Ownership group name
+      description: partial or full name
       schema:
         type: string
-      in: path
-      required: true
-  /sailisapi-0.1.0/api/ownershipgroup:
+      in: query
+      required: false
+  /sailisapi-0.1.0/api/ownership/group:
+    summary: Retrieve ownership group details by Id (system number) or ownership group
+      Id
     get:
       tags:
       - default
       parameters:
       - name: id
-        description: ""
+        description: Unique system number
         schema:
           type: integer
         in: query
         required: false
-      - name: groupid
-        description: ""
-        schema:
-          type: integer
-        in: query
       responses:
         "200":
           content:
@@ -115,110 +187,23 @@ paths:
                 $ref: '#/components/schemas/ownershipGroup'
           description: Successful response
         "400":
-          description: Bad Request - atleast one query parameter required
+          description: Bad Request - please provide a valid Id or ownershipGroupId
         "404":
-          description: No results
-      summary: http://localhost:8080/sailisapi-0.1.0/api/ownership/ownershipGroupId/90013963
-  /sailisapi-0.1.0/api/parcels/{id}:
-    get:
-      tags:
-      - default
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/parcel'
-          description: Successful response
-        "400":
-          description: Bad Request
-        "402":
           description: no records found
-        "404":
-          description: Parcel ID not found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/parcels/506856575
+      summary: http://localhost:8080/sailisapi-0.1.0/api/ownership/group
     parameters:
     - name: id
+      description: Unique system number
       schema:
+        format: int64
         type: integer
-      in: path
-      required: true
-  /sailisapi-0.1.0/api/titles/{prefix}/{folio}/{volume}:
-    get:
-      tags:
-      - default
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/title'
-          description: Successful response
-        "400":
-          description: Bad Request
-        "402":
-          description: no records found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/titles/CL/7/1170
-    parameters:
-    - name: prefix
+      in: query
+    - name: ownershipGroupId
+      description: ownershipGroupId
       schema:
         type: string
-      in: path
-      required: true
-    - name: folio
-      schema:
-        type: integer
-      in: path
-      required: true
-    - name: volume
-      schema:
-        type: integer
-      in: path
-      required: true
-  /sailisapi-0.1.0/api/titles/{reference}:
-    get:
-      tags:
-      - default
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/title'
-          description: Successful response
-        "400":
-          description: Bad Request
-        "402":
-          description: no records found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/titles/32232
-    parameters:
-    - name: reference
-      schema:
-        type: integer
-      in: path
-      required: true
-  /sailisapi-0.1.0/api/valuation/{parcelId}:
-    get:
-      tags:
-      - default
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/valuation'
-          description: Successful response
-        "400":
-          description: Bad Request
-        "402":
-          description: no records found
-      summary: http://localhost:8080/sailisapi-0.1.0/api/valuation/1018012
-    parameters:
-    - name: parcelId
-      schema:
-        type: integer
-      in: path
-      required: true
+      in: query
+      required: false
 components:
   schemas:
     parceltitle:

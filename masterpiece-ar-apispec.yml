@@ -20,7 +20,7 @@ paths:
             schema:
               $ref: '#/components/schemas/TokenRequest'
       tags:
-      - Auth
+      - Authentication
       parameters:
       - name: api-version
         description: The requested API version
@@ -229,6 +229,106 @@ paths:
                 $ref: '#/components/schemas/TransactionResponse'
           description: Success response for Payment Collection transaction
       summary: Post a payment collection request to masterpiece
+  /api/poscollections:
+    post:
+      requestBody:
+        description: This is POS collection request contract.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PosCollectionsRequest'
+      tags:
+      - POS Collections
+      parameters:
+      - name: api-version
+        description: The requested API version
+        schema:
+          default: "1.0"
+        in: header
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+          description: Success response for POS Collection transaction
+      summary: Post a POS Shift to Masterpiece
+  /api/invoices/outstanding:
+    get:
+      parameters:
+      - name: customerId
+        description: customerId
+        schema:
+          type: string
+        in: query
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvoiceDetail'
+          description: OK
+      summary: Get outstanding invoices
+      description: Get outstanding invoices
+  /api/customers:
+    get:
+      parameters:
+      - name: longnamelike
+        description: Long name like
+        schema:
+          type: string
+        in: query
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/customer'
+          description: OK
+      summary: Get requested customers in the customer group applicable to the requesting
+        client
+      description: Get requested customers in the customer group applicable to the
+        requesting client
+  /api/invoices:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvoiceBatch'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+          description: Batch data accepted
+      description: Post a batch of invoices
+  /api/customers/{mpcustomerId}:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+          description: OK
+        "404":
+          description: Not found
+    parameters:
+    - name: mpcustomerId
+      description: Masterpiece Customer ID
+      schema:
+        type: string
+      in: path
+      required: true
 components:
   schemas:
     TokenRequest:
@@ -248,6 +348,15 @@ components:
         token:
           nullable: true
           type: string
+      additionalProperties: false
+    lineItemText:
+      type: object
+      properties:
+        textLine:
+          nullable: true
+          type: array
+          items:
+            type: string
       additionalProperties: false
     LineItem:
       required:
@@ -281,6 +390,10 @@ components:
         totalTax:
           format: double
           type: number
+        lineItemText:
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/lineItemText'
       additionalProperties: false
     PurchasePaymentDetail:
       required:
@@ -316,6 +429,9 @@ components:
           format: date-time
           type: string
         invoiceId:
+          type: string
+        xReference:
+          nullable: true
           type: string
         purchaseNetAmount:
           format: double
@@ -488,6 +604,178 @@ components:
           items:
             $ref: '#/components/schemas/RemittanceDetail'
       additionalProperties: false
+    InvoiceDetail:
+      required:
+      - customerId
+      - dueDate
+      - invoiceId
+      - invoiceNetAmount
+      - invoiceTaxAmount
+      - invoiceTotalAmount
+      - lineItems
+      - transactionDate
+      type: object
+      properties:
+        customerId:
+          type: string
+        transactionDate:
+          format: date-time
+          type: string
+        dueDate:
+          format: date-time
+          type: string
+        invoiceId:
+          type: string
+        applicableInvoiceID:
+          nullable: true
+          type: string
+        invoiceNetAmount:
+          format: double
+          type: number
+        invoiceTaxAmount:
+          format: double
+          type: number
+        invoiceTotalAmount:
+          format: double
+          type: number
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+        lineItemFooter:
+          nullable: true
+          type: array
+          items:
+            type: string
+        isCreditMemo:
+          type: boolean
+      additionalProperties: false
+    PurchasePaymentCashDetail:
+      required:
+      - paymentAmount
+      - paymentInvoiceCustomer
+      type: object
+      properties:
+        paymentInvoiceCustomer:
+          type: string
+        invoiceNumber:
+          nullable: true
+          type: string
+        paymentAmount:
+          format: double
+          type: number
+        paymentReference:
+          nullable: true
+          type: string
+        transactionType:
+          nullable: true
+          type: string
+      additionalProperties: false
+    InvoicePaymentDetail:
+      required:
+      - customerId
+      - dueDate
+      - payments
+      - remmittanceId
+      - totalRemittanceAmount
+      - transactionDate
+      type: object
+      properties:
+        customerId:
+          type: string
+        transactionDate:
+          format: date-time
+          type: string
+        dueDate:
+          format: date-time
+          type: string
+        remmittanceId:
+          type: string
+        totalRemittanceAmount:
+          format: double
+          type: number
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchasePaymentCashDetail'
+      additionalProperties: false
+    PosCollectionsRequest:
+      required:
+      - clientId
+      - transactionGroupDate
+      type: object
+      properties:
+        transactionGroupDate:
+          format: date-time
+          type: string
+        location:
+          format: int32
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        batchId:
+          format: int32
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+        invoiceDetails:
+          nullable: true
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceDetail'
+        purchaseDetails:
+          nullable: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchaseDetail'
+        remittances:
+          nullable: true
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoicePaymentDetail'
+        clientId:
+          type: string
+      additionalProperties: false
+    InvoiceBatch:
+      description: InvoiceBatch
+      required:
+      - clientId
+      - invoices
+      - transactionGroupDate
+      type: object
+      properties:
+        transactionGroupDate:
+          format: date-time
+          description: Its a transaction processing date / batch date for masterpiece
+          type: string
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceDetail'
+        clientId:
+          type: string
+      additionalProperties: false
+    customer:
+      description: customer details
+      required:
+      - longname
+      - address
+      - phonenumber
+      - emailaddress
+      type: object
+      properties:
+        longname:
+          description: Customer long name
+          type: string
+        address:
+          description: address
+          type: string
+        phonenumber:
+          description: Phone number
+          type: string
+        emailaddress:
+          description: email address
+          type: string
   securitySchemes:
     Bearer:
       type: apiKey
@@ -497,14 +785,3 @@ components:
       in: header
 security:
 - Bearer: []
-tags:
-- name: Cash Transactions
-  description: ""
-- name: Invoice Numbers
-  description: ""
-- name: Online Payments
-  description: ""
-- name: Payment Collections
-  description: ""
-- name: Auth
-  description: ""

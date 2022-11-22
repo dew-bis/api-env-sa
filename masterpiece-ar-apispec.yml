@@ -255,6 +255,8 @@ paths:
       summary: Post a POS Shift to Masterpiece
   /api/invoices/outstanding:
     get:
+      tags:
+      - Invoices
       parameters:
       - name: customerId
         description: customerId
@@ -275,6 +277,8 @@ paths:
       description: Get outstanding invoices
   /api/customers:
     get:
+      tags:
+      - Customer
       parameters:
       - name: longnamelike
         description: Long name like
@@ -303,6 +307,8 @@ paths:
             schema:
               $ref: '#/components/schemas/InvoiceBatch'
         required: true
+      tags:
+      - Invoices
       responses:
         "201":
           content:
@@ -313,6 +319,8 @@ paths:
       description: Post a batch of invoices
   /api/customers/{mpcustomerId}:
     get:
+      tags:
+      - Customer
       responses:
         "200":
           content:
@@ -322,6 +330,8 @@ paths:
           description: OK
         "404":
           description: Not found
+      summary: Get Customer details
+      description: Get Customer details
     parameters:
     - name: mpcustomerId
       description: Masterpiece Customer ID

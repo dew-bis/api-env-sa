@@ -1282,6 +1282,7 @@ components:
       required:
       - methodOfPlacement
       - fromInMeters
+      - constructionType
       type: object
       properties:
         methodOfPlacement:
@@ -1322,6 +1323,92 @@ components:
           type: number
         comments:
           description: Comments
+          type: string
+        constructionType:
+          description: "A unique code for a type of consturction (eg casing, cementing)\n\
+            \n`CEN` - Centraliser\t\n`UKN` - Unknown completion\t\n`GCM` - Gravity\
+            \ Fed Cementing\t\n`GRT` - Grout\t\n`SEL` - Seal\t\n`BKF` - Backfilled\t\
+            \n`GSP` - Gavel or Sand Packing\t\n`WDV` - Well Development\t\n`WEL` -\
+            \ Traditional Well\t\n`TER` - Terra Firma\t\n`SMP` - Sump\t\n`PLG` - Plug\t\
+            \n"
+          enum:
+          - CEN
+          - UKN
+          - GCM
+          - GRT
+          - SEL
+          - BKF
+          - GSP
+          - WDV
+          - WEL
+          - TER
+          - SMP
+          - PLG
+          type: string
+        material:
+          description: "A unique code for a material type used in consturction (eg\
+            \ PVC, steel)\n\n`CTI` - Cast Iron   \n`CEM` - Cement  \n`CON` - Concrete\
+            \     \n`FRP` - Fibre Reinforced Pipe (assumed low temp FRP)    \n`COP`\
+            \ - Copper  \n`GLI` - Galvanised Iron \n`LED` - Lead    \n`NEP` - Neoprene\
+            \    \n`WST` - Welded Steel    \n`ABS` - Acrylonitrile Butadiene Styrene\
+            \ \n`PVC` - Polyvinylchloride (class not known) \n`SST` - Stainless Steel\
+            \ (assumed grade 316) \n`STL` - Steel   \n`NON` - None (Open Hole Completion)\
+            \ \n`TIM` - Timber  \n`RUB` - Rubber  \n`BRK` - Brick   \n`STN` - Stone\
+            \   \n`BEN` - Bentonite   \n`PLY` - Polyethylene Pipe   \n`TIN` - Tin\
+            \ Fluming \n`PVC45` - Class 4.5 PVC \n`PVC18` - Class 18 PVC (PN18)  \
+            \ \n`PVC9` - Class 9 PVC    \n`PVC12` - Class 12 PVC (PN12)   \n`PVC15`\
+            \ - Class 15 PVC  \n`FRPH` - High temperature FRP casing    \n`STLOFG`\
+            \ - Steel casing  - oil field grade (API 5L) \n`PVC6` - Class 6 PVC  \
+            \  \n`CUT` - Cuttings    \n`UNK` - Unknown \n`PVC16` - PVC PN16  \n`STLLCT`\
+            \ - STEEL CASING - API5LCT (THREADED JOINT)  \n`STLLB` - STEEL CASING\
+            \ - API5LB (WELDED JOINT)  \n"
+          enum:
+          - CTI
+          - CEM
+          - CON
+          - FRP
+          - COP
+          - GLI
+          - LED
+          - NEP
+          - WST
+          - ABS
+          - PVC
+          - SST
+          - STL
+          - NON
+          - TIM
+          - RUB
+          - BRK
+          - STN
+          - BEN
+          - PLY
+          - TIN
+          - PVC45
+          - PVC18
+          - "PVC9\t"
+          - PVC12
+          - PVC15
+          - "FRPH\t"
+          - STLOFG
+          - PVC6
+          - "CUT\t"
+          - "UNK\t"
+          - PVC16
+          - STLLCT
+          - STLLB
+          type: string
+        cement:
+          description: cement
+          type: string
+        water:
+          description: water
+          type: string
+        mixdetails:
+          description: mixdetails
+          type: string
+        retardantdetails:
+          description: retardantdetails
           type: string
     wcr-welldevelopmentdata:
       description: Well Completion Report - Well Development Data

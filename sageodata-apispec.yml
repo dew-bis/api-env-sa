@@ -1124,8 +1124,8 @@ components:
           description: "Production Zone Type. Possible values are: \n\n`OH` - Open\
             \ Hole Completion\t\n`PC` - Perforated Casing Completion\t\n`PLV` - Production\
             \ Level\t\n`S` - Screen\t\n`SB` - Screen Blank\t\n`SC` - Slotted Casing\
-            \ Completion\t\n`SMP` - Sump\t\n`UKN` - Unknown Completion\t\n`WS` - Wirewound\
-            \ Screen Completion"
+            \ Completion\t\n`SMP` - Sump\t\n`UKN` - Unknown Completion\t\n`R` - Riser\
+            \ Pipe\t\n`WS` - Wirewound Screen Completion"
           enum:
           - OH
           - PC
@@ -1136,6 +1136,7 @@ components:
           - SMP
           - UKN
           - WS
+          - R
           type: string
         fromInMeters:
           format: double

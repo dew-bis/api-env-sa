@@ -64,11 +64,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/wellcompletionreport-page'
           description: Successful response - returns an array of `wcr-summary` entities.
-        "404":
-          description: No matching results
         "400":
           description: 'Atleast one of the following query parameters required: `drillholeNumber`,
             `permitNumber` or `unitNumber`'
+        "404":
+          description: No matching results
       operationId: getwellcompletionreports
       summary: List All wellcompletionreports
       description: Gets a list of all Well Completion Reports as summaries.
@@ -1211,8 +1211,8 @@ components:
         comments:
           description: Comments
           type: string
-    wcr-linearsealdata:
-      description: Well Completion Report - Linear Seal Data
+    wcr-linersealdata:
+      description: Well Completion Report - Liner Seal Data
       required:
       - sealDepthInMeters
       - caseDiamInMillis
@@ -3441,11 +3441,11 @@ components:
         constructionComment:
           description: Construction comment
           type: string
-        linearSealDetails:
-          description: Array of Linear Seal Data
+        linerSealDetails:
+          description: Array of Liner Seal Data
           type: array
           items:
-            $ref: '#/components/schemas/wcr-linearsealdata'
+            $ref: '#/components/schemas/wcr-linersealdata'
         gravelPackingDetails:
           description: Array of Gravel Packing data
           type: array
@@ -3588,7 +3588,7 @@ components:
           innerDiamInMillis: 1
           comments: string
         constructionComment: string
-        linearSealDetails:
+        linerSealDetails:
         - sealDepthInMeters: 1
           caseDiamInMillis: 1
           caseMaterial: abs

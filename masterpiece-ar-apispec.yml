@@ -772,6 +772,7 @@ components:
       - address
       - phonenumber
       - emailaddress
+      - mpcustomerid
       type: object
       properties:
         longname:
@@ -785,6 +786,9 @@ components:
           type: string
         emailaddress:
           description: email address
+          type: string
+        mpcustomerid:
+          description: Masterpiece Customer ID
           type: string
   securitySchemes:
     Bearer:

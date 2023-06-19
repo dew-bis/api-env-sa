@@ -32,4 +32,6 @@ The API Catalogue (master) has the following definitions
 14. [Heritage](https://redocly.github.io/redoc/?nocors&url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/heritagews-apispec.yaml)
 
 15. [SOILS](https://redocly.github.io/redoc/?nocors&url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/soils-apispec.yml)
+    
+16. [SAILIS](https://redocly.github.io/redoc/?nocors&url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/sailis-api)
 

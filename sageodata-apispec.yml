@@ -1036,10 +1036,6 @@ components:
       - casingDepthToInMeters
       - casingDiamInMillis
       - casingMaterial
-      - cementingType
-      - cementDepthFromInMeters
-      - cementDepthToInMeters
-      - cementingMethod
       - doesShoeExist
       - isShoeCemented
       type: object
@@ -1075,14 +1071,6 @@ components:
           - P
           - "N"
           type: string
-        cementDepthFromInMeters:
-          format: double
-          description: Cement Depth - From value in meters
-          type: number
-        cementDepthToInMeters:
-          format: double
-          description: Cement Depth - To value in meters
-          type: number
         cementingMethod:
           description: "Cementing Method code. Possible values are: \n\n`DISP` - Displacement\
             \ ,general\t\n`DSPC` - Displacement through casing\t\n`DSPD` - Displacement\
@@ -1672,11 +1660,11 @@ components:
       example:
         results:
         - permitNumber: 999944
-          issueDate: 2020-01-01
+          issueDate: 2020-01-01T00:00:00.000Z
           purpose: notSpecified
           permitHolderName: JOHN CITIZEN
           wellUse: not_Specified
-          expiryDate: 2021-01-01
+          expiryDate: 2021-01-01T00:00:00.000Z
           address:
             addressLineOne: Street 1
             addressLineTwo: Street 2
@@ -1782,7 +1770,7 @@ components:
           description: Well Driller Details
       example:
         licenceNumber: 22233311
-        expiryDate: 2021-01-01
+        expiryDate: 2021-01-01T00:00:00.000Z
         wellDriller:
           drillerFirstName: JOHN
           drillerLastName: CITIZEN
@@ -1825,7 +1813,7 @@ components:
       example:
         results:
         - licenceNumber: 22233311
-          expiryDate: 2021-01-01
+          expiryDate: 2021-01-01T00:00:00.000Z
           wellDriller:
             drillerFirstName: JOHN
             drillerLastName: CITIZEN
@@ -2786,7 +2774,7 @@ components:
           unitNumber: 4745
           eventType: replace
           reportDetails: /api/v1.0/wellcompletionreports/WCR-Example
-          completionDate: 2020-01-01
+          completionDate: 2020-01-01T00:00:00.000Z
           drillholeNumber: 314545
           permitNumber: "28043"
         totalRecords: 1
@@ -2870,38 +2858,20 @@ components:
       - results
       type: object
       properties:
-        nextPage:
-          description: URI to next page of the collection
-          type: string
-        prevPage:
-          description: URI to previous page of the collection
-          type: string
-        totalRecords:
-          description: Indicates the total number of records (including all pages)
-          type: integer
-        pageSize:
-          description: Number of records displayed per page
-          type: integer
-        pageNumber:
-          description: Index (1-based) respresenting current page number
-          type: integer
         results:
           description: Collection of drillhole summaries
           type: array
           items:
             $ref: '#/components/schemas/drillhole'
       example:
-        totalRecords: 1
-        pageSize: 1
-        pageNumber: 1
         results:
         - latestPermitNumber: 234567
           drillholeName: BORE 2
-          originalDrilledDate: 1991-06-17
+          originalDrilledDate: 1991-06-17T00:00:00.000Z
           originalDrilledDepth: 65.23
           minimumDiameter: 150
           statusCode: EQP
-          statusDate: 1991-06-17
+          statusDate: 1991-06-17T00:00:00.000Z
           purposeCode: IRR
           map100kNumber: 6628
           sequenceNumber: 1234
@@ -3075,14 +3045,18 @@ components:
         permitNumberExt:
           description: Permit Number extension
           type: string
+        drillHoleNumber:
+          format: int32
+          description: Drillhole Number
+          type: integer
       example:
         latestPermitNumber: 234567
         drillholeName: BORE 2
-        originalDrilledDate: 1991-06-17
+        originalDrilledDate: 1991-06-17T00:00:00.000Z
         originalDrilledDepth: 65.23
         minimumDiameter: 150
         statusCode: EQP
-        statusDate: 1991-06-17
+        statusDate: 1991-06-17T00:00:00.000Z
         purposeCode: IRR
         map100kNumber: 6628
         sequenceNumber: 1234
@@ -3291,11 +3265,11 @@ components:
           type: string
       example:
         permitNumber: 999944
-        issueDate: 2020-01-01
+        issueDate: 2020-01-01T00:00:00.000Z
         purpose: BKFIL
         permitHolderName: JOHN CITIZEN
         wellUse: ENG
-        expiryDate: 2021-01-01
+        expiryDate: 2021-01-01T00:00:00.000Z
         address:
           addressLineOne: Street 1
           addressLineTwo: Street 2
@@ -3543,8 +3517,8 @@ components:
           surveyAccuracyInMetres: 1
           surveyMethod: amgrd
         constructionDetails:
-        - commenceDate: 2020-01-01
-          completionDate: 2020-01-01
+        - commenceDate: 2020-01-01T00:00:00.000Z
+          completionDate: 2020-01-01T00:00:00.000Z
           maxDepthInMeters: 10
           finalDepthInMeters: 1
           currentDepthInMeters: 1
@@ -3601,7 +3575,7 @@ components:
           durationInHours: 1
           comments: string
         waterCutDetails:
-        - date: 2020-01-01
+        - date: 2020-01-01T00:00:00.000Z
           isArtesian: true
           fromInMeters: 1
           toInMeters: 2

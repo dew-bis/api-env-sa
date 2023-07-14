@@ -891,18 +891,6 @@ paths:
           type: string
         in: query
         required: true
-      - name: limit
-        description: Maximum number of results in the response
-        schema:
-          type: integer
-        in: query
-        required: false
-      - name: offset
-        description: Pagination index
-        schema:
-          type: integer
-        in: query
-        required: false
       responses:
         "200":
           content:

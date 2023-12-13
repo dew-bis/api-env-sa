@@ -980,7 +980,7 @@ components:
             \ - Mud \t\n`RCP` - Reverse Circulation Percussion\t\n`ROT` - Rotary \t\
             \n`RTA` - Rotary - Air \t\n`RTF` - Rotary - Foam\t\n`RTM` - Rotary - Mud\t\
             \n`RTW` - Rotary - Water\t\n`SON` - Sonic\t\n`SPR` - Spearpoint\t\n`TUC`\
-            \ - Tungsten Carbide Bit - Coring\t\n`UKN` - Unknown\t\n`VAC` - Vacuum\t\
+            \ - Tungsten Carbide Bit - Coring\t\n'UDR'-Underreaming\t\n`UKN` - Unknown\t\n`VAC` - Vacuum\t\
             \n`VIB` - Vibrocore"
           enum:
           - ACR
@@ -1012,6 +1012,7 @@ components:
           - SON
           - SPR
           - TUC
+          - UDR
           - UKN
           - VAC
           - VIB
@@ -1172,6 +1173,7 @@ components:
           - TIM
           - TIN
           - WST
+          - UNK
           type: string
         apertureInMillis:
           format: double
@@ -1295,9 +1297,9 @@ components:
           description: To value in meters
           type: number
         gravelMeshSizeInMillis:
-          format: double
+          format: string
           description: Gravel mesh size - value in millimeters
-          type: number
+          type: string
         comments:
           description: Comments
           type: string
@@ -2875,6 +2877,11 @@ components:
           description: Name of drillhole – often something meaningful to the landholder
             as it used to come via the well construction report’s Schedule 8 form.
           type: string
+        drillHoleNumber:
+          type: integer
+          description: Drillhole Number
+          format: int32
+          nullable: true
         originalDrilledDate:
           format: date
           description: Date for the depth of construction
@@ -3032,11 +3039,7 @@ components:
           type: integer
         permitNumberExt:
           description: Permit Number extension
-          type: string
-        drillHoleNumber:
-          format: int32
-          description: Drillhole Number
-          type: integer
+          type: string         
       example:
         latestPermitNumber: 234567
         drillholeName: BORE 2
@@ -3298,24 +3301,17 @@ components:
           - REPLACE
           - DECOMM
           type: string
+        drillholeNumber:
+          type: integer
+          description: Unique identifier specified by SAGeoData.
+          format: int32
+          nullable: true
         drillholeName:
           description: Drillhole name
           type: string
         drillholeOtherName:
           description: Drillhole othere name
-          type: string
-        waterPointType:
-          description: "Water Point Type. If left blank the well is marked as NOT\
-            \ a Water Point Type. \n\nPossible values:  \n`DAM` - Dam\t\n`HOL` - Water\
-            \ Hole\t\n`LAK` - Lake\t\n`RIV` - River\t\n`SEA` - Sea Water\t\n`SOK`\
-            \ - Soak\t\n`SPR` - Spring\t\n`MDS` - Mound Spring\t\n`MWS` - Mine Water\
-            \ Supply\t\n`UKN` - Water Point type not known\t\n`SMP` - Swamp\t\n`DRN`\
-            \ - drain; Bore drain\t\n`CRK` - Creek\t\n`SNK` - Sink hole\t\n`GSP` -\
-            \ GAB Spring (incl previous mound springs)\t\n`RES` - Reservoir\t\n`VWP`\
-            \ - Vibrating Wire Piezometer\t\n`MIN` - Mine"
-          maxLength: 3
-          minLength: 3
-          type: string
+          type: string         
         isWaterWellClass:
           description: Is the well a Waterwell Class
           type: boolean
@@ -3351,7 +3347,7 @@ components:
           type: boolean
         finalSWLInMeters:
           format: double
-          description: Final Standing Water Level in meters
+          description: '[Deprecated] - Use construction object'
           type: number
         finalYieldInMeters:
           format: double
@@ -3447,11 +3443,7 @@ components:
         unitNumber:
           description: A combination of the map100KNumber and sequence number with
             format `map100kNumber`-`sequence number`
-          type: string
-        drillholeNumber:
-          format: int32
-          description: Unique identifier specified by SAGeoData.
-          type: integer
+          type: string         
         replacementUnitMap100K:
           format: int32
           description: |-
@@ -3634,12 +3626,21 @@ components:
         permitNumber:
           description: Well Construction Permit Number
           type: number
+        permitNumberExtension:          
+          type: string
+          description: 'Permit Number Extension.A null or blank value represents no extension data. Expected range [A,Z] character only.'
+          nullable: true
         permitHolderName:
           description: Permit Holder Name
           type: string
         licenceNumber:
           description: License Number
           type: integer
+        finalSWLInMeters:
+          type: number
+          description: Final Standing Water Level In Meters
+          format: double
+          nullable: true
   responses:
     UnauthorizedError:
       headers:

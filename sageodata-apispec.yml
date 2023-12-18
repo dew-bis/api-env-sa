@@ -1270,7 +1270,7 @@ components:
             \n`FUNL` - Funnel\t\n`GRAV` - Gravity\t\n`HAND` - Hand\t\n`MNUL` - Manual\t\
             \n`PACK` - Packed\t\n`POUR` - Poured\t\n`REVC` - Reverse Circulation\t\
             \n`SHOV` - Shovel\t\n`TREM` - Tremi line\t\n`VIBR` - Vibration\t\n`WASH`\
-            \ - Washed Down"
+            \ - Washed Down\t\n`BULL` - Bullheading through casing\t\n`DSPC` - Displacement through casing\t\n`DPSD` - Displacement through drill pipe\t\n`FMCP` - Formation collapse\t\n`NA` - Not applicable\t\n`UNK` - Unknown"
           enum:
           - BACK
           - BAIL
@@ -1287,6 +1287,12 @@ components:
           - TREM
           - VIBR
           - WASH
+          - BULL
+          - DSPC
+          - DPSD
+          - FMCP
+          - NA
+          - UNK 
           type: string
         fromInMeters:
           format: double

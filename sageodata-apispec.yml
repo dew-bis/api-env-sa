@@ -1193,8 +1193,7 @@ components:
     wcr-linersealdata:
       description: Well Completion Report - Liner Seal Data
       required:
-      - sealDepthInMeters
-      - caseDiamInMillis
+      - sealDepthInMeters      
       type: object
       properties:
         sealDepthInMeters:

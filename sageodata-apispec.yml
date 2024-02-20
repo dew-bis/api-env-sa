@@ -1255,6 +1255,8 @@ components:
           - TIN
           - WST
           type: string
+      comments:
+        description: Comments - value in string
     wcr-gravelpackingdata:
       description: Well Completion Report - Gravel Packing Data
       required:

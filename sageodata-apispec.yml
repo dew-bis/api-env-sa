@@ -3208,7 +3208,7 @@ components:
             \ 6 (can be blank)  \n\nPossible values for `type` are: \n`*` - *\t\n\
             `9` - 9\t\n`A` - Allotment\t\n`B` - Block\t\n`C` - Closed Road\t\n`M`\
             \ - Mineral Section\t\n`P` - Pastoral Run\t\n`Q` - Pieces\t\n`S` - Section\t\
-            \n`X` - Site "
+            \n`X` - Site \t\n`F` - Lot\t\n`U` - Common Property, and Unit"
           type: string
         propertyPlan:
           description: "Property Plan details in the format `<type>-<number>`  \n\n\

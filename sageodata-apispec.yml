@@ -3377,7 +3377,7 @@ components:
             `REC` - Recharge\t\n`RHL` - Rock Hole\t\n`RIV` - River\t\n`SEA` - Sea\
             \ Water\t\n`SIS` - Interception scheme production well\t\n`SOK` - Soak\t\
             \n`SPR` - Spring\t\n`STK` - Stock\t\n`TNK` - Tank\t\n`TWS` - Town Water\
-            \ Supply (Public/Muncipal)\t\n`WAS` - Waste Disposal"
+            \ Supply (Public/Muncipal)\t\n`WAS` - Waste Disposal\t\n`DWS` - Drinking Water Supply"
           type: array
           items:
             type: string

@@ -1,0 +1,1110 @@
+swagger: "2.0"
+info:
+  description: APIs exposed to access SAILIS Property Interest Web Services
+  version: v1
+  title: SAILIS Property Interests Web Services
+basePath: /api
+schemes:
+  - https
+paths:
+  /auth:
+    post:
+      summary: Authenticate
+      consumes: ["application/x-www-form-urlencoded"]
+      description: Authenticates a client and returns a Bearer JWT header.
+      operationId: auth
+      parameters:
+        - name: username
+          in: formData
+          required: true
+          type: string
+        - name: password
+          in: formData
+          required: true
+          type: string
+      responses:
+        204:
+          description: Successfully authenticated
+          headers:
+            Authorization:
+              type: string
+              description: Bearer JWT
+        400:
+          description: Invalid credentials
+          schema:
+            $ref: "#/definitions/ApiError"
+  /propertyinterest/v1/search/title:
+    get:
+      summary: Search for Property Interest using Title Reference
+      operationId: propertyInterestTitleSearch
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer JWT
+          required: true
+          type: string
+        - name: register
+          in: query
+          required: true
+          type: string
+          enum: [CT, CR, CL]
+        - name: volume
+          in: query
+          required: true
+          type: integer
+          format: int32
+          minimum: 5000
+        - name: folio
+          in: query
+          required: true
+          type: integer
+          format: int32
+          maximum: 999
+        - name: pageNumber
+          in: query
+          description: "Page Number (1-based); defaults to 1"
+          required: false
+          type: integer
+          format: int32
+        - name: pageSize
+          in: query
+          description: "Page Size; defaults to 10"
+          required: false
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: Successful Operation
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PropertyInterestSearchResult"
+        400:
+          description: "Invalid input provided: <Error Description>"
+          schema:
+            $ref: "#/definitions/ApiError"
+        401:
+          description: Unauthorised Access
+          schema:
+            $ref: "#/definitions/ApiError"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ApiError"
+        500:
+          description: "Internal SAILIS error <Error ID>"
+          schema:
+            $ref: "#/definitions/ApiErrorWithId"
+  /propertyinterest/v1/search/parcel:
+    get:
+      summary: Search for Property Interest using Plan/Parcel Reference
+      operationId: propertyInterestPlanParcelSearch
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer JWT
+          required: true
+          type: string
+        - name: parcelType
+          in: query
+          required: true
+          type: string
+          enum:
+            - AL
+            - AP
+            - AR
+            - AD
+            - AE
+            - AV
+            - AT
+            - AF
+            - FL
+            - FQ
+            - ID
+            - IQ
+            - FC
+            - UC
+            - UN
+            - SE
+            - BL
+            - TA
+            - AC
+            - QP
+        - name: parcelNumber
+          in: query
+          required: true
+          type: string
+          maxLength: 6
+        - name: planType
+          in: query
+          required: true
+          type: string
+          enum:
+            - D
+            - C
+            - S
+            - F
+            - H
+            - R
+            - T
+            - G
+        - name: planNumber
+          in: query
+          required: true
+          type: string
+          maxLength: 6
+        - name: pageNumber
+          in: query
+          description: "Page Number (1-based); defaults to 1"
+          required: false
+          type: integer
+          format: int32
+        - name: pageSize
+          in: query
+          description: "Page Size; defaults to 10"
+          required: false
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: Successful Operation
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PropertyInterestSearchResult"
+        400:
+          description: "Invalid input provided: <Error Description>"
+          schema:
+            $ref: "#/definitions/ApiError"
+        401:
+          description: Unauthorised Access
+          schema:
+            $ref: "#/definitions/ApiError"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ApiError"
+        500:
+          description: "Internal SAILIS error <Error ID>"
+          schema:
+            $ref: "#/definitions/ApiErrorWithId"
+  /propertyinterest/v1/search/reference:
+    get:
+      summary: Search for Property Interest using Property Interest Reference
+      operationId: propertyInterestReferenceSearch
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer JWT
+          required: true
+          type: string
+        - name: propertyInterestReference
+          in: query
+          required: true
+          type: string
+          maxLength: 20
+        - name: pageNumber
+          in: query
+          description: "Page Number (1-based); defaults to 1"
+          required: false
+          type: integer
+          format: int32
+        - name: pageSize
+          in: query
+          description: "Page Size; defaults to 10"
+          required: false
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PropertyInterestSearchResult"
+        400:
+          description: "Invalid input provided: <Error Description>"
+          schema:
+            $ref: "#/definitions/ApiError"
+        401:
+          description: Unauthorised Access
+          schema:
+            $ref: "#/definitions/ApiError"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ApiError"
+        500:
+          description: "Internal SAILIS error <Error ID>"
+          schema:
+            $ref: "#/definitions/ApiErrorWithId"
+  /propertyinterest/v1/search/name:
+    get:
+      summary: Search for Property Interest using Property Interest Name
+      operationId: propertyInterestCodeSearch
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer JWT
+          required: true
+          type: string
+        - name: propertyInterestName
+          in: query
+          required: false
+          type: string
+          maxLength: 50
+        - name: propertyInterestCode
+          in: query
+          required: false
+          type: string
+          maxLength: 6
+        - name: pageNumber
+          in: query
+          description: "Page Number (1-based); defaults to 1"
+          required: false
+          type: integer
+          format: int32
+        - name: pageSize
+          in: query
+          description: "Page Size; defaults to 10"
+          required: false
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: successful operation
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PropertyInterestSearchResult"
+        400:
+          description: "Invalid input provided: <Error Description>"
+          schema:
+            $ref: "#/definitions/ApiError"
+        401:
+          description: Unauthorised Access
+          schema:
+            $ref: "#/definitions/ApiError"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ApiError"
+        500:
+          description: "Internal SAILIS error <Error ID>"
+          schema:
+            $ref: "#/definitions/ApiErrorWithId"
+  /propertyinterest/v1/create:
+    post:
+      summary: Create a Property Interest for Organisation
+      consumes:
+        - application/x-www-form-urlencoded
+      operationId: propertyInterestCreate
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer JWT
+          required: true
+          type: string
+        - name: propertyInterestName
+          in: formData
+          required: true
+          type: string
+          maxLength: 50
+        - name: propertyInterestCode
+          in: formData
+          required: false
+          type: string
+          maxLength: 6
+        - name: effectiveFromDate
+          in: formData
+          required: true
+          type: string
+          format: date-time
+        - name: effectiveToDate
+          in: formData
+          required: false
+          type: string
+          format: date-time
+      responses:
+        200:
+          description: Successful Operation
+          schema:
+            $ref: "#/definitions/PropertyInterest"
+        400:
+          description: "Invalid input provided: <Error Description>"
+          schema:
+            $ref: "#/definitions/ApiError"
+        401:
+          description: Unauthorised Access
+          schema:
+            $ref: "#/definitions/ApiError"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ApiError"
+        500:
+          description: "Internal SAILIS Error: <Error ID>"
+          schema:
+            $ref: "#/definitions/ApiErrorWithId"
+  /propertyinterest/v1/link/parcel/{propertyInterestId}:
+    post:
+      summary: Link Property Interest to Parcel
+      consumes:
+        - application/x-www-form-urlencoded
+      operationId: propertyInterestLinkParcel
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer JWT
+          required: true
+          type: string
+        - name: propertyInterestId
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: propertyInterestReference
+          in: formData
+          required: true
+          type: string
+          maxLength: 20
+        - name: parcelType
+          in: formData
+          required: true
+          type: string
+          enum:
+            - AL
+            - AP
+            - AR
+            - AD
+            - AE
+            - AV
+            - AT
+            - AF
+            - FL
+            - FQ
+            - ID
+            - IQ
+            - FC
+            - UC
+            - UN
+            - SE
+            - BL
+            - TA
+            - AC
+            - QP
+        - name: parcelNumber
+          in: formData
+          required: true
+          type: string
+          maxLength: 6
+        - name: planType
+          in: formData
+          required: true
+          type: string
+          enum:
+            - D
+            - C
+            - S
+            - F
+            - H
+            - R
+            - T
+            - G
+        - name: planNumber
+          in: formData
+          required: true
+          type: string
+          maxLength: 6
+      responses:
+        201:
+          description: successful operation
+          schema:
+            $ref: "#/definitions/PropertyInterestParcel"
+        400:
+          description: "Invalid input provided: <Error Description>"
+          schema:
+            $ref: "#/definitions/ApiError"
+        401:
+          description: Unauthorised Access
+          schema:
+            $ref: "#/definitions/ApiError"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ApiError"
+        500:
+          description: "Internal SAILIS error <Error ID>"
+          schema:
+            $ref: "#/definitions/ApiErrorWithId"
+  /propertyinterest/v1/link/title/{propertyInterestId}:
+    post:
+      summary: Link Property Interest to all Parcels contained within a Title
+      consumes:
+        - application/x-www-form-urlencoded
+      operationId: propertyInterestLinkTitle
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer JWT
+          required: true
+          type: string
+        - name: propertyInterestId
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: register
+          in: formData
+          required: true
+          type: string
+          enum: [CT, CR, CL]
+        - name: volume
+          in: formData
+          required: true
+          type: integer
+          format: int32
+          minimum: 5000
+        - name: folio
+          in: formData
+          required: true
+          type: integer
+          format: int32
+          maximum: 999
+        - name: propertyInterestReference
+          in: formData
+          required: true
+          type: string
+          maxLength: 20
+      responses:
+        201:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              propertyInterestParcelList:
+                type: array
+                items:
+                  $ref: "#/definitions/PropertyInterestParcel"
+        400:
+          description: "Invalid input provided: <Error Description>"
+          schema:
+            $ref: "#/definitions/ApiError"
+        401:
+          description: Unauthorised Access
+          schema:
+            $ref: "#/definitions/ApiError"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ApiError"
+        500:
+          description: "Internal SAILIS error <Error ID>"
+          schema:
+            $ref: "#/definitions/ApiErrorWithId"
+  /propertyinterest/v1/edit/parcel/{propertyInterestParcelLinkId}:
+    put:
+      summary: Update Property Interest Reference
+      consumes:
+        - application/x-www-form-urlencoded
+      operationId: propertyInterestUpdateReference
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer JWT
+          required: true
+          type: string
+        - name: propertyInterestParcelLinkId
+          in: path
+          required: true
+          type: integer
+          format: int64
+        - name: propertyInterestReference
+          in: formData
+          required: true
+          type: string
+          maxLength: 20
+      responses:
+        201:
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              propertyInterestParcel:
+                schema:
+                  $ref: "#/definitions/PropertyInterestParcel"
+        400:
+          description: "Invalid input provided: <Error Description>"
+          schema:
+            $ref: "#/definitions/ApiError"
+        401:
+          description: Unauthorised Access
+          schema:
+            $ref: "#/definitions/ApiError"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ApiError"
+        500:
+          description: "Internal SAILIS error <Error ID>"
+          schema:
+            $ref: "#/definitions/ApiErrorWithId"
+  /propertyinterest/v1/unlink/parcel/{propertyInterestParcelLinkId}:
+    post:
+      summary: Unlink Property Interest from Parcel
+      consumes:
+        - application/x-www-form-urlencoded
+      operationId: propertyInterestUnlinkParcel
+      produces:
+        - application/json
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer JWT
+          required: true
+          type: string
+        - name: propertyInterestParcelLinkId
+          in: path
+          required: true
+          type: integer
+          format: int64
+      responses:
+        201:
+          description: successful operation
+          schema:
+            type: object
+        400:
+          description: "Invalid input provided: <Error Description>"
+          schema:
+            $ref: "#/definitions/ApiError"
+        401:
+          description: Unauthorised Access
+          schema:
+            $ref: "#/definitions/ApiError"
+        403:
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ApiError"
+        500:
+          description: "Internal SAILIS error <Error ID>"
+          schema:
+            $ref: "#/definitions/ApiErrorWithId"
+definitions:
+  PropertyInterest:
+    type: object
+    properties:
+      propertyInterestId:
+        type: integer
+        format: int64
+      name:
+        type: string
+        maxLength: 50
+      piCode:
+        type: string
+        maxLength: 6
+      effectiveFrom:
+        type: string
+        format: date-time
+      effectiveTo:
+        type: string
+        format: date-time
+      created:
+        type: string
+        format: date-time
+  PropertyInterestParcel:
+    type: object
+    properties:
+      propertyInterestParcelId:
+        type: integer
+        format: int64
+      propertyInterestId:
+        type: integer
+        format: int64
+      reference:
+        type: string
+        maxLength: 20
+      created:
+        type: string
+        format: date-time
+      planParcelReference:
+        $ref: "#/definitions/PlanParcelReference"
+  TitleReference:
+    type: object
+    properties:
+      register:
+        type: string
+        enum: [CT, CR, CL]
+      volume:
+        type: integer
+        format: int32
+        minimum: 5000
+      folio:
+        type: integer
+        format: int32
+        maximum: 999
+  PlanParcelReference:
+    type: object
+    properties:
+      planType:
+        type: string
+        enum:
+          - D
+          - C
+          - S
+          - F
+          - H
+          - R
+          - T
+          - G
+      planNumber:
+        type: string
+        maxLength: 6
+      parcelType:
+        type: string
+        enum:
+          - AL
+          - AP
+          - AR
+          - AD
+          - AE
+          - AV
+          - AT
+          - AF
+          - FL
+          - FQ
+          - ID
+          - IQ
+          - FC
+          - UC
+          - UN
+          - SE
+          - BL
+          - TA
+          - AC
+          - QP
+      parcelNumber:
+        type: string
+        maxLength: 6
+  Address:
+    type: object
+    properties:
+      unitType:
+        type: string
+        enum:
+          - ANT
+          - APT
+          - ATM
+          - BBQ
+          - BTSD
+          - BLDG
+          - BNGW
+          - CAGE
+          - CARP
+          - CARS
+          - CLUB
+          - COOL
+          - CTGE
+          - DUPL
+          - FCTY
+          - FLAT
+          - GRGE
+          - HALL
+          - HSE
+          - KSK
+          - LSE
+          - LBBY
+          - LOFT
+          - LOT
+          - MSNT
+          - MBTH
+          - OFFC
+          - RESV
+          - ROOM
+          - SHED
+          - SHOP
+          - SHRM
+          - SIGN
+          - SITE
+          - STLL
+          - STOR
+          - STR
+          - STU
+          - SUBS
+          - SE
+          - TNCY
+          - TWR
+          - TNHS
+          - UNIT
+          - VLT
+          - VLLA
+          - WARD
+          - WHSE
+          - WKSH
+      unitNo:
+        type: string
+        maxLength: 7
+      floorLevelType:
+        type: string
+        enum:
+          - B
+          - FL
+          - G
+          - L
+          - LG
+          - M
+          - OD
+          - P
+          - PTHS
+          - PLF
+          - PDM
+          - RT
+          - SB
+          - UG
+      floorLevelNo:
+        type: string
+        maxLength: 5
+      buildingName:
+        type: string
+        maxLength: 50
+      lotNo:
+        type: string
+        maxLength: 6
+      streetNo:
+        type: string
+        maxLength: 6
+      streetNoTo:
+        type: string
+        maxLength: 6
+      streetName:
+        type: string
+        maxLength: 45
+      streetType:
+        type: string
+        enum:
+          - ACCS
+          - ALLY
+          - ALWY
+          - AMBL
+          - APP
+          - ARC
+          - ARTL
+          - ARTY
+          - AV
+          - BA
+          - BEND
+          - BWLK
+          - BVD
+          - BR
+          - BRAE
+          - BRK
+          - BROW
+          - BYPA
+          - BYWY
+          - CSWY
+          - CTR
+          - CH
+          - CIR
+          - CCT
+          - CRCS
+          - CL
+          - CON
+          - CPS
+          - CNR
+          - CT
+          - CTYD
+          - COVE
+          - CR
+          - CRST
+          - CRSS
+          - CSAC
+          - CUTT
+          - DALE
+          - DIP
+          - DR
+          - DVWY
+          - EDGE
+          - ELB
+          - END
+          - ENT
+          - ESP
+          - EXP
+          - FAWY
+          - FOLW
+          - FTWY
+          - FORM
+          - FWY
+          - FRTG
+          - GAP
+          - GDNS
+          - GTE
+          - GLDE
+          - GLEN
+          - GRA
+          - GRN
+          - GR
+          - HTS
+          - HIRD
+          - HWY
+          - HILL
+          - INTG
+          - JNC
+          - KEY
+          - LANE
+          - LNWY
+          - LINE
+          - LINK
+          - LKT
+          - LOOP
+          - MALL
+          - MNDR
+          - MEWS
+          - MTWY
+          - NOOK
+          - OTLK
+          - PDE
+          - PWY
+          - PASS
+          - PSGE
+          - PATH
+          - PWAY
+          - PIAZ
+          - PL
+          - PLZA
+          - PKT
+          - PNT
+          - PORT
+          - PROM
+          - QDRT
+          - QYS
+          - RMBL
+          - REST
+          - RTT
+          - RDGE
+          - RISE
+          - RD
+          - RTY
+          - RTE
+          - ROW
+          - RUE
+          - SVWY
+          - SHUN
+          - SPUR
+          - SQ
+          - ST
+          - SBWY
+          - TARN
+          - TCE
+          - THFR
+          - TLWY
+          - TOP
+          - TOR
+          - TRK
+          - TRL
+          - TURN
+          - UPAS
+          - VALE
+          - VIAD
+          - VIEW
+          - VSTA
+          - WALK
+          - WKWY
+          - WAY
+          - WHRF
+          - WYND
+          - BOWL
+          - CMMN
+          - CRSG
+          - DOCK
+          - FLAT
+          - FTRL
+          - PARK
+          - RAMP
+          - RES
+          - RUN
+          - STPS
+          - STRP
+          - TKWY
+          - VLLA
+          - YARD
+          - BANK
+          - CMNS
+          - EXTN
+          - FTRK
+          - HOLW
+      steetSuffix:
+        type: string
+        maxLength: 4
+      suburb:
+        type: string
+        maxLength: 46
+      state:
+        type: string
+        enum:
+          - AAT
+          - ACT
+          - NSW
+          - NT
+          - QLD
+          - SA
+          - TAS
+          - VIC
+          - WA
+      postcode:
+        type: integer
+        format: int32
+        maximum: 9999
+  PropertyInterestSearchResult:
+    type: object
+    properties:
+      propertyInterestId:
+        type: integer
+        format: int64
+      propertyInterestParcelLinkId:
+        type: integer
+        format: int64
+      propertyInterestName:
+        type: string
+        maxLength: 50
+      propertyInterestCode:
+        type: string
+        maxLength: 6
+      propertyInterestReference:
+        type: string
+        maxLength: 20
+      planParcelReference:
+        $ref: "#/definitions/PlanParcelReference"
+      propertyAddress:
+        $ref: "#/definitions/Address"
+      titleReference:
+        $ref: "#/definitions/TitleReference"
+      valuationNumbers:
+        type: array
+        items:
+          type: string
+          minLength: 10
+          maxLength: 10
+      propertyInterestCreatedTime:
+        type: string
+        format: date-time
+      parcelLinkCreatedTime:
+        type: string
+        format: date-time
+      propertyInterestEffectiveFrom:
+        type: string
+        format: date-time
+      propertyInterestEffectiveTo:
+        type: string
+        format: date-time
+  PropertyInterestSearchResults:
+    type: object
+    properties:
+      searchResults:
+        type: array
+        items:
+          $ref: "#/definitions/PropertyInterestSearchResult"
+  ApiError:
+    type: object
+    properties:
+      httpStatus:
+        $ref: "#/definitions/HttpStatusType"
+      errorMessage:
+        type: string
+  ApiErrorWithId:
+    type: object
+    properties:
+      httpStatus:
+        $ref: "#/definitions/HttpStatusType"
+      errorMessage:
+        type: string
+      errorId:
+        type: integer
+        format: int64
+  HttpStatusType:
+    type: object
+    properties:
+      httpStatus:
+        type: string
+        enum:
+          - CONTINUE
+          - SWITCHING_PROTOCOLS
+          - PROCESSING
+          - CHECKPOINT
+          - OK
+          - CREATED
+          - ACCEPTED
+          - NON_AUTHORITATIVE_INFORMATION
+          - NO_CONTENT
+          - RESET_CONTENT
+          - PARTIAL_CONTENT
+          - MULTI_STATUS
+          - ALREADY_REPORTED
+          - IM_USED
+          - MULTIPLE_CHOICES
+          - MOVED_PERMANENTLY
+          - FOUND
+          - MOVED_TEMPORARILY
+          - SEE_OTHER
+          - NOT_MODIFIED
+          - USE_PROXY
+          - TEMPORARY_REDIRECT
+          - PERMANENT_REDIRECT
+          - BAD_REQUEST
+          - UNAUTHORIZED
+          - PAYMENT_REQUIRED
+          - FORBIDDEN
+          - NOT_FOUND
+          - METHOD_NOT_ALLOWED
+          - NOT_ACCEPTABLE
+          - PROXY_AUTHENTICATION_REQUIRED
+          - REQUEST_TIMEOUT
+          - CONFLICT
+          - GONE
+          - LENGTH_REQUIRED
+          - PRECONDITION_FAILED
+          - PAYLOAD_TOO_LARGE
+          - REQUEST_ENTITY_TOO_LARGE
+          - URI_TOO_LONG
+          - REQUEST_URI_TOO_LONG
+          - UNSUPPORTED_MEDIA_TYPE
+          - REQUESTED_RANGE_NOT_SATISFIABLE
+          - EXPECTATION_FAILED
+          - I_AM_A_TEAPOT
+          - INSUFFICIENT_SPACE_ON_RESOURCE
+          - METHOD_FAILURE
+          - DESTINATION_LOCKED
+          - UNPROCESSABLE_ENTITY
+          - LOCKED
+          - FAILED_DEPENDENCY
+          - UPGRADE_REQUIRED
+          - PRECONDITION_REQUIRED
+          - TOO_MANY_REQUESTS
+          - REQUEST_HEADER_FIELDS_TOO_LARGE
+          - UNAVAILABLE_FOR_LEGAL_REASONS
+          - INTERNAL_SERVER_ERROR
+          - NOT_IMPLEMENTED
+          - BAD_GATEWAY
+          - SERVICE_UNAVAILABLE
+          - GATEWAY_TIMEOUT
+          - HTTP_VERSION_NOT_SUPPORTED
+          - VARIANT_ALSO_NEGOTIATES
+          - INSUFFICIENT_STORAGE
+          - LOOP_DETECTED
+          - BANDWIDTH_LIMIT_EXCEEDED
+          - NOT_EXTENDED
+          - NETWORK_AUTHENTICATION_REQUIRED

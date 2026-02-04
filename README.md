@@ -35,3 +35,5 @@ The API Catalogue (master) has the following definitions
     
 16. [SAILIS](https://redocly.github.io/redoc/?nocors&url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/sailis-api)
 
+17. [SAILIS V1](https://redocly.github.io/redoc/?nocors&url=https://raw.githubusercontent.com/dew-bis/api-env-sa/master/SAILIS-API-PropertyInterests-v1.yaml)
+
